@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://calcolare-codice-fiscale.it',
+  site: 'https://www.calcolare-codice-fiscale.it',
   trailingSlash: 'always',
   integrations: [
     react(),

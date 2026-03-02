@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://calcolare-codice-fiscale.it/sitemap-index.xml
+Sitemap: https://www.calcolare-codice-fiscale.it/sitemap-index.xml
