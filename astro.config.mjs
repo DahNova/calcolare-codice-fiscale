@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://calcolare-codice-fiscale.it',
+  trailingSlash: 'always',
   integrations: [
     react(),
     tailwind(),
