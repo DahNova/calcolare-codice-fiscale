@@ -42,13 +42,14 @@ describe('calcolaCodiceFiscale', () => {
     expect(cf.substring(3, 6)).toBe('RRT');
   });
 
-  it('integra con X quando cognome ha pochi caratteri', () => {
+  it('integra con X quando nome/cognome ha pochi caratteri', () => {
     // Cognome "Fo": F + O → FOX
     const cf = calcolaCodiceFiscale({
       cognome: 'Fo', nome: 'Io', sesso: 'M',
       giorno: 1, mese: 1, anno: 1980, codiceCatastale: 'H501',
     });
     expect(cf.substring(0, 3)).toBe('FOX');
+    expect(cf.substring(3, 6)).toBe('IOX');
   });
 
   it('codifica tutti i mesi correttamente', () => {
@@ -79,5 +80,14 @@ describe('calcolaCodiceFiscale', () => {
       giorno: 1, mese: 1, anno: 1980, codiceCatastale: 'h501', // minuscolo input
     });
     expect(cf.substring(11, 15)).toBe('H501');
+  });
+
+  it('ignora H (non è né vocale né consonante secondo DM 12/03/1974)', () => {
+    // "Chiara" → ignoring H → consonanti: C,R → vocali: I,A,A → CRI
+    const cf = calcolaCodiceFiscale({
+      cognome: 'Chiara', nome: 'Mario', sesso: 'F',
+      giorno: 10, mese: 3, anno: 1990, codiceCatastale: 'H501',
+    });
+    expect(cf.substring(0, 3)).toBe('CRI');
   });
 });

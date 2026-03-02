@@ -12,7 +12,7 @@ const ODD: Record<string, number> = {
 };
 
 function consonanti(s: string): string {
-  return s.toUpperCase().replace(/[^A-Z]/g, '').replace(/[AEIOU]/g, '');
+  return s.toUpperCase().replace(/[^A-Z]/g, '').replace(/[AEIOUH]/g, '');
 }
 
 function vocali(s: string): string {
@@ -48,7 +48,7 @@ function checkDigit(parziale: string): string {
       sum += ODD[ch] ?? 0;
     } else {
       // 1-based even position → simple value
-      sum += /[0-9]/.test(ch) ? parseInt(ch) : ch.charCodeAt(0) - 65;
+      sum += /[0-9]/.test(ch) ? parseInt(ch, 10) : ch.charCodeAt(0) - 65;
     }
   }
   return String.fromCharCode(65 + (sum % 26));
