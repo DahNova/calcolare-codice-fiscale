@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { decodificaCodiceFiscale } from '../lib/inverso';
 import { verificaCodiceFiscale } from '../lib/verifica';
+
+type Comune = { nome: string; provincia: string; codiceCatastale: string };
 
 const MESI = ['', 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
   'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
@@ -10,8 +12,16 @@ export default function InversoForm() {
   const [error, setError] = useState('');
   const [dati, setDati] = useState<ReturnType<typeof decodificaCodiceFiscale>>(null);
   const [nomeComune, setNomeComune] = useState('');
+  const comuniRef = useRef<Comune[]>([]);
 
-  async function handleSubmit(e: React.FormEvent) {
+  // Load comuni once on mount
+  useEffect(() => {
+    fetch('/data/comuni.json')
+      .then(r => r.json())
+      .then((data: Comune[]) => { comuniRef.current = data; });
+  }, []);
+
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError('');
     setDati(null);
@@ -26,10 +36,7 @@ export default function InversoForm() {
     if (!result) { setError('Impossibile decodificare il codice fiscale.'); return; }
     setDati(result);
 
-    // Lookup asincrono del comune
-    const res = await fetch('/data/comuni.json');
-    const comuni: Array<{ nome: string; provincia: string; codiceCatastale: string }> = await res.json();
-    const trovato = comuni.find(c => c.codiceCatastale === result.codiceCatastale);
+    const trovato = comuniRef.current.find(c => c.codiceCatastale === result.codiceCatastale);
     setNomeComune(trovato ? `${trovato.nome} (${trovato.provincia})` : `Codice: ${result.codiceCatastale}`);
   }
 

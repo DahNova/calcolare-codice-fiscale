@@ -216,9 +216,10 @@ const schemaFAQ = {
           { q: "Perché il giorno delle donne è diverso?", a: "Per le femmine si aggiunge 40 al giorno reale, rendendo il sesso leggibile direttamente dal CF." },
           { q: "Come si calcola il carattere di controllo?", a: "Somma di valori dei 15 caratteri con tabelle diverse per posizioni pari/dispari, modulo 26." },
         ].map(({ q, a }) => (
-          <details class="border border-gray-200 rounded-lg">
-            <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-gray-800 hover:bg-gray-50 list-none">
+          <details class="border border-gray-200 rounded-lg group">
+            <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-gray-800 hover:bg-gray-50 list-none flex justify-between items-center">
               {q}
+              <span class="text-gray-400 text-xs group-open:rotate-180 transition-transform">▼</span>
             </summary>
             <p class="px-4 pb-3 text-sm text-gray-600">{a}</p>
           </details>
