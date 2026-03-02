@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import VerificaForm from '../components/VerificaForm';
+---
+
+<Layout
+  title="Verifica Codice Fiscale — Controlla se è Valido"
+  description="Verifica se un codice fiscale italiano è valido. Controllo del carattere di controllo in tempo reale, gratuito e immediato."
+>
+  <nav class="text-xs text-gray-400 mb-4">
+    <a href="/" class="hover:underline">Home</a>
+    <span class="mx-1">›</span>
+    <span>Verifica Codice Fiscale</span>
+  </nav>
+
+  <h1 class="text-3xl font-bold text-brand-blue mb-1">Verifica Codice Fiscale</h1>
+  <p class="text-gray-500 mb-6 text-sm">
+    Inserisci un codice fiscale per verificarne la validità in tempo reale.
+  </p>
+
+  <VerificaForm client:load />
+
+  <section class="mt-8 text-sm text-gray-700 space-y-3">
+    <h2 class="text-xl font-bold text-gray-800">Come funziona la verifica?</h2>
+    <p>
+      La verifica controlla la correttezza del <strong>carattere di controllo</strong>
+      (il 16° carattere del CF), calcolato con un algoritmo definito dal D.M. 12/03/1974.
+    </p>
+    <p>
+      Un CF formalmente valido non garantisce che sia effettivamente assegnato a una
+      persona reale dall'Agenzia delle Entrate. Per una verifica ufficiale, usa il
+      servizio dell'Agenzia delle Entrate.
+    </p>
+  </section>
+</Layout>
