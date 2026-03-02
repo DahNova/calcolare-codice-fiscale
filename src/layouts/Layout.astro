@@ -1,0 +1,87 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  schemaJson?: object | object[];
+}
+
+const { title, description, canonicalUrl, schemaJson } = Astro.props;
+const siteUrl = 'https://calcolare-codice-fiscale.it';
+const canonical = canonicalUrl ?? siteUrl + Astro.url.pathname;
+const schemas = schemaJson
+  ? Array.isArray(schemaJson) ? schemaJson : [schemaJson]
+  : [];
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+
+    <!-- Schema.org JSON-LD -->
+    {schemas.map(s => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- GTM placeholder: insert Google Tag Manager <script> here -->
+  </head>
+  <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <header class="bg-[#003087] text-white shadow-md">
+      <nav class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="/" class="text-xl font-bold tracking-tight hover:opacity-90 flex items-center gap-2">
+          <span class="bg-white text-[#003087] px-2 py-0.5 rounded text-sm font-mono font-black">CF</span>
+          <span class="hidden sm:inline">Calcolare Codice Fiscale</span>
+        </a>
+        <ul class="flex gap-4 sm:gap-5 text-sm font-medium">
+          <li><a href="/inverso" class="hover:underline opacity-90 hover:opacity-100">Inverso</a></li>
+          <li><a href="/verifica" class="hover:underline opacity-90 hover:opacity-100">Verifica</a></li>
+          <li><a href="/come-si-calcola" class="hidden sm:inline hover:underline opacity-90 hover:opacity-100">Come si calcola</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-3xl mx-auto px-4 py-8 w-full flex-1">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 py-6 text-center text-sm text-gray-500 mt-auto">
+      <p class="mb-1">
+        Strumento gratuito per il calcolo del codice fiscale italiano —
+        elaborazione secondo il D.M. 12/03/1974
+      </p>
+      <p class="flex justify-center flex-wrap gap-3 text-xs mt-1">
+        <a href="/" class="hover:underline">Calcola CF</a>
+        <span>·</span>
+        <a href="/inverso" class="hover:underline">Inverso</a>
+        <span>·</span>
+        <a href="/verifica" class="hover:underline">Verifica</a>
+        <span>·</span>
+        <a href="/come-si-calcola" class="hover:underline">Come si calcola</a>
+      </p>
+    </footer>
+
+  </body>
+</html>
+
+<style is:global>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+</style>
