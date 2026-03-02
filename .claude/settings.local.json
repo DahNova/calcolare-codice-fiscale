@@ -11,7 +11,9 @@
       "Bash(npm search:*)",
       "Bash(npm uninstall:*)",
       "Bash(npm test:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(ls:*)",
+      "Bash(mv:*)"
     ]
   }
 }
