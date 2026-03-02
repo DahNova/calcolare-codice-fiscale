@@ -7,8 +7,7 @@ export interface Props {
 }
 
 const { title, description, canonicalUrl, schemaJson } = Astro.props;
-const siteUrl = 'https://calcolare-codice-fiscale.it';
-const canonical = canonicalUrl ?? siteUrl + Astro.url.pathname;
+const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site).href;
 const schemas = schemaJson
   ? Array.isArray(schemaJson) ? schemaJson : [schemaJson]
   : [];
@@ -19,7 +18,7 @@ const schemas = schemaJson
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <title>{title} | Calcolare Codice Fiscale</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
@@ -32,7 +31,7 @@ const schemas = schemaJson
 
     <!-- Schema.org JSON-LD -->
     {schemas.map(s => (
-      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+      <script type="application/ld+json" set:html={JSON.stringify(s).replace(/<\//g, '<\\/')} />
     ))}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -42,10 +41,10 @@ const schemas = schemaJson
   <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
 
     <!-- Navbar -->
-    <header class="bg-[#003087] text-white shadow-md">
-      <nav class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+    <header class="bg-brand-blue text-white shadow-md">
+      <nav aria-label="Navigazione principale" class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
         <a href="/" class="text-xl font-bold tracking-tight hover:opacity-90 flex items-center gap-2">
-          <span class="bg-white text-[#003087] px-2 py-0.5 rounded text-sm font-mono font-black">CF</span>
+          <span class="bg-white text-brand-blue px-2 py-0.5 rounded text-sm font-mono font-black">CF</span>
           <span class="hidden sm:inline">Calcolare Codice Fiscale</span>
         </a>
         <ul class="flex gap-4 sm:gap-5 text-sm font-medium">
@@ -69,11 +68,11 @@ const schemas = schemaJson
       </p>
       <p class="flex justify-center flex-wrap gap-3 text-xs mt-1">
         <a href="/" class="hover:underline">Calcola CF</a>
-        <span>·</span>
+        <span aria-hidden="true">·</span>
         <a href="/inverso" class="hover:underline">Inverso</a>
-        <span>·</span>
+        <span aria-hidden="true">·</span>
         <a href="/verifica" class="hover:underline">Verifica</a>
-        <span>·</span>
+        <span aria-hidden="true">·</span>
         <a href="/come-si-calcola" class="hover:underline">Come si calcola</a>
       </p>
     </footer>
