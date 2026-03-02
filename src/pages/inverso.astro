@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import InversoForm from '../components/InversoForm';
+---
+
+<Layout
+  title="Decodifica Codice Fiscale — Leggi i Dati dal CF"
+  description="Inserisci un codice fiscale e scopri data di nascita, sesso e comune. Decodifica inversa gratuita e immediata."
+>
+  <nav class="text-xs text-gray-400 mb-4">
+    <a href="/" class="hover:underline">Home</a>
+    <span class="mx-1">›</span>
+    <span>Codice Fiscale Inverso</span>
+  </nav>
+
+  <h1 class="text-3xl font-bold text-brand-blue mb-1">Decodifica Codice Fiscale</h1>
+  <p class="text-gray-500 mb-6 text-sm">
+    Inserisci un codice fiscale per estrarne data di nascita, sesso e comune.
+  </p>
+
+  <InversoForm client:load />
+
+  <section class="mt-8 text-sm text-gray-700 space-y-3">
+    <h2 class="text-xl font-bold text-gray-800">Come funziona la decodifica?</h2>
+    <p>
+      Il <strong>codice fiscale inverso</strong> analizza i 16 caratteri del CF per
+      estrarne le informazioni anagrafiche codificate: <strong>sesso</strong>,
+      <strong>data di nascita</strong> completa e <strong>comune o stato estero di nascita</strong>.
+    </p>
+    <p>
+      Non è possibile risalire al nome o al cognome esatti: la codifica di questi dati
+      non è univocamente reversibile, poiché persone diverse possono condividere le stesse
+      tre lettere iniziali.
+    </p>
+  </section>
+</Layout>
