@@ -45,12 +45,27 @@ const schemaFAQ = {
     },
   ],
 };
+
+const schemaWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Calcolare Codice Fiscale",
+  "url": "https://calcolare-codice-fiscale.it",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://calcolare-codice-fiscale.it/?q={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
 ---
 
 <Layout
   title="Calcola Codice Fiscale Online — Gratis e Immediato"
   description="Calcola il tuo codice fiscale online in pochi secondi. Inserisci nome, cognome, data e luogo di nascita. Strumento gratuito e aggiornato 2026."
-  schemaJson={[schemaWebApp, schemaFAQ]}
+  schemaJson={[schemaWebApp, schemaFAQ, schemaWebSite]}
 >
   <h1 class="text-3xl font-bold text-brand-blue mb-1">Calcola il Codice Fiscale Online</h1>
   <p class="text-gray-500 mb-6 text-sm">
@@ -99,6 +114,9 @@ const schemaFAQ = {
       { href: '/inverso', title: 'Codice Fiscale Inverso', desc: 'Estrai i dati da un CF esistente' },
       { href: '/verifica', title: 'Verifica Codice Fiscale', desc: 'Controlla se un CF è valido' },
       { href: '/come-si-calcola', title: 'Come si calcola', desc: 'Guida completa all\'algoritmo' },
+      { href: '/omocodia', title: 'Omocodia', desc: 'Codici fiscali duplicati e come vengono gestiti' },
+      { href: '/tabelle', title: 'Tabelle di Riferimento', desc: 'Mesi, check digit, codici catastali' },
+      { href: '/codice-fiscale-stranieri', title: 'Nati all\'Estero', desc: 'CF per chi è nato fuori dall\'Italia' },
     ].map(({ href, title, desc }) => (
       <a href={href}
         class="block p-4 border border-gray-200 rounded-lg hover:border-brand-blue hover:bg-blue-50 transition-colors group">

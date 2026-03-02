@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#003087"/>
+  <rect x="0" y="580" width="1200" height="50" fill="#1a7a4a"/>
+  <rect x="80" y="120" width="130" height="68" rx="10" fill="white"/>
+  <text x="145" y="170" text-anchor="middle" font-family="monospace" font-size="40" font-weight="900" fill="#003087">CF</text>
+  <text x="80" y="270" font-family="Helvetica,Arial,sans-serif" font-size="68" font-weight="700" fill="white">Calcolare Codice Fiscale</text>
+  <text x="80" y="340" font-family="Helvetica,Arial,sans-serif" font-size="30" fill="rgba(255,255,255,0.75)">Calcola · Verifica · Decodifica — Gratuito</text>
+  <rect x="80" y="390" width="660" height="82" rx="10" fill="rgba(255,255,255,0.1)"/>
+  <text x="110" y="444" font-family="monospace" font-size="38" font-weight="bold" fill="white" letter-spacing="5">RSSMRA80A01H501U</text>
+  <text x="80" y="601" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="rgba(255,255,255,0.85)">calcolare-codice-fiscale.it</text>
+</svg>

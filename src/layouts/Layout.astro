@@ -4,13 +4,27 @@ export interface Props {
   description: string;
   canonicalUrl?: string;
   schemaJson?: object | object[];
+  breadcrumbs?: Array<{ name: string; url: string }>;
 }
 
-const { title, description, canonicalUrl, schemaJson } = Astro.props;
+const { title, description, canonicalUrl, schemaJson, breadcrumbs } = Astro.props;
 const canonical = canonicalUrl ?? new URL(Astro.url.pathname, Astro.site).href;
 const schemas = schemaJson
   ? Array.isArray(schemaJson) ? schemaJson : [schemaJson]
   : [];
+
+const allSchemas = breadcrumbs && breadcrumbs.length > 0
+  ? [...schemas, {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbs.map((b, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": b.name,
+        "item": new URL(b.url, Astro.site).href,
+      })),
+    }]
+  : schemas;
 ---
 
 <!doctype html>
@@ -28,9 +42,13 @@ const schemas = schemaJson
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="it_IT" />
+    <meta property="og:image" content={new URL('/og-image.svg', Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Schema.org JSON-LD -->
-    {schemas.map(s => (
+    {allSchemas.map(s => (
       <script type="application/ld+json" set:html={JSON.stringify(s).replace(/<\//g, '<\\/')} />
     ))}
 
@@ -51,6 +69,7 @@ const schemas = schemaJson
           <li><a href="/inverso" class="hover:underline opacity-90 hover:opacity-100">Inverso</a></li>
           <li><a href="/verifica" class="hover:underline opacity-90 hover:opacity-100">Verifica</a></li>
           <li><a href="/come-si-calcola" class="hidden sm:inline hover:underline opacity-90 hover:opacity-100">Come si calcola</a></li>
+          <li><a href="/omocodia" class="hidden sm:inline hover:underline opacity-90 hover:opacity-100">Omocodia</a></li>
         </ul>
       </nav>
     </header>
@@ -74,6 +93,12 @@ const schemas = schemaJson
         <a href="/verifica" class="hover:underline">Verifica</a>
         <span aria-hidden="true">·</span>
         <a href="/come-si-calcola" class="hover:underline">Come si calcola</a>
+        <span aria-hidden="true">·</span>
+        <a href="/omocodia" class="hover:underline">Omocodia</a>
+        <span aria-hidden="true">·</span>
+        <a href="/tabelle" class="hover:underline">Tabelle</a>
+        <span aria-hidden="true">·</span>
+        <a href="/codice-fiscale-stranieri" class="hover:underline">Stranieri</a>
       </p>
     </footer>
 
