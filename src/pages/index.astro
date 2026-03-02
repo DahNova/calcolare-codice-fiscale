@@ -1,6 +1,122 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CalcolaForm from '../components/CalcolaForm';
+
+const schemaWebApp = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Calcola Codice Fiscale Online",
+  "url": "https://calcolare-codice-fiscale.it",
+  "description": "Calcola il codice fiscale italiano online gratis. Strumento aggiornato.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "inLanguage": "it",
+};
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Come si calcola il codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il codice fiscale si calcola partendo da 3 lettere del cognome, 3 del nome, 2 cifre dell'anno, 1 lettera del mese, 2 cifre del giorno (+ 40 per le donne), il codice catastale del comune e un carattere di controllo finale." }
+    },
+    {
+      "@type": "Question",
+      "name": "Il codice fiscale calcolato online è valido?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sì, nella quasi totalità dei casi. In rari casi di omocodia (due persone con lo stesso CF teorico) l'Agenzia delle Entrate assegna un codice modificato che non può essere calcolato con formule standard." }
+    },
+    {
+      "@type": "Question",
+      "name": "Cosa succede se sono nato all'estero?",
+      "acceptedAnswer": { "@type": "Answer", "text": "I nati all'estero usano un codice catastale speciale che inizia con Z (es. Z110 per la Francia). Seleziona 'Nato all'estero' nel form e scegli il paese." }
+    },
+    {
+      "@type": "Question",
+      "name": "Il codice fiscale rivela il sesso?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sì. Il giorno di nascita per le donne viene aumentato di 40. Quindi un uomo nato il 5 ha '05' nel CF, mentre una donna nata il 5 ha '45'." }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso decodificare un codice fiscale esistente?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sì, usa la pagina Codice Fiscale Inverso per estrarre data di nascita, sesso e comune da un CF esistente." }
+    },
+  ],
+};
 ---
-<Layout title="Test" description="Test">
-  <h1>Test</h1>
+
+<Layout
+  title="Calcola Codice Fiscale Online — Gratis e Immediato"
+  description="Calcola il tuo codice fiscale online in pochi secondi. Inserisci nome, cognome, data e luogo di nascita. Strumento gratuito e aggiornato 2026."
+  schemaJson={[schemaWebApp, schemaFAQ]}
+>
+  <h1 class="text-3xl font-bold text-brand-blue mb-1">Calcola il Codice Fiscale Online</h1>
+  <p class="text-gray-500 mb-6 text-sm">
+    Gratis, immediato, aggiornato 2026 — calcolo secondo il D.M. 12/03/1974
+  </p>
+
+  <CalcolaForm client:load />
+
+  <!-- Slot AdSense (placeholder - da configurare dopo approvazione AdSense) -->
+  <div class="my-8 min-h-[90px] flex items-center justify-center">
+    <!-- AdSense banner verrà inserito qui -->
+  </div>
+
+  <!-- Testo SEO -->
+  <section class="mt-2">
+    <h2 class="text-xl font-bold text-gray-800 mb-3">Cos'è il Codice Fiscale?</h2>
+    <div class="text-gray-700 text-sm leading-relaxed space-y-3">
+      <p>
+        Il <strong>codice fiscale</strong> è un codice alfanumerico di 16 caratteri utilizzato
+        in Italia per identificare univocamente i cittadini a fini fiscali e amministrativi.
+        Introdotto nel 1973 con il D.P.R. 605, è richiesto per qualsiasi rapporto con la
+        Pubblica Amministrazione, banche, datori di lavoro e il Servizio Sanitario Nazionale.
+      </p>
+      <p>
+        La sua struttura segue le regole del <strong>D.M. 12/03/1974</strong>: le prime tre
+        lettere derivano dal cognome, le successive tre dal nome, poi troviamo anno e mese di
+        nascita, il giorno (aumentato di 40 per le donne), il codice catastale del comune e
+        infine un carattere di controllo per verificare la correttezza del codice.
+      </p>
+    </div>
+  </section>
+
+  <!-- Link alle altre pagine -->
+  <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+    {[
+      { href: '/inverso', title: 'Codice Fiscale Inverso', desc: 'Estrai i dati da un CF esistente' },
+      { href: '/verifica', title: 'Verifica Codice Fiscale', desc: 'Controlla se un CF è valido' },
+      { href: '/come-si-calcola', title: 'Come si calcola', desc: 'Guida completa all\'algoritmo' },
+    ].map(({ href, title, desc }) => (
+      <a href={href}
+        class="block p-4 border border-gray-200 rounded-lg hover:border-brand-blue hover:bg-blue-50 transition-colors group">
+        <div class="font-semibold text-sm text-brand-blue group-hover:underline">{title}</div>
+        <div class="text-xs text-gray-500 mt-1">{desc}</div>
+      </a>
+    ))}
+  </div>
+
+  <!-- FAQ -->
+  <section class="mt-8">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Domande Frequenti</h2>
+    <div class="space-y-2">
+      {[
+        { q: "Come si calcola il codice fiscale?", a: "Si calcola partendo da 3 lettere del cognome, 3 del nome, 2 cifre dell'anno, 1 lettera del mese, 2 cifre del giorno (+40 per donne), codice catastale del comune e carattere di controllo." },
+        { q: "Il codice calcolato è valido per usi ufficiali?", a: "È valido nella quasi totalità dei casi. In rari casi di omocodia l'Agenzia delle Entrate assegna un codice modificato." },
+        { q: "Cosa succede se sono nato all'estero?", a: "Usa l'opzione 'Nato all'estero' e seleziona il paese. I nati all'estero hanno codici catastali speciali che iniziano con Z." },
+        { q: "Il codice fiscale dipende dal sesso?", a: "Sì. Il giorno di nascita per le donne viene aumentato di 40, rendendo il sesso immediatamente riconoscibile." },
+        { q: "Posso decodificare un CF esistente?", a: "Sì! Usa la nostra pagina Codice Fiscale Inverso per estrarre data, sesso e comune da un CF." },
+      ].map(({ q, a }) => (
+        <details class="border border-gray-200 rounded-lg group">
+          <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-gray-800 hover:bg-gray-50 list-none flex justify-between items-center">
+            {q}
+            <span class="text-gray-400 text-xs group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="px-4 pb-3 text-sm text-gray-600">{a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
 </Layout>
