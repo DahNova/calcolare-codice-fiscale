@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Come si Calcola il Codice Fiscale — Guida Completa all'Algoritmo",
+  "description": "Guida dettagliata all'algoritmo di calcolo del codice fiscale italiano, con esempi passo per passo per cognome, nome, data, comune e carattere di controllo.",
+  "url": "https://calcolare-codice-fiscale.it/come-si-calcola",
+  "inLanguage": "it",
+  "datePublished": "2026-01-01",
+  "dateModified": "2026-03-01",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+};
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quante lettere si prendono dal cognome per il codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Si prendono 3 lettere: prima le consonanti nell'ordine in cui appaiono, poi le vocali. Se i caratteri sono ancora meno di 3, si aggiunge X." }
+    },
+    {
+      "@type": "Question",
+      "name": "Come viene codificato il mese nel codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ogni mese corrisponde a una lettera: Gennaio=A, Febbraio=B, Marzo=C, Aprile=D, Maggio=E, Giugno=H, Luglio=L, Agosto=M, Settembre=P, Ottobre=R, Novembre=S, Dicembre=T." }
+    },
+    {
+      "@type": "Question",
+      "name": "Perché il giorno di nascita delle donne è diverso nel CF?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Per le donne il giorno di nascita viene aumentato di 40. Questo permette di distinguere il sesso direttamente dalla lettura del codice fiscale." }
+    },
+    {
+      "@type": "Question",
+      "name": "Come si calcola il carattere di controllo del codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Si sommano i valori dei 15 caratteri usando due tabelle: una per le posizioni dispari e una per le posizioni pari. La somma modulo 26 dà la lettera finale (A=0, B=1, ..., Z=25)." }
+    },
+  ],
+};
+---
+
+<Layout
+  title="Come si Calcola il Codice Fiscale — Guida Completa 2026"
+  description="Guida completa all'algoritmo del codice fiscale italiano: cognome, nome, data di nascita, comune di nascita e carattere di controllo. Con esempi pratici."
+  schemaJson={[schemaArticle, schemaFAQ]}
+>
+  <nav class="text-xs text-gray-400 mb-4">
+    <a href="/" class="hover:underline">Home</a>
+    <span class="mx-1">›</span>
+    <span>Come si calcola il codice fiscale</span>
+  </nav>
+
+  <article>
+    <h1 class="text-3xl font-bold text-brand-blue mb-4">
+      Come si Calcola il Codice Fiscale
+    </h1>
+
+    <!-- Esempio visivo struttura CF -->
+    <div class="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-8 text-center">
+      <div class="font-mono text-2xl font-bold tracking-widest mb-3">
+        <span class="text-red-600">RSS</span><span class="text-blue-600">MRA</span><span
+          class="text-green-600">80A01</span><span class="text-purple-600">H501</span><span
+          class="text-orange-500">U</span>
+      </div>
+      <div class="flex justify-center flex-wrap gap-4 text-xs font-semibold">
+        <span class="text-red-600">Cognome (3)</span>
+        <span class="text-blue-600">Nome (3)</span>
+        <span class="text-green-600">Data (5)</span>
+        <span class="text-purple-600">Comune (4)</span>
+        <span class="text-orange-500">Check (1)</span>
+      </div>
+      <p class="text-xs text-gray-500 mt-2">Esempio: Mario Rossi, M, 1 Gennaio 1980, Roma</p>
+    </div>
+
+    <div class="space-y-8 text-sm text-gray-700 leading-relaxed">
+
+      <!-- Cognome -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">1. Codifica del Cognome</h2>
+        <p>Si estraggono prima le <strong>consonanti</strong> del cognome nell'ordine in cui appaiono,
+        poi le <strong>vocali</strong>, fino ad avere 3 caratteri. Se ancora mancano, si aggiunge <code class="bg-gray-100 px-1 rounded">X</code>.</p>
+        <div class="mt-3 overflow-x-auto">
+          <table class="text-xs border-collapse w-full">
+            <thead><tr class="bg-gray-100">
+              <th class="border border-gray-200 px-3 py-1.5 text-left">Cognome</th>
+              <th class="border border-gray-200 px-3 py-1.5">Consonanti</th>
+              <th class="border border-gray-200 px-3 py-1.5">Vocali</th>
+              <th class="border border-gray-200 px-3 py-1.5 font-bold">Risultato</th>
+            </tr></thead>
+            <tbody>
+              {[
+                ['Rossi', 'R, S, S', 'O, I', 'RSS'],
+                ['Bianchi', 'B, N, C, H', 'I, A, I', 'BNC'],
+                ['Fo', 'F', 'O', 'FOX'],
+                ['Ali', 'L', 'A, I', 'LAI'],
+              ].map(([cog, cons, voc, ris]) => (
+                <tr>
+                  <td class="border border-gray-200 px-3 py-1.5 font-medium">{cog}</td>
+                  <td class="border border-gray-200 px-3 py-1.5 text-center">{cons}</td>
+                  <td class="border border-gray-200 px-3 py-1.5 text-center">{voc}</td>
+                  <td class="border border-gray-200 px-3 py-1.5 text-center font-mono font-bold text-red-600">{ris}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Nome -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">2. Codifica del Nome</h2>
+        <p>Se il nome ha <strong>4 o più consonanti</strong>, si prendono la <strong>1ª, la 3ª e la 4ª</strong>.
+        Altrimenti si procede come per il cognome (consonanti + vocali + X).</p>
+        <div class="mt-3 overflow-x-auto">
+          <table class="text-xs border-collapse w-full">
+            <thead><tr class="bg-gray-100">
+              <th class="border border-gray-200 px-3 py-1.5 text-left">Nome</th>
+              <th class="border border-gray-200 px-3 py-1.5">Consonanti</th>
+              <th class="border border-gray-200 px-3 py-1.5">Regola</th>
+              <th class="border border-gray-200 px-3 py-1.5 font-bold">Risultato</th>
+            </tr></thead>
+            <tbody>
+              {[
+                ['Mario', 'M, R', '< 4 consonanti → cons+voc', 'MRA'],
+                ['Roberto', 'R, B, R, T', '≥ 4 → 1ª, 3ª, 4ª = R,R,T', 'RRT'],
+                ['Anna', 'N, N', '< 4 → NN + vocale A', 'NNA'],
+                ['Luca', 'L, C', '< 4 → LC + vocale U', 'LCU'],
+              ].map(([n, c, r, res]) => (
+                <tr>
+                  <td class="border border-gray-200 px-3 py-1.5 font-medium">{n}</td>
+                  <td class="border border-gray-200 px-3 py-1.5 text-center">{c}</td>
+                  <td class="border border-gray-200 px-3 py-1.5 text-center">{r}</td>
+                  <td class="border border-gray-200 px-3 py-1.5 text-center font-mono font-bold text-blue-600">{res}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Anno -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">3. Anno di Nascita</h2>
+        <p>Si usano le <strong>ultime due cifre</strong> dell'anno. 1980 → <code class="bg-gray-100 px-1 rounded font-mono">80</code>,
+        2005 → <code class="bg-gray-100 px-1 rounded font-mono">05</code>.</p>
+      </section>
+
+      <!-- Mese -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">4. Mese di Nascita</h2>
+        <p>Ogni mese ha una lettera corrispondente:</p>
+        <div class="mt-3 grid grid-cols-4 sm:grid-cols-6 gap-2">
+          {[
+            ['Gen','A'],['Feb','B'],['Mar','C'],['Apr','D'],
+            ['Mag','E'],['Giu','H'],['Lug','L'],['Ago','M'],
+            ['Set','P'],['Ott','R'],['Nov','S'],['Dic','T'],
+          ].map(([mese, lettera]) => (
+            <div class="border border-gray-200 rounded p-2 text-center text-xs">
+              <div class="text-gray-500">{mese}</div>
+              <div class="font-mono font-bold text-green-700 text-base">{lettera}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Giorno -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">5. Giorno di Nascita</h2>
+        <p>Per i <strong>maschi</strong>: giorno invariato, con zero iniziale se necessario (es. 5 → <code class="bg-gray-100 px-1 rounded font-mono">05</code>).</p>
+        <p class="mt-1">Per le <strong>femmine</strong>: giorno + 40 (es. 15 → <code class="bg-gray-100 px-1 rounded font-mono">55</code>). Questo rende il sesso immediatamente riconoscibile.</p>
+      </section>
+
+      <!-- Comune -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">6. Codice Catastale del Comune</h2>
+        <p>Ogni comune italiano ha un <strong>codice catastale</strong> univoco: una lettera seguita da 3 cifre.
+        Per chi è nato all'estero si usano codici che iniziano con <code class="bg-gray-100 px-1 rounded font-mono">Z</code>.</p>
+        <ul class="mt-2 space-y-1 text-xs">
+          <li>Roma → <code class="bg-gray-100 px-1 rounded font-mono">H501</code></li>
+          <li>Milano → <code class="bg-gray-100 px-1 rounded font-mono">F205</code></li>
+          <li>Napoli → <code class="bg-gray-100 px-1 rounded font-mono">F839</code></li>
+          <li>Francia → <code class="bg-gray-100 px-1 rounded font-mono">Z110</code></li>
+        </ul>
+      </section>
+
+      <!-- Check digit -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">7. Carattere di Controllo</h2>
+        <p>I 15 caratteri precedenti vengono sommati usando due tabelle di conversione:
+        una per le <strong>posizioni dispari</strong> (1ª, 3ª, 5ª, ...) e una per le
+        <strong>posizioni pari</strong> (2ª, 4ª, ...). La somma modulo 26 dà la lettera finale.</p>
+        <p class="mt-2">Questo carattere permette di rilevare errori di trascrizione del codice fiscale.</p>
+      </section>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-10 p-5 bg-green-50 border border-green-200 rounded-xl text-center">
+      <p class="font-semibold text-green-800 mb-2">Pronto a calcolare il tuo codice fiscale?</p>
+      <a href="/"
+        class="inline-block bg-brand-green hover:bg-brand-green-hover text-white px-6 py-2.5 rounded-lg transition-colors font-medium text-sm">
+        Vai al Calcolatore →
+      </a>
+    </div>
+
+    <!-- FAQ -->
+    <section class="mt-10">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Domande Frequenti</h2>
+      <div class="space-y-2">
+        {[
+          { q: "Quante lettere si prendono dal cognome?", a: "3 lettere: prima le consonanti nell'ordine, poi le vocali, poi X se serve." },
+          { q: "Come viene codificato il mese?", a: "Con una lettera: A=Gen, B=Feb, C=Mar, D=Apr, E=Mag, H=Giu, L=Lug, M=Ago, P=Set, R=Ott, S=Nov, T=Dic." },
+          { q: "Perché il giorno delle donne è diverso?", a: "Per le femmine si aggiunge 40 al giorno reale, rendendo il sesso leggibile direttamente dal CF." },
+          { q: "Come si calcola il carattere di controllo?", a: "Somma di valori dei 15 caratteri con tabelle diverse per posizioni pari/dispari, modulo 26." },
+        ].map(({ q, a }) => (
+          <details class="border border-gray-200 rounded-lg">
+            <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-gray-800 hover:bg-gray-50 list-none">
+              {q}
+            </summary>
+            <p class="px-4 pb-3 text-sm text-gray-600">{a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  </article>
+</Layout>
