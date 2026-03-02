@@ -11,4 +11,9 @@ export default defineConfig({
     sitemap(),
   ],
   output: 'static',
+  vite: {
+    optimizeDeps: {
+      include: ['react/jsx-dev-runtime'],
+    },
+  },
 });
