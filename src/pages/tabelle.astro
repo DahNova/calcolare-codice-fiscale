@@ -1,0 +1,202 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Tabelle Codice Fiscale — Mesi, Carattere di Controllo, Codici Catastali"
+  description="Tabelle di riferimento complete per il codice fiscale italiano: lettere dei mesi, valori per il carattere di controllo, codici catastali dei principali comuni."
+  breadcrumbs={[{name:'Home',url:'/'},{name:'Tabelle di Riferimento',url:'/tabelle'}]}
+>
+  <nav class="text-xs text-gray-400 mb-4">
+    <a href="/" class="hover:underline">Home</a>
+    <span class="mx-1">›</span>
+    <span>Tabelle di Riferimento</span>
+  </nav>
+
+  <h1 class="text-3xl font-bold text-brand-blue mb-1">Tabelle del Codice Fiscale</h1>
+  <p class="text-gray-500 mb-8 text-sm">
+    Riferimento completo: mesi, posizioni dispari/pari per il check digit, codici catastali
+  </p>
+
+  <div class="space-y-10 text-sm">
+
+    <!-- Tabella mesi -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Tabella Mesi</h2>
+      <p class="text-gray-600 mb-4">
+        Ogni mese dell'anno corrisponde a una lettera specifica nel codice fiscale.
+        Le lettere <strong>non seguono l'ordine alfabetico</strong> per evitare confusione
+        con cifre simili (es. "I" simile a "1", "O" simile a "0").
+      </p>
+      <div class="grid grid-cols-3 sm:grid-cols-4 gap-2">
+        {[
+          ['Gennaio','1','A'],['Febbraio','2','B'],['Marzo','3','C'],['Aprile','4','D'],
+          ['Maggio','5','E'],['Giugno','6','H'],['Luglio','7','L'],['Agosto','8','M'],
+          ['Settembre','9','P'],['Ottobre','10','R'],['Novembre','11','S'],['Dicembre','12','T'],
+        ].map(([mese, num, lettera]) => (
+          <div class="border border-gray-200 rounded-lg p-3 text-center">
+            <div class="text-xs text-gray-500 mb-1">{mese} ({num})</div>
+            <div class="font-mono font-black text-2xl text-brand-blue">{lettera}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Tabella posizioni dispari (ODD) -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Tabella Posizioni Dispari (Carattere di Controllo)</h2>
+      <p class="text-gray-600 mb-4">
+        Per calcolare il <strong>carattere di controllo</strong> (16° carattere del CF),
+        i caratteri nelle posizioni dispari (1ª, 3ª, 5ª, ..., 15ª) usano questa tabella
+        di conversione. I valori sono definiti dal D.M. 12/03/1974.
+      </p>
+      <div class="overflow-x-auto">
+        <table class="text-xs border-collapse w-full">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-200 px-2 py-1.5">Char</th>
+              <th class="border border-gray-200 px-2 py-1.5">Val</th>
+              <th class="border border-gray-200 px-2 py-1.5">Char</th>
+              <th class="border border-gray-200 px-2 py-1.5">Val</th>
+              <th class="border border-gray-200 px-2 py-1.5">Char</th>
+              <th class="border border-gray-200 px-2 py-1.5">Val</th>
+              <th class="border border-gray-200 px-2 py-1.5">Char</th>
+              <th class="border border-gray-200 px-2 py-1.5">Val</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              [['0',1],['A',1],['K',2],['U',16]],
+              [['1',0],['B',0],['L',4],['V',10]],
+              [['2',5],['C',5],['M',18],['W',22]],
+              [['3',7],['D',7],['N',20],['X',25]],
+              [['4',9],['E',9],['O',11],['Y',24]],
+              [['5',13],['F',13],['P',3],['Z',23]],
+              [['6',15],['G',15],['Q',6],['','']],
+              [['7',17],['H',17],['R',8],['','']],
+              [['8',19],['I',19],['S',12],['','']],
+              [['9',21],['J',21],['T',14],['','']],
+            ].map(row => (
+              <tr>
+                {row.map(([c, v]) => (
+                  <>
+                    <td class="border border-gray-200 px-2 py-1.5 text-center font-mono font-bold">{c}</td>
+                    <td class="border border-gray-200 px-2 py-1.5 text-center text-brand-blue font-medium">{v}</td>
+                  </>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-gray-400 mt-2">
+        Per le posizioni pari (2ª, 4ª, ..., 14ª): le cifre valgono il loro valore numerico (0-9),
+        le lettere valgono la loro posizione nell'alfabeto (A=0, B=1, ..., Z=25).
+      </p>
+    </section>
+
+    <!-- Codici catastali principali comuni -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Codici Catastali — Principali Comuni</h2>
+      <p class="text-gray-600 mb-4">
+        Il <strong>codice catastale</strong> (o codice Belfiore) identifica univocamente ogni
+        comune italiano e stato estero nel codice fiscale. È composto da una lettera e tre cifre.
+        Per i nati all'estero i codici iniziano con <strong>Z</strong>.
+      </p>
+      <div class="overflow-x-auto">
+        <table class="text-xs border-collapse w-full">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-200 px-3 py-1.5 text-left">Comune</th>
+              <th class="border border-gray-200 px-3 py-1.5">Prov.</th>
+              <th class="border border-gray-200 px-3 py-1.5 font-bold">Codice</th>
+              <th class="border border-gray-200 px-3 py-1.5 text-left">Comune</th>
+              <th class="border border-gray-200 px-3 py-1.5">Prov.</th>
+              <th class="border border-gray-200 px-3 py-1.5 font-bold">Codice</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              [['Roma','RM','H501'],['Milano','MI','F205']],
+              [['Napoli','NA','F839'],['Torino','TO','L219']],
+              [['Palermo','PA','G273'],['Genova','GE','D969']],
+              [['Bologna','BO','A944'],['Firenze','FI','D612']],
+              [['Bari','BA','A662'],['Catania','CT','C351']],
+              [['Venezia','VE','L736'],['Verona','VR','L781']],
+              [['Messina','ME','F158'],['Padova','PD','G224']],
+              [['Trieste','TS','L424'],['Brescia','BS','B157']],
+              [['Taranto','TA','L049'],['Reggio Calabria','RC','H224']],
+              [['Modena','MO','F257'],['Parma','PR','G337']],
+            ].map(([left, right]) => (
+              <tr>
+                <td class="border border-gray-200 px-3 py-1.5 font-medium">{left[0]}</td>
+                <td class="border border-gray-200 px-3 py-1.5 text-center text-gray-500">{left[1]}</td>
+                <td class="border border-gray-200 px-3 py-1.5 text-center font-mono font-bold text-brand-blue">{left[2]}</td>
+                <td class="border border-gray-200 px-3 py-1.5 font-medium">{right[0]}</td>
+                <td class="border border-gray-200 px-3 py-1.5 text-center text-gray-500">{right[1]}</td>
+                <td class="border border-gray-200 px-3 py-1.5 text-center font-mono font-bold text-brand-blue">{right[2]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-gray-400 mt-2">
+        Per trovare il codice catastale di qualsiasi comune usa il calcolatore →
+        <a href="/" class="hover:underline text-brand-blue">Calcola CF</a>
+      </p>
+    </section>
+
+    <!-- Codici paesi esteri -->
+    <section id="esteri">
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Codici Catastali — Principali Paesi Esteri</h2>
+      <p class="text-gray-600 mb-4">
+        Per i nati all'estero, il codice catastale inizia con <strong>Z</strong> e identifica il paese di nascita.
+      </p>
+      <div class="overflow-x-auto">
+        <table class="text-xs border-collapse w-full">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-200 px-3 py-1.5 text-left">Paese</th>
+              <th class="border border-gray-200 px-3 py-1.5 font-bold">Codice</th>
+              <th class="border border-gray-200 px-3 py-1.5 text-left">Paese</th>
+              <th class="border border-gray-200 px-3 py-1.5 font-bold">Codice</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              [['Albania','Z100'],['Algeria','Z301']],
+              [['Argentina','Z600'],['Australia','Z700']],
+              [['Austria','Z102'],['Belgio','Z103']],
+              [['Brasile','Z602'],['Bulgaria','Z104']],
+              [['Canada','Z401'],['Cina','Z210']],
+              [['Francia','Z110'],['Germania','Z112']],
+              [['Giappone','Z219'],['Grecia','Z115']],
+              [['India','Z222'],['Marocco','Z330']],
+              [['Paesi Bassi','Z126'],['Polonia','Z127']],
+              [['Regno Unito','Z114'],['Romania','Z129']],
+              [['Russia','Z154'],['Spagna','Z131']],
+              [['Svizzera','Z133'],['Tunisia','Z352']],
+              [['Turchia','Z243'],['Ucraina','Z138']],
+              [["Stati Uniti d'America",'Z404'],['Venezuela','Z614']],
+            ].map(([left, right]) => (
+              <tr>
+                <td class="border border-gray-200 px-3 py-1.5 font-medium">{left[0]}</td>
+                <td class="border border-gray-200 px-3 py-1.5 text-center font-mono font-bold text-brand-blue">{left[1]}</td>
+                <td class="border border-gray-200 px-3 py-1.5 font-medium">{right[0]}</td>
+                <td class="border border-gray-200 px-3 py-1.5 text-center font-mono font-bold text-brand-blue">{right[1]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="mt-10 p-5 bg-green-50 border border-green-200 rounded-xl text-center">
+    <p class="font-semibold text-green-800 mb-2">Vuoi calcolare il tuo codice fiscale?</p>
+    <a href="/" class="inline-block bg-brand-green hover:bg-brand-green-hover text-white px-6 py-2.5 rounded-lg transition-colors font-medium text-sm">
+      Vai al Calcolatore →
+    </a>
+  </div>
+</Layout>

@@ -1,0 +1,171 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Come si calcola il codice fiscale per chi è nato all'estero?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Per i nati all'estero la struttura del CF è identica a quella degli italiani, tranne per il codice catastale: al posto del comune di nascita si usa il codice del paese estero, che inizia sempre con Z (es. Z110 per la Francia, Z112 per la Germania)." }
+    },
+    {
+      "@type": "Question",
+      "name": "Dove trovo il codice catastale del mio paese di nascita?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Puoi trovarlo nella nostra tabella dei codici paesi esteri, oppure direttamente nel calcolatore selezionando 'Nato all'estero' e cercando il paese nel campo di ricerca." }
+    },
+    {
+      "@type": "Question",
+      "name": "Gli stranieri residenti in Italia hanno il codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sì. Tutti i cittadini stranieri che hanno rapporti con l'amministrazione italiana (lavoro, sanità, banca, acquisti immobiliari) devono richiedere il codice fiscale all'Agenzia delle Entrate o al Consolato italiano nel paese di origine." }
+    },
+    {
+      "@type": "Question",
+      "name": "Come si calcola il codice fiscale di un cittadino apolide?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Per gli apolidi e i rifugiati viene usato il codice Z000, che identifica la condizione di apolide nel sistema dell'Agenzia delle Entrate." }
+    },
+  ],
+};
+---
+
+<Layout
+  title="Codice Fiscale per Nati all'Estero — Guida Completa"
+  description="Come calcolare il codice fiscale italiano per chi è nato all'estero: codici Z per paesi esteri, struttura del CF, come richiederlo all'Agenzia delle Entrate."
+  schemaJson={schemaFAQ}
+  breadcrumbs={[{name:'Home',url:'/'},{name:"Nati all'Estero",url:'/codice-fiscale-stranieri'}]}
+>
+  <nav class="text-xs text-gray-400 mb-4">
+    <a href="/" class="hover:underline">Home</a>
+    <span class="mx-1">›</span>
+    <span>Codice Fiscale per Nati all'Estero</span>
+  </nav>
+
+  <h1 class="text-3xl font-bold text-brand-blue mb-1">Codice Fiscale per Nati all'Estero</h1>
+  <p class="text-gray-500 mb-6 text-sm">
+    Come funziona il CF per chi è nato fuori dall'Italia e come calcolarlo
+  </p>
+
+  <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
+    <strong>Vuoi calcolare subito il tuo CF?</strong> Usa il calcolatore e seleziona
+    "Nato/a all'estero" per cercare il tuo paese di nascita.
+    <a href="/" class="ml-1 font-semibold hover:underline">Vai al calcolatore →</a>
+  </div>
+
+  <div class="space-y-8 text-sm text-gray-700 leading-relaxed">
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">La Struttura è Identica</h2>
+      <p>
+        Il codice fiscale per i nati all'estero segue esattamente la stessa struttura di quello
+        dei nati in Italia: 3 lettere dal cognome, 3 dal nome, anno e mese di nascita, giorno
+        (+40 per le donne), 4 caratteri del luogo di nascita e il carattere di controllo.
+      </p>
+      <p class="mt-3">
+        L'unica differenza è nel <strong>codice catastale del luogo di nascita</strong>: invece
+        del codice di un comune italiano, si usa il <strong>codice del paese estero</strong>,
+        che inizia sempre con la lettera <strong>Z</strong>.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Esempio Pratico</h2>
+      <div class="bg-gray-50 rounded-xl p-5">
+        <p class="font-medium mb-3">Maria Schmidt, nata il 15 marzo 1990 in Germania:</p>
+        <div class="font-mono text-xl font-bold tracking-widest text-center mb-4">
+          <span class="text-red-600">SCH</span><span class="text-blue-600">MRA</span><span class="text-green-600">90C55</span><span class="text-purple-600">Z112</span><span class="text-orange-500">?</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div><span class="text-red-600 font-semibold">SCH</span> = Cognome Schmidt</div>
+          <div><span class="text-blue-600 font-semibold">MRA</span> = Nome Maria</div>
+          <div><span class="text-green-600 font-semibold">90</span> = Anno 1990</div>
+          <div><span class="text-green-600 font-semibold">C</span> = Marzo</div>
+          <div><span class="text-green-600 font-semibold">55</span> = Giorno 15 + 40 (femmina)</div>
+          <div><span class="text-purple-600 font-semibold">Z112</span> = Germania</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">I Codici Z — Come Funzionano</h2>
+      <p>
+        I codici per gli stati esteri sono definiti dall'<strong>Agenzia delle Entrate</strong>
+        e iniziano tutti con la lettera <strong>Z</strong> seguita da tre cifre. Sono detti
+        "codici Belfiore" per gli stati esteri.
+      </p>
+      <p class="mt-3">
+        Ogni paese ha un codice unico che rimane stabile nel tempo. In caso di cambiamenti
+        politici (es. paesi che si unificano o si dividono), l'AE assegna nuovi codici
+        mantenendo quelli storici per i nati prima del cambiamento.
+      </p>
+      <p class="mt-3">
+        <a href="/tabelle#esteri" class="text-brand-blue hover:underline font-medium">
+          Consulta la tabella completa dei codici paesi esteri →
+        </a>
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Chi Deve Richiedere il Codice Fiscale</h2>
+      <p>Il codice fiscale è obbligatorio per tutti i cittadini stranieri che in Italia:</p>
+      <ul class="mt-2 space-y-1 list-disc list-inside text-gray-700">
+        <li>Stipulano un contratto di lavoro</li>
+        <li>Aprono un conto corrente bancario</li>
+        <li>Accedono al Servizio Sanitario Nazionale</li>
+        <li>Acquistano o affittano un immobile</li>
+        <li>Svolgono qualsiasi atto con la Pubblica Amministrazione</li>
+        <li>Sono iscritti all'AIRE (Anagrafe Italiani Residenti all'Estero)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Come Richiedere il Codice Fiscale</h2>
+      <p>I cittadini stranieri possono richiedere il codice fiscale:</p>
+      <div class="mt-3 space-y-3">
+        {[
+          {
+            title: 'In Italia',
+            body: "Presso qualsiasi ufficio dell'Agenzia delle Entrate presentando un documento di identità valido. Il codice viene rilasciato immediatamente e gratuitamente.",
+          },
+          {
+            title: "All'estero (italiani AIRE)",
+            body: "Presso il Consolato o l'Ambasciata italiana nel paese di residenza. I cittadini italiani iscritti all'AIRE possono anche richiedere il CF online tramite il sito dell'Agenzia delle Entrate.",
+          },
+          {
+            title: 'Calcolo preventivo',
+            body: 'Puoi calcolare il tuo codice fiscale in anticipo con il nostro strumento. Il codice calcolato è valido nella quasi totalità dei casi (eccetto omocodia).',
+          },
+        ].map(({ title, body }) => (
+          <div class="flex gap-3 bg-gray-50 rounded-lg p-4">
+            <div class="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0"></div>
+            <div>
+              <p class="font-semibold text-gray-800">{title}</p>
+              <p class="text-gray-600 mt-1">{body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Domande Frequenti</h2>
+    <div class="space-y-2">
+      {[
+        { q: "Come si calcola il CF per chi è nato all'estero?", a: "La struttura è identica ai nati in Italia. L'unica differenza è il codice catastale: si usa il codice del paese estero che inizia con Z (es. Z110 per la Francia, Z112 per la Germania, Z404 per gli USA)." },
+        { q: "Dove trovo il codice catastale del mio paese?", a: "Nel nostro calcolatore, seleziona 'Nato all'estero' e cerca il paese nel campo di ricerca. Oppure consulta la nostra tabella dei codici paesi esteri." },
+        { q: "Gli stranieri in Italia devono avere il CF?", a: "Sì, per qualsiasi rapporto con enti italiani (lavoro, banca, sanità, acquisti immobiliari). Si richiede all'Agenzia delle Entrate con un documento di identità." },
+        { q: "Il CF cambia se cambio residenza?", a: "No. Il codice fiscale è basato sul luogo di nascita, non di residenza. Rimane invariato per tutta la vita, indipendentemente da dove si vive." },
+      ].map(({ q, a }) => (
+        <details class="border border-gray-200 rounded-lg group">
+          <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-gray-800 hover:bg-gray-50 list-none flex justify-between items-center">
+            {q}
+            <span class="text-gray-400 text-xs group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="px-4 pb-3 text-sm text-gray-600">{a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+</Layout>

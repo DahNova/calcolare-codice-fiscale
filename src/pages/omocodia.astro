@@ -1,0 +1,182 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Cos'è l'omocodia nel codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "L'omocodia si verifica quando due persone hanno dati anagrafici che generano lo stesso codice fiscale. In questi casi l'Agenzia delle Entrate modifica il codice sostituendo alcune cifre con lettere secondo una tabella specifica." }
+    },
+    {
+      "@type": "Question",
+      "name": "Come riconoscere un codice fiscale omocodice?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Un CF omocodice presenta lettere nelle posizioni 7, 10, 11, 12, 13, 14 o 15 al posto delle cifre attese. Le lettere sostitutive seguono la tabella: 0→L, 1→M, 2→N, 3→P, 4→Q, 5→R, 6→S, 7→T, 8→U, 9→V." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quante persone hanno un codice fiscale omocodice?",
+      "acceptedAnswer": { "@type": "Answer", "text": "I casi di omocodia sono relativamente rari, ma con oltre 60 milioni di italiani esistono alcune migliaia di codici omocodici. La probabilità aumenta per nomi e date di nascita molto comuni." }
+    },
+    {
+      "@type": "Question",
+      "name": "Il mio codice fiscale calcolato online è diverso da quello ufficiale: perché?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Se il tuo codice fiscale ufficiale differisce da quello calcolato online, probabilmente hai un codice omocodice. Il codice ufficiale ti è stato assegnato dall'Agenzia delle Entrate al momento della nascita o del rilascio del codice fiscale." }
+    },
+  ],
+};
+---
+
+<Layout
+  title="Omocodia del Codice Fiscale — Cos'è e Come Funziona"
+  description="Scopri cos'è l'omocodia nel codice fiscale italiano: quando si verifica, la tabella di sostituzione cifre-lettere e come riconoscere un CF omocodice."
+  schemaJson={schemaFAQ}
+  breadcrumbs={[{name:'Home',url:'/'},{name:'Omocodia',url:'/omocodia'}]}
+>
+  <nav class="text-xs text-gray-400 mb-4">
+    <a href="/" class="hover:underline">Home</a>
+    <span class="mx-1">›</span>
+    <span>Omocodia</span>
+  </nav>
+
+  <h1 class="text-3xl font-bold text-brand-blue mb-1">Omocodia del Codice Fiscale</h1>
+  <p class="text-gray-500 mb-6 text-sm">
+    Quando due persone generano lo stesso CF — e come l'Agenzia delle Entrate lo risolve
+  </p>
+
+  <div class="space-y-8 text-sm text-gray-700 leading-relaxed">
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Cos'è l'Omocodia?</h2>
+      <p>
+        L'<strong>omocodia</strong> (o omonimia fiscale) si verifica quando due persone diverse
+        producono lo stesso codice fiscale teorico applicando il normale algoritmo di calcolo
+        previsto dal <strong>D.M. 12/03/1974</strong>. Questo accade perché l'algoritmo utilizza
+        solo alcune lettere del nome e del cognome, e i dati anagrafici (data e comune di nascita)
+        possono coincidere, ad esempio per gemelli con nomi simili o persone nate lo stesso giorno
+        nello stesso comune con nome e cognome foneticamente simili.
+      </p>
+      <p class="mt-3">
+        Quando si verifica questa situazione, l'<strong>Agenzia delle Entrate</strong> assegna
+        alla seconda persona (o alle successive) un codice <strong>omocodice</strong>: una
+        variante del CF standard in cui alcune cifre vengono sostituite con lettere secondo
+        una tabella di conversione specifica.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">La Tabella di Sostituzione</h2>
+      <p class="mb-3">
+        Le cifre vengono sostituite con lettere secondo questa tabella, definita dal
+        D.M. 23/12/1976:
+      </p>
+      <div class="overflow-x-auto">
+        <table class="text-xs border-collapse w-full max-w-md">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-200 px-4 py-2">Cifra originale</th>
+              <th class="border border-gray-200 px-4 py-2">Lettera sostitutiva</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[['0','L'],['1','M'],['2','N'],['3','P'],['4','Q'],['5','R'],['6','S'],['7','T'],['8','U'],['9','V']].map(([d,l]) => (
+              <tr>
+                <td class="border border-gray-200 px-4 py-2 text-center font-mono font-bold">{d}</td>
+                <td class="border border-gray-200 px-4 py-2 text-center font-mono font-bold text-brand-blue">{l}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Quali Posizioni Vengono Sostituite?</h2>
+      <p class="mb-3">
+        Le sostituzioni avvengono in ordine, partendo dalla posizione più a destra del codice
+        (escluso il carattere di controllo). Le posizioni coinvolte sono, nell'ordine di sostituzione:
+      </p>
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+        <div class="font-mono text-lg font-bold tracking-widest text-center mb-3">
+          <span class="text-gray-400">R S S M R A </span><span class="text-red-500 underline decoration-dotted">8 0</span><span class="text-gray-400"> A </span><span class="text-red-500 underline decoration-dotted">0 1</span><span class="text-gray-400"> H </span><span class="text-red-500 underline decoration-dotted">5 0 1</span><span class="text-gray-400"> U</span>
+        </div>
+        <p class="text-xs text-center text-gray-500">Le cifre sottolineate in rosso sono le posizioni sostituibili (7 posizioni in totale)</p>
+      </div>
+      <p class="mt-3">
+        Al primo caso di omocodia si sostituisce la cifra più a destra (posizione 15 del codice parziale).
+        Se esiste ancora conflitto, si sostituisce anche la penultima cifra, e così via fino a
+        sette sostituzioni possibili. Il carattere di controllo viene sempre ricalcolato sul
+        codice modificato.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Esempio Pratico</h2>
+      <p class="mb-3">
+        Supponiamo che <strong>RSSMRA80A01H501</strong> sia già assegnato. Il secondo omonimo riceve:
+      </p>
+      <div class="space-y-2">
+        {[
+          ['1° omocodia', 'RSSMRA80A01H50L', 'La cifra 1 in posizione 15 → L'],
+          ['2° omocodia', 'RSSMRA80A01H5ML', 'La cifra 0 in posizione 14 → L, poi 1 → M'],
+          ['3° omocodia', 'RSSMRA80A01HP ML', 'La cifra 5 in posizione 13 → R'],
+        ].map(([step, cf, note]) => (
+          <div class="flex items-start gap-3 bg-gray-50 rounded-lg p-3">
+            <span class="text-xs font-semibold text-gray-500 w-24 shrink-0 mt-0.5">{step}</span>
+            <code class="font-mono font-bold text-brand-blue">{cf}</code>
+            <span class="text-xs text-gray-400 ml-auto">{note}</span>
+          </div>
+        ))}
+      </div>
+      <p class="mt-3 text-xs text-gray-500">
+        * Gli esempi sopra sono semplificati. Il carattere di controllo viene ricalcolato ad ogni variante.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Il Mio CF è Omocodice?</h2>
+      <p>
+        Se il tuo codice fiscale ufficiale (quello sulla tessera sanitaria o nel documento
+        dell'Agenzia delle Entrate) differisce da quello calcolato con il nostro strumento,
+        molto probabilmente hai un <strong>codice omocodice</strong>. Questo è assolutamente
+        normale e non indica alcun problema.
+      </p>
+      <p class="mt-2">
+        Per verificare il tuo codice ufficiale, utilizza il servizio di verifica sul sito
+        dell'Agenzia delle Entrate. Il nostro strumento calcola sempre il codice
+        <em>teorico standard</em>, valido per la stragrande maggioranza delle persone.
+      </p>
+      <div class="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+        <p class="text-sm font-medium text-green-800">
+          Vuoi calcolare il tuo codice fiscale standard?
+        </p>
+        <a href="/" class="mt-2 inline-block text-sm text-brand-green font-semibold hover:underline">
+          Vai al Calcolatore →
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Domande Frequenti</h2>
+    <div class="space-y-2">
+      {[
+        { q: "Cos'è l'omocodia nel codice fiscale?", a: "L'omocodia si verifica quando due persone generano lo stesso CF teorico. L'Agenzia delle Entrate risolve il conflitto sostituendo alcune cifre con lettere (0→L, 1→M, 2→N, 3→P, 4→Q, 5→R, 6→S, 7→T, 8→U, 9→V)." },
+        { q: "Come riconosco un CF omocodice?", a: "Un CF omocodice ha lettere nelle posizioni dove normalmente ci sono cifre (anno, giorno, o codice catastale). Le lettere sostitutive sono solo: L, M, N, P, Q, R, S, T, U, V." },
+        { q: "Il CF omocodice è valido?", a: "Sì, è perfettamente valido. È il codice ufficiale assegnato dall'Agenzia delle Entrate e deve essere usato in tutti i documenti ufficiali." },
+        { q: "Perché il mio CF è diverso da quello calcolato online?", a: "Probabilmente hai un codice omocodice. Il calcolatore online produce sempre il codice teorico standard. Se il tuo è diverso, usa quello sulla tessera sanitaria o nel documento AE." },
+      ].map(({ q, a }) => (
+        <details class="border border-gray-200 rounded-lg group">
+          <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-gray-800 hover:bg-gray-50 list-none flex justify-between items-center">
+            {q}
+            <span class="text-gray-400 text-xs group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="px-4 pb-3 text-sm text-gray-600">{a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+</Layout>
