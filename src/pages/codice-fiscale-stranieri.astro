@@ -1,5 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import EsempioCF from '../components/EsempioCF.astro';
+import SearchPaesi from '../components/SearchPaesi';
+import { paesiPerContinente, CONTINENTI } from '../data/paesiEsteri';
+
+const continentIdMap: Record<string, string> = {
+  'Europa': 'europa',
+  'Africa': 'africa',
+  'Asia': 'asia',
+  'Americhe': 'americhe',
+  'Oceania': 'oceania',
+};
+
+const continentCounts = Object.fromEntries(
+  CONTINENTI.map(c => [c, paesiPerContinente.get(c)?.length ?? 0])
+);
 
 const schemaFAQ = {
   "@context": "https://schema.org",
@@ -25,13 +40,28 @@ const schemaFAQ = {
       "name": "Come si calcola il codice fiscale di un cittadino apolide?",
       "acceptedAnswer": { "@type": "Answer", "text": "Per gli apolidi e i rifugiati viene usato il codice Z000, che identifica la condizione di apolide nel sistema dell'Agenzia delle Entrate." }
     },
+    {
+      "@type": "Question",
+      "name": "Quanti sono i codici Z per paesi esteri?",
+      "acceptedAnswer": { "@type": "Answer", "text": "I codici catastali per paesi esteri sono 216, ciascuno assegnato dall'Agenzia delle Entrate. Iniziano tutti con la lettera Z seguita da tre cifre." }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual è il codice catastale della Germania?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il codice catastale della Germania è Z112. Viene usato nel codice fiscale per le persone nate in Germania." }
+    },
+    {
+      "@type": "Question",
+      "name": "Come trovo il codice catastale del mio paese di nascita?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Usa la barra di ricerca nella tabella qui sopra: puoi cercare per nome del paese o per codice Z." }
+    },
   ],
 };
 ---
 
 <Layout
-  title="Codice Fiscale per Nati all'Estero — Guida Completa"
-  description="Come calcolare il codice fiscale italiano per chi è nato all'estero: codici Z per paesi esteri, struttura del CF, come richiederlo all'Agenzia delle Entrate."
+  title="Codice Fiscale per Nati all'Estero — Tutti i Codici Catastali dei Paesi Esteri"
+  description="Tabella completa di tutti i 216 codici catastali per paesi esteri nel codice fiscale italiano. Cerca per paese o codice Z. Guida al CF per stranieri."
   schemaJson={schemaFAQ}
   breadcrumbs={[{name:'Home',url:'/'},{name:"Nati all'Estero",url:'/codice-fiscale-stranieri/'}]}
 >
@@ -43,7 +73,7 @@ const schemaFAQ = {
 
   <h1 class="text-3xl font-bold text-brand-blue mb-1">Codice Fiscale per Nati all'Estero</h1>
   <p class="text-gray-500 mb-6 text-sm">
-    Come funziona il CF per chi è nato fuori dall'Italia e come calcolarlo
+    Guida completa e tabella di tutti i 216 codici catastali dei paesi esteri
   </p>
 
   <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
@@ -70,20 +100,7 @@ const schemaFAQ = {
 
     <section>
       <h2 class="text-xl font-bold text-gray-800 mb-3">Esempio Pratico</h2>
-      <div class="bg-gray-50 rounded-xl p-5">
-        <p class="font-medium mb-3">Maria Schmidt, nata il 15 marzo 1990 in Germania:</p>
-        <div class="font-mono text-xl font-bold tracking-widest text-center mb-4">
-          <span class="text-red-600">SCH</span><span class="text-blue-600">MRA</span><span class="text-green-600">90C55</span><span class="text-purple-600">Z112</span><span class="text-orange-500">?</span>
-        </div>
-        <div class="grid grid-cols-2 gap-2 text-xs">
-          <div><span class="text-red-600 font-semibold">SCH</span> = Cognome Schmidt</div>
-          <div><span class="text-blue-600 font-semibold">MRA</span> = Nome Maria</div>
-          <div><span class="text-green-600 font-semibold">90</span> = Anno 1990</div>
-          <div><span class="text-green-600 font-semibold">C</span> = Marzo</div>
-          <div><span class="text-green-600 font-semibold">55</span> = Giorno 15 + 40 (femmina)</div>
-          <div><span class="text-purple-600 font-semibold">Z112</span> = Germania</div>
-        </div>
-      </div>
+      <EsempioCF cognome="Schmidt" nome="Maria" sesso="F" giorno={15} mese={3} anno={1990} paese="Germania" codiceCatastale="Z112" />
     </section>
 
     <section>
@@ -98,11 +115,56 @@ const schemaFAQ = {
         politici (es. paesi che si unificano o si dividono), l'AE assegna nuovi codici
         mantenendo quelli storici per i nati prima del cambiamento.
       </p>
-      <p class="mt-3">
-        <a href="/tabelle-codice-fiscale/#esteri" class="text-brand-blue hover:underline font-medium">
-          Consulta la tabella completa dei codici paesi esteri →
-        </a>
-      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Tabella Completa dei Codici Catastali Esteri</h2>
+
+      <nav class="flex flex-wrap gap-3 mb-6">
+        {CONTINENTI.map(c => (
+          <a href={`#${continentIdMap[c]}`} class="text-sm font-medium text-brand-blue hover:underline">
+            {c} ({continentCounts[c]})
+          </a>
+        ))}
+      </nav>
+
+      <SearchPaesi client:visible />
+
+      {CONTINENTI.map(c => {
+        const countries = paesiPerContinente.get(c) ?? [];
+        const cid = continentIdMap[c];
+        return (
+          <div data-continente={cid}>
+            <h3 id={cid} class="text-lg font-bold text-gray-800 mb-3 scroll-mt-20">
+              {c} <span class="text-sm font-normal text-gray-400 ml-2">({countries.length} paesi)</span>
+            </h3>
+            <div class="overflow-x-auto mb-8">
+              <table class="text-sm border-collapse w-full">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border border-gray-200 px-3 py-1.5 text-left">Paese</th>
+                    <th class="border border-gray-200 px-3 py-1.5 text-center w-24">Codice</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {countries.map(p => (
+                    <tr id={p.codiceCatastale.toLowerCase()} data-paese={p.nome} data-codice={p.codiceCatastale}>
+                      <td class="border border-gray-200 px-3 py-1.5">
+                        {p.hasDedicatedPage ? (
+                          <a href={`/codice-fiscale-estero/${p.slug}/`} class="text-brand-blue hover:underline font-medium">{p.nome}</a>
+                        ) : (
+                          <span class="font-medium">{p.nome}</span>
+                        )}
+                      </td>
+                      <td class="border border-gray-200 px-3 py-1.5 text-center font-mono font-bold text-brand-blue">{p.codiceCatastale}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      })}
     </section>
 
     <section>
@@ -154,9 +216,12 @@ const schemaFAQ = {
     <div class="space-y-2">
       {[
         { q: "Come si calcola il CF per chi è nato all'estero?", a: "La struttura è identica ai nati in Italia. L'unica differenza è il codice catastale: si usa il codice del paese estero che inizia con Z (es. Z110 per la Francia, Z112 per la Germania, Z404 per gli USA)." },
-        { q: "Dove trovo il codice catastale del mio paese?", a: "Nel nostro calcolatore, seleziona 'Nato all'estero' e cerca il paese nel campo di ricerca. Oppure consulta la nostra tabella dei codici paesi esteri." },
+        { q: "Dove trovo il codice catastale del mio paese?", a: "Nel nostro calcolatore, seleziona 'Nato all'estero' e cerca il paese nel campo di ricerca. Oppure consulta la tabella completa dei codici paesi esteri qui sopra." },
         { q: "Gli stranieri in Italia devono avere il CF?", a: "Sì, per qualsiasi rapporto con enti italiani (lavoro, banca, sanità, acquisti immobiliari). Si richiede all'Agenzia delle Entrate con un documento di identità." },
         { q: "Il CF cambia se cambio residenza?", a: "No. Il codice fiscale è basato sul luogo di nascita, non di residenza. Rimane invariato per tutta la vita, indipendentemente da dove si vive." },
+        { q: "Quanti sono i codici Z per paesi esteri?", a: "I codici catastali per paesi esteri sono 216, ciascuno assegnato dall'Agenzia delle Entrate. Iniziano tutti con la lettera Z seguita da tre cifre." },
+        { q: "Qual è il codice catastale della Germania?", a: "Il codice catastale della Germania è Z112. Viene usato nel codice fiscale per le persone nate in Germania." },
+        { q: "Come trovo il codice catastale del mio paese di nascita?", a: "Usa la barra di ricerca nella tabella qui sopra: puoi cercare per nome del paese o per codice Z." },
       ].map(({ q, a }) => (
         <details class="border border-gray-200 rounded-lg group">
           <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-gray-800 hover:bg-gray-50 list-none flex justify-between items-center">
@@ -168,4 +233,9 @@ const schemaFAQ = {
       ))}
     </div>
   </section>
+
+  <div class="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg text-sm text-green-800 text-center">
+    <strong>Calcola il tuo codice fiscale ora</strong> — seleziona "Nato/a all'estero" e inserisci i tuoi dati.
+    <a href="/" class="ml-1 font-semibold hover:underline">Vai al calcolatore →</a>
+  </div>
 </Layout>
