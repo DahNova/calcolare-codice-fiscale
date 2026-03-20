@@ -13,7 +13,11 @@
       "Bash(npm test:*)",
       "Bash(rm:*)",
       "Bash(ls:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(xargs grep:*)",
+      "Bash(grep:*)",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "Bash(curl:*)"
     ]
   }
 }

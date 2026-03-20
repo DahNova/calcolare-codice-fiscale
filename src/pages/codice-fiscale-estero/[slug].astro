@@ -86,7 +86,7 @@ const schemaFAQ = {
 const schemaArticle = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": `Codice Fiscale ${c.nomeBreve} (${c.codiceCatastale}) — Calcolo e Guida`,
+  "headline": `Codice Fiscale ${c.nomeBreve} (${c.codiceCatastale}) - Calcolo e Guida`,
   "description": `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Calcola il codice fiscale per chi è nato ${c.preposizione} ${c.nomeBreve}.`,
   "url": `https://www.calcolare-codice-fiscale.it/codice-fiscale-estero/${c.slug}/`,
   "inLanguage": "it",
@@ -96,7 +96,7 @@ const schemaArticle = {
   "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
 };
 
-const title = `Codice Fiscale ${c.nomeBreve} (${c.codiceCatastale}) — Calcolo e Guida`;
+const title = `Codice Fiscale ${c.nomeBreve} (${c.codiceCatastale}) - Calcolo e Guida`;
 const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Calcola il codice fiscale per chi è nato ${c.preposizione} ${c.nomeBreve}: esempio pratico, guida e FAQ.`;
 ---
 
@@ -112,12 +112,13 @@ const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Cal
       <span class="mx-1.5 text-white/30">&rsaquo;</span>
       <span class="text-white/80">{c.nomeBreve}</span>
     </nav>
-    <h1 class="text-3xl font-heading font-bold text-white mb-2">Codice Fiscale {c.nomeBreve} &mdash; Codice Catastale {c.codiceCatastale}</h1>
-    <p class="text-white/60 text-sm">Come calcolare il CF per chi è nato {c.preposizione} {c.nomeBreve}</p>
-    <div class="mt-4 inline-flex items-center gap-2 bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-sm text-white/80">
-      <strong class="text-white">Calcola subito il tuo CF</strong> &mdash; Usa il calcolatore e seleziona "Nato/a all'estero" per cercare {c.nomeBreve}.
-      <a href="/" class="font-semibold text-white hover:underline ml-1">Vai al calcolatore &rarr;</a>
-    </div>
+    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-1">Codice Fiscale {c.nomeBreve}</h1>
+    <p class="text-white/60 text-sm mb-1">Codice catastale <span class="font-mono font-bold text-white/90">{c.codiceCatastale}</span></p>
+    <p class="text-white/50 text-sm">Come calcolare il CF per chi è nato {c.preposizione} {c.nomeBreve}</p>
+    <a href="/" class="mt-5 inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-5 py-2.5 text-sm text-white hover:bg-white/15 transition-colors">
+      Vai al calcolatore
+      <span class="text-white/60">&rarr;</span>
+    </a>
   </div>
 
   <div class="space-y-8 text-sm text-slate-600 leading-relaxed">
@@ -209,7 +210,7 @@ const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Cal
 
   <!-- Related countries -->
   <section class="mt-8">
-    <h2 class="text-lg font-heading font-bold text-slate-800 mb-3">Codici Fiscali &mdash; Altri Paesi</h2>
+    <h2 class="text-lg font-heading font-bold text-slate-800 mb-3">Codici Fiscali di Altri Paesi</h2>
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
       {relatedContent.map(r => (
         <a href={`/codice-fiscale-estero/${r.slug}/`}

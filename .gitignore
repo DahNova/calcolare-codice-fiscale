@@ -23,3 +23,7 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 site-reference.png
+
+# local scripts (non committare)
+submit-indexnow.sh
+*.csv

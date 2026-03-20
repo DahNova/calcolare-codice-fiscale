@@ -192,7 +192,7 @@ export default function CalcolaForm() {
           <p className="text-xs text-slate-400 mt-1">
             {natoEstero
               ? `Codice: ${selectedComune.codiceCatastale}`
-              : `Prov: ${selectedComune.provincia} — Codice catastale: ${selectedComune.codiceCatastale}`
+              : `Prov: ${selectedComune.provincia} · Codice catastale: ${selectedComune.codiceCatastale}`
             }
           </p>
         )}
