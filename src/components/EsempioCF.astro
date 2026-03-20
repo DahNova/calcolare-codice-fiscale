@@ -28,17 +28,21 @@ const MESI_NOMI: Record<number, string> = {
 };
 ---
 
-<div class="bg-gradient-to-br from-slate-50 to-blue-50/30 rounded-2xl p-6">
-  <p class="font-medium mb-3">{nome} {cognome}, {sesso === 'M' ? 'nato' : 'nata'} il {giorno} {MESI_NOMI[mese]?.toLowerCase()} {anno} in {paese}:</p>
-  <div class="font-mono text-xl font-bold tracking-widest text-center mb-4">
-    <span class="text-red-600">{parts.cog}</span><span class="text-blue-600">{parts.nom}</span><span class="text-green-600">{parts.data}</span><span class="text-purple-600">{parts.cat}</span><span class="text-orange-500">{parts.check}</span>
+<div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+  <p class="font-medium text-slate-700 mb-4">{nome} {cognome}, {sesso === 'M' ? 'nato' : 'nata'} il {giorno} {MESI_NOMI[mese]?.toLowerCase()} {anno} in {paese}:</p>
+  <div class="flex items-center justify-center gap-1 mb-5">
+    <span class="font-mono text-xl sm:text-2xl font-bold text-red-500 bg-red-50 px-2 py-1 rounded-lg">{parts.cog}</span>
+    <span class="font-mono text-xl sm:text-2xl font-bold text-blue-500 bg-blue-50 px-2 py-1 rounded-lg">{parts.nom}</span>
+    <span class="font-mono text-xl sm:text-2xl font-bold text-green-600 bg-green-50 px-2 py-1 rounded-lg">{parts.data}</span>
+    <span class="font-mono text-xl sm:text-2xl font-bold text-purple-600 bg-purple-50 px-2 py-1 rounded-lg">{parts.cat}</span>
+    <span class="font-mono text-xl sm:text-2xl font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-lg">{parts.check}</span>
   </div>
-  <div class="grid grid-cols-2 gap-2 text-xs text-slate-600">
-    <div><span class="text-red-600 font-semibold">{parts.cog}</span> = Cognome {cognome}</div>
-    <div><span class="text-blue-600 font-semibold">{parts.nom}</span> = Nome {nome}</div>
-    <div><span class="text-green-600 font-semibold">{parts.data.slice(0,2)}</span> = Anno {anno}</div>
-    <div><span class="text-green-600 font-semibold">{parts.data.slice(2,3)}</span> = {MESI_NOMI[mese]}</div>
-    <div><span class="text-green-600 font-semibold">{parts.data.slice(3,5)}</span> = Giorno {giorno}{sesso === 'F' ? ' + 40 (femmina)' : ''}</div>
-    <div><span class="text-purple-600 font-semibold">{parts.cat}</span> = {paese}</div>
+  <div class="grid grid-cols-2 gap-3 text-xs">
+    <div class="flex items-center gap-2"><span class="text-red-500 font-mono font-bold bg-red-50 px-1.5 py-0.5 rounded">{parts.cog}</span> <span class="text-slate-500">Cognome {cognome}</span></div>
+    <div class="flex items-center gap-2"><span class="text-blue-500 font-mono font-bold bg-blue-50 px-1.5 py-0.5 rounded">{parts.nom}</span> <span class="text-slate-500">Nome {nome}</span></div>
+    <div class="flex items-center gap-2"><span class="text-green-600 font-mono font-bold bg-green-50 px-1.5 py-0.5 rounded">{parts.data.slice(0,2)}</span> <span class="text-slate-500">Anno {anno}</span></div>
+    <div class="flex items-center gap-2"><span class="text-green-600 font-mono font-bold bg-green-50 px-1.5 py-0.5 rounded">{parts.data.slice(2,3)}</span> <span class="text-slate-500">{MESI_NOMI[mese]}</span></div>
+    <div class="flex items-center gap-2"><span class="text-green-600 font-mono font-bold bg-green-50 px-1.5 py-0.5 rounded">{parts.data.slice(3,5)}</span> <span class="text-slate-500">Giorno {giorno}{sesso === 'F' ? ' + 40' : ''}</span></div>
+    <div class="flex items-center gap-2"><span class="text-purple-600 font-mono font-bold bg-purple-50 px-1.5 py-0.5 rounded">{parts.cat}</span> <span class="text-slate-500">{paese}</span></div>
   </div>
 </div>
