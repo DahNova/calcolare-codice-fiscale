@@ -1,0 +1,44 @@
+---
+import { calcolaCodiceFiscale } from '../lib/codiceFiscale';
+
+interface Props {
+  cognome: string;
+  nome: string;
+  sesso: 'M' | 'F';
+  giorno: number;
+  mese: number;
+  anno: number;
+  paese: string;
+  codiceCatastale: string;
+}
+
+const { cognome, nome, sesso, giorno, mese, anno, paese, codiceCatastale } = Astro.props;
+const cf = calcolaCodiceFiscale({ cognome, nome, sesso, giorno, mese, anno, codiceCatastale });
+const parts = {
+  cog: cf.slice(0, 3),
+  nom: cf.slice(3, 6),
+  data: cf.slice(6, 11),
+  cat: cf.slice(11, 15),
+  check: cf.slice(15, 16),
+};
+
+const MESI_NOMI: Record<number, string> = {
+  1:'Gennaio',2:'Febbraio',3:'Marzo',4:'Aprile',5:'Maggio',6:'Giugno',
+  7:'Luglio',8:'Agosto',9:'Settembre',10:'Ottobre',11:'Novembre',12:'Dicembre',
+};
+---
+
+<div class="bg-gray-50 rounded-xl p-5">
+  <p class="font-medium mb-3">{nome} {cognome}, {sesso === 'M' ? 'nato' : 'nata'} il {giorno} {MESI_NOMI[mese]?.toLowerCase()} {anno} in {paese}:</p>
+  <div class="font-mono text-xl font-bold tracking-widest text-center mb-4">
+    <span class="text-red-600">{parts.cog}</span><span class="text-blue-600">{parts.nom}</span><span class="text-green-600">{parts.data}</span><span class="text-purple-600">{parts.cat}</span><span class="text-orange-500">{parts.check}</span>
+  </div>
+  <div class="grid grid-cols-2 gap-2 text-xs">
+    <div><span class="text-red-600 font-semibold">{parts.cog}</span> = Cognome {cognome}</div>
+    <div><span class="text-blue-600 font-semibold">{parts.nom}</span> = Nome {nome}</div>
+    <div><span class="text-green-600 font-semibold">{parts.data.slice(0,2)}</span> = Anno {anno}</div>
+    <div><span class="text-green-600 font-semibold">{parts.data.slice(2,3)}</span> = {MESI_NOMI[mese]}</div>
+    <div><span class="text-green-600 font-semibold">{parts.data.slice(3,5)}</span> = Giorno {giorno}{sesso === 'F' ? ' + 40 (femmina)' : ''}</div>
+    <div><span class="text-purple-600 font-semibold">{parts.cat}</span> = {paese}</div>
+  </div>
+</div>
