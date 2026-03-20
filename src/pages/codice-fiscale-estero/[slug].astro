@@ -103,30 +103,28 @@ const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Cal
 <Layout title={title} description={description} schemaJson={[schemaFAQ, schemaArticle]}
   breadcrumbs={[{name:'Home',url:'/'},{name:"Nati all'Estero",url:'/codice-fiscale-stranieri/'},{name:c.nomeBreve,url:`/codice-fiscale-estero/${c.slug}/`}]}>
 
-  <!-- Breadcrumb -->
-  <nav class="text-xs text-gray-400 mb-4">
-    <a href="/" class="hover:underline">Home</a>
-    <span class="mx-1">&rsaquo;</span>
-    <a href="/codice-fiscale-stranieri/" class="hover:underline">Nati all'Estero</a>
-    <span class="mx-1">&rsaquo;</span>
-    <span>{c.nomeBreve}</span>
-  </nav>
-
-  <!-- H1 -->
-  <h1 class="text-3xl font-bold text-brand-blue mb-1">Codice Fiscale {c.nomeBreve} &mdash; Codice Catastale {c.codiceCatastale}</h1>
-  <p class="text-gray-500 mb-6 text-sm">Come calcolare il CF per chi è nato {c.preposizione} {c.nomeBreve}</p>
-
-  <!-- CTA box -->
-  <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
-    <strong>Calcola subito il tuo CF</strong> &mdash; Usa il calcolatore e seleziona "Nato/a all'estero" per cercare {c.nomeBreve}.
-    <a href="/" class="ml-1 font-semibold hover:underline">Vai al calcolatore &rarr;</a>
+  <!-- Gradient Header -->
+  <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
+    <nav class="text-xs mb-4">
+      <a href="/" class="text-white/50 hover:text-white/70">Home</a>
+      <span class="mx-1.5 text-white/30">&rsaquo;</span>
+      <a href="/codice-fiscale-stranieri/" class="text-white/50 hover:text-white/70">Nati all'Estero</a>
+      <span class="mx-1.5 text-white/30">&rsaquo;</span>
+      <span class="text-white/80">{c.nomeBreve}</span>
+    </nav>
+    <h1 class="text-3xl font-heading font-bold text-white mb-2">Codice Fiscale {c.nomeBreve} &mdash; Codice Catastale {c.codiceCatastale}</h1>
+    <p class="text-white/60 text-sm">Come calcolare il CF per chi è nato {c.preposizione} {c.nomeBreve}</p>
+    <div class="mt-4 inline-flex items-center gap-2 bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-sm text-white/80">
+      <strong class="text-white">Calcola subito il tuo CF</strong> &mdash; Usa il calcolatore e seleziona "Nato/a all'estero" per cercare {c.nomeBreve}.
+      <a href="/" class="font-semibold text-white hover:underline ml-1">Vai al calcolatore &rarr;</a>
+    </div>
   </div>
 
-  <div class="space-y-8 text-sm text-gray-700 leading-relaxed">
+  <div class="space-y-8 text-sm text-slate-600 leading-relaxed">
 
     <!-- Section: Il Codice Catastale -->
     <section>
-      <h2 class="text-xl font-bold text-gray-800 mb-3">Il Codice Catastale {c.codiceCatastale}</h2>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Il Codice Catastale {c.codiceCatastale}</h2>
       <p>
         Nel codice fiscale italiano, le persone nate {c.preposizione} {c.nomeBreve} utilizzano il codice catastale
         <strong>{c.codiceCatastale}</strong> al posto del codice di un comune italiano. Questo codice occupa le
@@ -141,7 +139,7 @@ const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Cal
 
     <!-- Section: Esempio Pratico -->
     <section>
-      <h2 class="text-xl font-bold text-gray-800 mb-3">Esempio Pratico</h2>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Esempio Pratico</h2>
       <EsempioCF
         cognome={esCognome}
         nome={esNome}
@@ -156,27 +154,27 @@ const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Cal
 
     <!-- Section: Comunita in Italia -->
     <section>
-      <h2 class="text-xl font-bold text-gray-800 mb-3">Comunità {c.nomeBreve} in Italia</h2>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Comunità {c.nomeBreve} in Italia</h2>
       <p>{c.comunita}</p>
     </section>
 
     <!-- Section: Come Richiedere -->
     <section>
-      <h2 class="text-xl font-bold text-gray-800 mb-3">Come Richiedere il Codice Fiscale</h2>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Come Richiedere il Codice Fiscale</h2>
       <p>Chi è nato {c.preposizione} {c.nomeBreve} può richiedere il codice fiscale:</p>
       <div class="mt-3 space-y-3">
-        <div class="flex gap-3 bg-gray-50 rounded-lg p-4">
+        <div class="flex gap-3 bg-slate-50 rounded-lg p-4">
           <div class="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0"></div>
           <div>
-            <p class="font-semibold text-gray-800">In Italia</p>
-            <p class="text-gray-600 mt-1">Presso qualsiasi ufficio dell'Agenzia delle Entrate presentando un documento di identità valido. Il codice viene rilasciato immediatamente e gratuitamente.</p>
+            <p class="font-semibold text-slate-800">In Italia</p>
+            <p class="text-slate-600 mt-1">Presso qualsiasi ufficio dell'Agenzia delle Entrate presentando un documento di identità valido. Il codice viene rilasciato immediatamente e gratuitamente.</p>
           </div>
         </div>
-        <div class="flex gap-3 bg-gray-50 rounded-lg p-4">
+        <div class="flex gap-3 bg-slate-50 rounded-lg p-4">
           <div class="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0"></div>
           <div>
-            <p class="font-semibold text-gray-800">All'estero</p>
-            <p class="text-gray-600 mt-1">Presso il Consolato o l'Ambasciata italiana {c.preposizione} {c.nomeBreve}. I cittadini italiani iscritti all'AIRE possono richiederlo anche online tramite il sito dell'Agenzia delle Entrate.</p>
+            <p class="font-semibold text-slate-800">All'estero</p>
+            <p class="text-slate-600 mt-1">Presso il Consolato o l'Ambasciata italiana {c.preposizione} {c.nomeBreve}. I cittadini italiani iscritti all'AIRE possono richiederlo anche online tramite il sito dell'Agenzia delle Entrate.</p>
           </div>
         </div>
       </div>
@@ -184,43 +182,47 @@ const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Cal
 
   </div>
 
+  <div class="my-10 min-h-[90px]"></div>
+
   <!-- FAQ -->
-  <section class="mt-10">
-    <h2 class="text-xl font-bold text-gray-800 mb-4">Domande Frequenti</h2>
-    <div class="space-y-2">
-      {[
-        { q: `Qual è il codice catastale ${diPaese}?`, a: `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Si usa nel codice fiscale per identificare le persone nate ${c.preposizione} ${c.nomeBreve}.` },
-        { q: `Come si calcola il CF per chi è nato ${c.preposizione} ${c.nomeBreve}?`, a: `Il calcolo è identico a quello per i nati in Italia. L'unica differenza è il codice catastale: si usa ${c.codiceCatastale} al posto del codice di un comune italiano.` },
-        { q: `${c.codiceCatastale} a quale stato corrisponde?`, a: `Il codice ${c.codiceCatastale} corrisponde a ${c.nomeCompleto}. È assegnato dall'Agenzia delle Entrate per il codice fiscale.` },
-        ...(c.faqExtra ? [c.faqExtra] : []),
-      ].map(({ q, a }) => (
-        <details class="border border-gray-200 rounded-lg group">
-          <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-gray-800 hover:bg-gray-50 list-none flex justify-between items-center">
-            {q}
-            <span class="text-gray-400 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
-          </summary>
-          <p class="px-4 pb-3 text-sm text-gray-600">{a}</p>
-        </details>
-      ))}
+  <section>
+    <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
+    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+      <div class="divide-y divide-slate-100">
+        {[
+          { q: `Qual è il codice catastale ${diPaese}?`, a: `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Si usa nel codice fiscale per identificare le persone nate ${c.preposizione} ${c.nomeBreve}.` },
+          { q: `Come si calcola il CF per chi è nato ${c.preposizione} ${c.nomeBreve}?`, a: `Il calcolo è identico a quello per i nati in Italia. L'unica differenza è il codice catastale: si usa ${c.codiceCatastale} al posto del codice di un comune italiano.` },
+          { q: `${c.codiceCatastale} a quale stato corrisponde?`, a: `Il codice ${c.codiceCatastale} corrisponde a ${c.nomeCompleto}. È assegnato dall'Agenzia delle Entrate per il codice fiscale.` },
+          ...(c.faqExtra ? [c.faqExtra] : []),
+        ].map(({ q, a }) => (
+          <details class="group">
+            <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+              {q}
+              <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+            </summary>
+            <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+          </details>
+        ))}
+      </div>
     </div>
   </section>
 
   <!-- Related countries -->
   <section class="mt-8">
-    <h2 class="text-lg font-bold text-gray-800 mb-3">Codici Fiscali &mdash; Altri Paesi</h2>
+    <h2 class="text-lg font-heading font-bold text-slate-800 mb-3">Codici Fiscali &mdash; Altri Paesi</h2>
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
       {relatedContent.map(r => (
         <a href={`/codice-fiscale-estero/${r.slug}/`}
-          class="block p-3 border border-gray-200 rounded-lg hover:border-brand-blue hover:bg-blue-50 transition-colors text-center">
-          <div class="font-semibold text-sm text-brand-blue">{r.nome}</div>
-          <div class="text-xs text-gray-400 font-mono mt-1">{r.codice}</div>
+          class="block p-3 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors text-center">
+          <div class="font-semibold text-sm text-brand-blue-link">{r.nome}</div>
+          <div class="text-xs text-slate-400 font-mono mt-1">{r.codice}</div>
         </a>
       ))}
     </div>
   </section>
 
   <!-- CTA -->
-  <div class="mt-10 p-5 bg-green-50 border border-green-200 rounded-xl text-center">
+  <div class="mt-10 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 text-center">
     <p class="font-semibold text-green-800 mb-2">Calcola il tuo codice fiscale</p>
     <a href="/" class="inline-block bg-brand-green hover:bg-brand-green-hover text-white px-6 py-2.5 rounded-lg transition-colors font-medium text-sm">
       Vai al Calcolatore &rarr;
