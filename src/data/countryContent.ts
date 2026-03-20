@@ -1,0 +1,321 @@
+export interface CountryContent {
+  slug: string;
+  codiceCatastale: string;
+  continente: string;
+  nomeCompleto: string;
+  nomeBreve: string;
+  preposizione: string;
+  articolo: string;
+  esempioNome: string;
+  esempioSesso: 'M' | 'F';
+  esempioData: string;
+  comunita: string;
+  faqExtra?: { q: string; a: string };
+}
+
+export const countryContent: CountryContent[] = [
+  {
+    slug: 'romania',
+    codiceCatastale: 'Z129',
+    continente: 'Europa',
+    nomeCompleto: 'Romania',
+    nomeBreve: 'Romania',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Andrei Popescu',
+    esempioSesso: 'M',
+    esempioData: '14 marzo 1988',
+    comunita:
+      'La comunità rumena è la più numerosa tra le comunità straniere in Italia, con oltre un milione di residenti regolarmente iscritti all\'anagrafe. I cittadini rumeni sono presenti in tutte le regioni italiane, con concentrazioni particolarmente elevate in Lombardia, Lazio e Piemonte. Dal 2007, anno di ingresso della Romania nell\'Unione Europea, i cittadini rumeni godono della libertà di circolazione e possono risiedere in Italia senza necessità di permesso di soggiorno.',
+    faqExtra: {
+      q: 'I cittadini rumeni hanno bisogno del permesso di soggiorno per vivere in Italia?',
+      a: 'No. La Romania è entrata nell\'Unione Europea il 1° gennaio 2007, pertanto i suoi cittadini esercitano il diritto di libera circolazione. Per soggiorni superiori a tre mesi è sufficiente iscriversi all\'anagrafe del comune di residenza, senza richiedere alcun permesso di soggiorno.',
+    },
+  },
+  {
+    slug: 'albania',
+    codiceCatastale: 'Z100',
+    continente: 'Europa',
+    nomeCompleto: 'Albania',
+    nomeBreve: 'Albania',
+    preposizione: 'in',
+    articolo: "l'",
+    esempioNome: 'Fatmir Hoxha',
+    esempioSesso: 'M',
+    esempioData: '22 settembre 1985',
+    comunita:
+      'La comunità albanese rappresenta la seconda comunità straniera più grande in Italia, con circa 400 000 residenti. Le principali ondate migratorie si sono verificate nei primi anni Novanta, dopo il crollo del regime comunista albanese, e si sono concentrate soprattutto in Toscana, Lombardia ed Emilia-Romagna. Nel corso degli anni la comunità albanese ha raggiunto un elevato livello di integrazione nel tessuto sociale ed economico italiano.',
+  },
+  {
+    slug: 'germania',
+    codiceCatastale: 'Z112',
+    continente: 'Europa',
+    nomeCompleto: 'Germania',
+    nomeBreve: 'Germania',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Maria Schmidt',
+    esempioSesso: 'F',
+    esempioData: '8 giugno 1992',
+    comunita:
+      'La Germania ospita una delle più antiche e numerose comunità di italiani all\'estero: oltre 700 000 connazionali iscritti all\'AIRE risiedono stabilmente nel Paese, con forti concentrazioni nelle regioni della Baviera, del Baden-Württemberg e della Renania. Allo stesso tempo, i cittadini tedeschi residenti in Italia sono circa 70 000, impiegati prevalentemente nei settori dell\'industria manifatturiera, dei servizi alle imprese e del turismo. I legami bilaterali italo-tedeschi affondano le radici nelle migrazioni operaie degli anni Cinquanta e Sessanta.',
+    faqExtra: {
+      q: 'Un cittadino italiano iscritto all\'AIRE in Germania deve calcolare il codice fiscale italiano?',
+      a: 'Sì. L\'iscrizione all\'AIRE non comporta la perdita del codice fiscale italiano. Il codice fiscale rimane necessario per qualsiasi rapporto con l\'Amministrazione finanziaria italiana, per successioni, pratiche immobiliari e per il rimpatrio. Può essere calcolato online inserendo il comune di nascita o, se nato all\'estero, il codice catastale del Paese di nascita.',
+    },
+  },
+  {
+    slug: 'svizzera',
+    codiceCatastale: 'Z133',
+    continente: 'Europa',
+    nomeCompleto: 'Svizzera',
+    nomeBreve: 'Svizzera',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Anna Brunner',
+    esempioSesso: 'F',
+    esempioData: '3 novembre 1990',
+    comunita:
+      'La Svizzera è tradizionalmente uno dei principali Paesi di destinazione dell\'emigrazione italiana: circa 320 000 connazionali iscritti all\'AIRE vi risiedono, con una presenza storica particolarmente radicata nei cantoni di Zurigo, Ginevra, Basilea e Ticino. La comunità svizzera in Italia è invece composta da circa 50 000 persone, spesso legate a doppia nazionalità o attività transfrontaliere. I forti legami economici tra i due Paesi, uniti alla vicinanza geografica, rendono il confine italo-svizzero tra i più attraversati d\'Europa per lavoro e pendolarismo.',
+  },
+  {
+    slug: 'marocco',
+    codiceCatastale: 'Z330',
+    continente: 'Africa',
+    nomeCompleto: 'Marocco',
+    nomeBreve: 'Marocco',
+    preposizione: 'in',
+    articolo: 'il',
+    esempioNome: 'Fatima El Amrani',
+    esempioSesso: 'F',
+    esempioData: '17 aprile 1987',
+    comunita:
+      'La comunità marocchina è la terza più grande tra le comunità di cittadini non comunitari in Italia, con circa 430 000 residenti. La presenza si concentra soprattutto in Lombardia, Emilia-Romagna e Veneto, dove i lavoratori marocchini sono impiegati prevalentemente nell\'industria manifatturiera, nell\'edilizia e nel commercio al dettaglio. L\'immigrazione marocchina in Italia è iniziata in modo consistente negli anni Ottanta e si è consolidata nei decenni successivi, dando vita a comunità ben strutturate con associazioni culturali e luoghi di culto.',
+  },
+  {
+    slug: 'francia',
+    codiceCatastale: 'Z110',
+    continente: 'Europa',
+    nomeCompleto: 'Francia',
+    nomeBreve: 'Francia',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Sophie Dupont',
+    esempioSesso: 'F',
+    esempioData: '29 luglio 1993',
+    comunita:
+      'La Francia è il Paese con la più lunga tradizione di immigrazione italiana in Europa: oltre 400 000 connazionali iscritti all\'AIRE risiedono oltralpe, con forti presenze storiche in Provenza, in Île-de-France e nella regione Rhône-Alpes. La comunità francese residente in Italia conta circa 35 000 persone, impegnate in settori quali la moda, la gastronomia, il design e i servizi finanziari. I profondi legami culturali e linguistici tra i due Paesi favoriscono una mobilità bilaterale continua.',
+  },
+  {
+    slug: 'regno-unito',
+    codiceCatastale: 'Z114',
+    continente: 'Europa',
+    nomeCompleto: 'Regno Unito',
+    nomeBreve: 'Regno Unito',
+    preposizione: 'nel',
+    articolo: 'il',
+    esempioNome: 'James Wilson',
+    esempioSesso: 'M',
+    esempioData: '11 gennaio 1989',
+    comunita:
+      'I cittadini britannici residenti in Italia sono circa 60 000, con concentrazioni particolarmente elevate in Toscana, Liguria e nel Lazio, spesso attratti dal clima, dal patrimonio culturale e dalla qualità della vita. A seguito dell\'uscita del Regno Unito dall\'Unione Europea (Brexit, 31 gennaio 2020), i cittadini britannici che erano già residenti in Italia prima del 31 dicembre 2020 hanno diritto di soggiorno permanente ai sensi dell\'Accordo di recesso, mentre i nuovi arrivi devono richiedere un permesso di soggiorno.',
+    faqExtra: {
+      q: 'Dopo la Brexit, come funziona il soggiorno in Italia per i cittadini britannici?',
+      a: 'I cittadini del Regno Unito che risiedevano in Italia prima del 31 dicembre 2020 possono continuare a farlo in virtù dell\'Accordo di recesso UE-UK e devono richiedere il documento di soggiorno per titolari di diritti. Chi è arrivato dopo tale data deve invece seguire le norme ordinarie per i cittadini di Paesi terzi e richiedere il permesso di soggiorno presso la Questura competente.',
+    },
+  },
+  {
+    slug: 'ucraina',
+    codiceCatastale: 'Z138',
+    continente: 'Europa',
+    nomeCompleto: 'Ucraina',
+    nomeBreve: 'Ucraina',
+    preposizione: 'in',
+    articolo: "l'",
+    esempioNome: 'Olena Kovalenko',
+    esempioSesso: 'F',
+    esempioData: '5 febbraio 1984',
+    comunita:
+      'La comunità ucraina in Italia ha raggiunto le 230 000 unità secondo i dati ISTAT, con una quota molto elevata di donne impiegate nel settore del lavoro domestico e dell\'assistenza alle persone anziane (badanti). A partire dal febbraio 2022, a seguito dell\'invasione russa dell\'Ucraina, decine di migliaia di profughi ucraini hanno trovato protezione temporanea in Italia ai sensi della Direttiva 2001/55/CE, beneficiando di permessi di soggiorno per protezione temporanea. Le principali comunità si trovano in Lombardia, Campania, Lazio e Toscana.',
+    faqExtra: {
+      q: 'I rifugiati ucraini con protezione temporanea possono ottenere il codice fiscale in Italia?',
+      a: 'Sì. I cittadini ucraini con permesso di soggiorno per protezione temporanea hanno diritto al codice fiscale italiano. Possono richiederlo direttamente all\'Agenzia delle Entrate presentando il documento di identità e il permesso di soggiorno, oppure calcolarlo tramite questo strumento per verificarne il formato prima della richiesta formale.',
+    },
+  },
+  {
+    slug: 'stati-uniti',
+    codiceCatastale: 'Z404',
+    continente: 'Americhe',
+    nomeCompleto: "Stati Uniti d'America",
+    nomeBreve: 'Stati Uniti',
+    preposizione: 'negli',
+    articolo: 'gli',
+    esempioNome: 'Michael Johnson',
+    esempioSesso: 'M',
+    esempioData: '4 luglio 1991',
+    comunita:
+      'Gli Stati Uniti d\'America ospitano la più grande comunità di origine italiana al mondo: si stima che oltre 17 milioni di americani abbiano antenati italiani, con iscritti AIRE che superano le 230 000 unità. Parallelamente, i cittadini statunitensi residenti in Italia sono circa 17 000, impiegati prevalentemente nelle multinazionali, nelle ambasciate e nelle università. Il codice fiscale è spesso richiesto agli americani che acquistano immobili, aprono conti correnti o svolgono attività lavorativa in Italia.',
+    faqExtra: {
+      q: 'I cittadini americani possono richiedere il codice fiscale online senza essere fisicamente in Italia?',
+      a: 'Sì. I cittadini stranieri non residenti in Italia possono richiedere il codice fiscale presso il Consolato italiano più vicino nel Paese di residenza. In alternativa, è possibile presentare domanda all\'Agenzia delle Entrate tramite i servizi online con delega a un intermediario abilitato, oppure calcolarlo deterministicamente con questo strumento (il risultato coincide con quello attribuito dall\'Agenzia delle Entrate).',
+    },
+  },
+  {
+    slug: 'cina',
+    codiceCatastale: 'Z210',
+    continente: 'Asia',
+    nomeCompleto: 'Cina',
+    nomeBreve: 'Cina',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Wei Chen',
+    esempioSesso: 'M',
+    esempioData: '20 ottobre 1986',
+    comunita:
+      'La comunità cinese in Italia è una delle più antiche tra le comunità asiatiche del Paese, con una presenza che risale ai primi del Novecento a Prato. Oggi i residenti di nazionalità cinese superano le 330 000 unità, concentrate soprattutto in Toscana (distretto di Prato), Lombardia (Milano), Lazio (Roma) e Veneto. La comunità cinese è fortemente imprenditoriale: gestisce migliaia di attività nei settori dell\'abbigliamento, della ristorazione e del commercio all\'ingrosso.',
+  },
+  {
+    slug: 'india',
+    codiceCatastale: 'Z222',
+    continente: 'Asia',
+    nomeCompleto: 'India',
+    nomeBreve: 'India',
+    preposizione: 'in',
+    articolo: "l'",
+    esempioNome: 'Priya Sharma',
+    esempioSesso: 'F',
+    esempioData: '13 agosto 1994',
+    comunita:
+      'La comunità indiana in Italia supera le 175 000 presenze e si distingue per la forte presenza di lavoratori agricoli e nell\'allevamento, specialmente nelle pianure del Punjab italiano — la Padana — con concentrazioni elevate in Lombardia, Emilia-Romagna e Veneto. I lavoratori provenienti dalla regione indiana del Punjab sono tradizionalmente impiegati negli allevamenti da latte della Pianura Padana. Si registra anche una crescente presenza di professionisti IT e studenti universitari nelle grandi città.',
+  },
+  {
+    slug: 'filippine',
+    codiceCatastale: 'Z216',
+    continente: 'Asia',
+    nomeCompleto: 'Filippine',
+    nomeBreve: 'Filippine',
+    preposizione: 'nelle',
+    articolo: 'le',
+    esempioNome: 'Maria Santos',
+    esempioSesso: 'F',
+    esempioData: '25 dicembre 1983',
+    comunita:
+      'La comunità filippina in Italia conta circa 165 000 residenti ed è storicamente concentrata a Roma e Milano, dove i lavoratori filippini sono impiegati soprattutto nel settore del lavoro domestico, dell\'assistenza alle persone anziane e della ristorazione. Si tratta di una comunità molto coesa, con forti legami comunitari attorno alle parrocchie cattoliche e alle associazioni di connazionali. Le rimesse inviate alle famiglie nelle Filippine rappresentano una componente economica rilevante per i Paesi d\'origine.',
+  },
+  {
+    slug: 'bangladesh',
+    codiceCatastale: 'Z249',
+    continente: 'Asia',
+    nomeCompleto: 'Bangladesh',
+    nomeBreve: 'Bangladesh',
+    preposizione: 'nel',
+    articolo: 'il',
+    esempioNome: 'Rahman Islam',
+    esempioSesso: 'M',
+    esempioData: '9 marzo 1990',
+    comunita:
+      'La comunità bangladese in Italia ha raggiunto le 140 000 unità e si è affermata in modo particolare a Roma, dove il quartiere dell\'Esquilino ospita una delle più vivaci comunità dell\'Asia meridionale in Europa. I lavoratori bangladesi sono impiegati prevalentemente nel commercio al dettaglio, nella ristorazione e nell\'edilizia. L\'immigrazione dal Bangladesh verso l\'Italia è cresciuta significativamente a partire dagli anni Novanta, con un profilo migratorio caratterizzato da una forte prevalenza maschile.',
+  },
+  {
+    slug: 'moldova',
+    codiceCatastale: 'Z140',
+    continente: 'Europa',
+    nomeCompleto: 'Moldova',
+    nomeBreve: 'Moldova',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Elena Rusu',
+    esempioSesso: 'F',
+    esempioData: '18 maggio 1982',
+    comunita:
+      'La comunità moldava in Italia supera le 130 000 persone ed è composta in larga misura da donne che lavorano come assistenti familiari (badanti) per anziani non autosufficienti. Le principali regioni di insediamento sono Lombardia, Lazio, Emilia-Romagna e Toscana. La Moldova non fa parte dell\'Unione Europea, pertanto i suoi cittadini devono essere in possesso di un valido permesso di soggiorno per risiedere e lavorare in Italia; tuttavia, la Moldova ha avviato un processo di avvicinamento all\'UE, avendo ottenuto lo status di Paese candidato nel 2022.',
+  },
+  {
+    slug: 'spagna',
+    codiceCatastale: 'Z131',
+    continente: 'Europa',
+    nomeCompleto: 'Spagna',
+    nomeBreve: 'Spagna',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Carlos García',
+    esempioSesso: 'M',
+    esempioData: '7 settembre 1995',
+    comunita:
+      'La Spagna è sia un Paese di destinazione degli emigrati italiani — con oltre 200 000 iscritti AIRE — sia un Paese di provenienza di circa 30 000 cittadini spagnoli residenti in Italia. I residenti spagnoli in Italia sono spesso professionisti, studenti Erasmus che poi si stabilizzano, o cittadini con doppia nazionalità. I due Paesi condividono un\'intensa mobilità universitaria e professionale, facilitata dall\'appartenenza comune all\'Unione Europea e dalla prossimità culturale e linguistica.',
+  },
+  {
+    slug: 'polonia',
+    codiceCatastale: 'Z127',
+    continente: 'Europa',
+    nomeCompleto: 'Polonia',
+    nomeBreve: 'Polonia',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Agnieszka Kowalska',
+    esempioSesso: 'F',
+    esempioData: '30 aprile 1988',
+    comunita:
+      'La comunità polacca in Italia conta circa 100 000 residenti e si è sviluppata soprattutto a partire dall\'ingresso della Polonia nell\'Unione Europea nel 2004. I lavoratori polacchi sono impiegati prevalentemente nell\'assistenza domiciliare, nell\'edilizia e nell\'agricoltura stagionale. Una quota crescente di giovani polacchi arriva in Italia come studenti universitari o lavoratori qualificati nel settore dell\'informatica e dell\'ingegneria, contribuendo a un profilo migratorio sempre più diversificato.',
+  },
+  {
+    slug: 'brasile',
+    codiceCatastale: 'Z602',
+    continente: 'Americhe',
+    nomeCompleto: 'Brasile',
+    nomeBreve: 'Brasile',
+    preposizione: 'in',
+    articolo: 'il',
+    esempioNome: 'Lucas Oliveira',
+    esempioSesso: 'M',
+    esempioData: '2 febbraio 1993',
+    comunita:
+      'Il Brasile è profondamente legato all\'Italia da un intenso flusso migratorio iniziato nell\'Ottocento: oltre 35 milioni di brasiliani dichiarano origini italiane, e molti di essi hanno riacquistato la cittadinanza italiana per discendenza (jure sanguinis). I cittadini brasiliani regolarmente residenti in Italia sono circa 45 000, concentrati soprattutto a Milano, Roma e Torino. Tra loro vi sono professionisti, studenti universitari e artisti, nonché un numero crescente di discendenti di emigrati italiani che scelgono di vivere nel Paese degli antenati.',
+    faqExtra: {
+      q: 'I discendenti di italiani emigrati in Brasile possono ottenere il codice fiscale italiano?',
+      a: 'Sì. Chi ha acquisito o sta richiedendo la cittadinanza italiana jure sanguinis ha diritto al codice fiscale italiano. Il codice fiscale viene attribuito dall\'Agenzia delle Entrate al momento del riconoscimento della cittadinanza e può essere calcolato preventivamente tramite questo strumento, inserendo il comune o il Paese estero di nascita.',
+    },
+  },
+  {
+    slug: 'argentina',
+    codiceCatastale: 'Z600',
+    continente: 'Americhe',
+    nomeCompleto: 'Argentina',
+    nomeBreve: 'Argentina',
+    preposizione: 'in',
+    articolo: "l'",
+    esempioNome: 'Valentina Rossi',
+    esempioSesso: 'F',
+    esempioData: '12 ottobre 1986',
+    comunita:
+      "L'Argentina è storicamente uno dei principali Paesi di destinazione dell'emigrazione italiana nel mondo: si stima che circa 25 milioni di argentini abbiano antenati italiani. I cittadini argentini residenti in Italia sono circa 40 000, tra cui molti italo-argentini che hanno esercitato il diritto alla cittadinanza italiana per discendenza. Negli anni delle crisi economiche argentine (in particolare 2001-2002), molti italo-argentini sono rientrati in Italia, portando con sé una cultura ibrida di straordinaria ricchezza.",
+  },
+  {
+    slug: 'tunisia',
+    codiceCatastale: 'Z352',
+    continente: 'Africa',
+    nomeCompleto: 'Tunisia',
+    nomeBreve: 'Tunisia',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Mohamed Ben Ali',
+    esempioSesso: 'M',
+    esempioData: '1 gennaio 1980',
+    comunita:
+      'La comunità tunisina in Italia è una delle più antiche comunità nordafricane nel Paese, con una presenza che risale agli anni Settanta legata alla pesca e al lavoro stagionale in Sicilia. Oggi i residenti tunisini in Italia superano le 100 000 unità, con insediamenti storici in Sicilia (Mazara del Vallo), Lombardia, Lazio ed Emilia-Romagna. La prossimità geografica tra la Tunisia e la Sicilia — le coste tunisine distano appena 130 km da Lampedusa — ha favorito nel tempo flussi migratori continui e un intenso scambio commerciale e culturale.',
+  },
+  {
+    slug: 'egitto',
+    codiceCatastale: 'Z336',
+    continente: 'Africa',
+    nomeCompleto: 'Egitto',
+    nomeBreve: 'Egitto',
+    preposizione: 'in',
+    articolo: "l'",
+    esempioNome: 'Nour Hassan',
+    esempioSesso: 'F',
+    esempioData: '16 giugno 1991',
+    comunita:
+      "La comunità egiziana in Italia conta circa 130 000 residenti e si è consolidata a partire dagli anni Ottanta, con forti concentrazioni a Milano, Roma, Torino e Napoli. I lavoratori egiziani sono impiegati soprattutto nel commercio ambulante e al dettaglio, nell'edilizia e nella ristorazione. La comunità è caratterizzata da una forte identità culturale e religiosa islamica, con numerose associazioni e moschee presenti nelle principali città italiane.",
+  },
+];
