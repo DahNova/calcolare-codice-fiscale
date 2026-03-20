@@ -104,18 +104,18 @@ export default function CalcolaForm() {
   }
 
   const fieldClass = (field: keyof Errors) =>
-    `w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue ${
-      errors[field] ? 'border-red-400 bg-red-50' : 'border-gray-300 bg-white'
+    `w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-brand-blue-link focus:bg-white transition-colors ${
+      errors[field] ? 'border-red-400 bg-red-50' : 'border-slate-200 bg-slate-50'
     }`;
 
   return (
     <form onSubmit={handleSubmit} noValidate
-      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-4">
+      className="bg-white rounded-2xl border border-slate-200 p-8 shadow-[0_8px_32px_-4px_rgba(15,23,42,0.06)] space-y-4">
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Nome */}
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">
+          <label className="block text-[13px] font-medium text-slate-700 mb-1">
             Nome *
           </label>
           <input type="text" value={nome}
@@ -127,7 +127,7 @@ export default function CalcolaForm() {
 
         {/* Cognome */}
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">
+          <label className="block text-[13px] font-medium text-slate-700 mb-1">
             Cognome *
           </label>
           <input type="text" value={cognome}
@@ -139,11 +139,11 @@ export default function CalcolaForm() {
 
         {/* Sesso */}
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">
+          <label className="block text-[13px] font-medium text-slate-700 mb-1">
             Sesso *
           </label>
           <select value={sesso} onChange={e => setSesso(e.target.value as 'M' | 'F')}
-            className="w-full border border-gray-300 bg-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
+            className="w-full border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-brand-blue-link focus:bg-white transition-colors">
             <option value="M">Maschio</option>
             <option value="F">Femmina</option>
           </select>
@@ -151,7 +151,7 @@ export default function CalcolaForm() {
 
         {/* Data di nascita */}
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">
+          <label className="block text-[13px] font-medium text-slate-700 mb-1">
             Data di nascita *
           </label>
           <input type="date" value={dataStr}
@@ -164,7 +164,7 @@ export default function CalcolaForm() {
       </div>
 
       {/* Toggle nato all'estero */}
-      <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer select-none">
+      <label className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer select-none">
         <input type="checkbox" checked={natoEstero}
           onChange={e => {
             setNatoEstero(e.target.checked);
@@ -172,13 +172,13 @@ export default function CalcolaForm() {
             setSelectedComune(null);
             setSuggestions([]);
           }}
-          className="rounded border-gray-300" />
+          className="rounded border-slate-300" />
         Nato/a all'estero
       </label>
 
       {/* Comune / Stato estero autocomplete */}
       <div ref={dropdownRef} className="relative">
-        <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">
+        <label className="block text-[13px] font-medium text-slate-700 mb-1">
           {natoEstero ? 'Stato estero *' : 'Comune di nascita *'}
         </label>
         <input
@@ -189,7 +189,7 @@ export default function CalcolaForm() {
           autoComplete="off"
           className={fieldClass('comune')} />
         {selectedComune && (
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-xs text-slate-400 mt-1">
             {natoEstero
               ? `Codice: ${selectedComune.codiceCatastale}`
               : `Prov: ${selectedComune.provincia} — Codice catastale: ${selectedComune.codiceCatastale}`
@@ -198,13 +198,13 @@ export default function CalcolaForm() {
         )}
         {errors.comune && <p className="text-red-500 text-xs mt-1">{errors.comune}</p>}
         {suggestions.length > 0 && (
-          <ul className="absolute z-20 w-full bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto">
+          <ul className="absolute z-20 w-full bg-white border border-slate-200 rounded-xl shadow-xl mt-1 max-h-48 overflow-y-auto">
             {suggestions.map(c => (
               <li key={c.codiceCatastale}
                 onMouseDown={() => selectComune(c)}
                 className="px-3 py-2 text-sm hover:bg-blue-50 cursor-pointer flex justify-between gap-2">
                 <span>{c.nome}</span>
-                {!natoEstero && <span className="text-gray-400 text-xs shrink-0">{c.provincia}</span>}
+                {!natoEstero && <span className="text-slate-400 text-xs shrink-0">{c.provincia}</span>}
               </li>
             ))}
           </ul>
@@ -213,24 +213,24 @@ export default function CalcolaForm() {
 
       {/* Submit */}
       <button type="submit"
-        className="w-full bg-brand-green hover:bg-brand-green-hover text-white font-semibold py-3 rounded-lg transition-colors text-base mt-2">
+        className="w-full bg-gradient-to-b from-brand-green to-brand-green-dark hover:from-green-500 hover:to-green-700 text-white font-heading font-bold py-3.5 rounded-xl shadow-[0_4px_16px_rgba(22,163,74,0.25)] transition-colors text-base mt-2">
         Calcola il Codice Fiscale
       </button>
 
       {/* Risultato */}
       {risultato && (
-        <div className="p-5 bg-blue-50 border border-blue-200 rounded-lg text-center">
-          <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">Il tuo codice fiscale è:</p>
+        <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl text-center">
+          <p className="text-xs uppercase tracking-wide text-slate-500 mb-2">Il tuo codice fiscale è:</p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <span className="text-3xl font-mono font-bold text-brand-blue tracking-widest">
               {risultato}
             </span>
             <button type="button" onClick={copy}
-              className="text-xs bg-white border border-gray-300 rounded-lg px-3 py-1.5 hover:bg-gray-50 transition-colors font-medium">
+              className="text-xs bg-white border border-slate-200 rounded-xl px-4 py-2 hover:bg-slate-50 transition-colors font-medium">
               {copied ? '✓ Copiato!' : 'Copia'}
             </button>
           </div>
-          <p className="text-xs text-gray-400 mt-3">
+          <p className="text-xs text-slate-400 mt-3">
             Calcolato secondo il D.M. 12/03/1974. In rari casi di omocodia il codice
             assegnato dall'Agenzia delle Entrate potrebbe differire.
           </p>

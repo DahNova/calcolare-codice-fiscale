@@ -42,9 +42,9 @@ export default function InversoForm() {
 
   return (
     <form onSubmit={handleSubmit}
-      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-4">
+      className="bg-white rounded-2xl border border-slate-200 p-8 shadow-[0_8px_32px_-4px_rgba(15,23,42,0.06)] space-y-4">
       <div>
-        <label className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-1">
+        <label className="block text-[13px] font-medium text-slate-700 mb-1">
           Codice Fiscale
         </label>
         <input
@@ -53,31 +53,37 @@ export default function InversoForm() {
           onChange={e => { setCf(e.target.value.toUpperCase()); setError(''); }}
           maxLength={16}
           placeholder="es. RSSMRA80A01H501U"
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 font-mono text-lg uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-blue"
+          className="w-full border border-slate-200 rounded-xl px-4 py-3 font-mono text-lg tracking-wide uppercase bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-brand-blue-link focus:bg-white transition-colors"
         />
-        <p className="text-xs text-gray-400 mt-1 text-right">{cf.length}/16</p>
+        <p className="text-xs text-slate-400 mt-1 text-right">{cf.length}/16</p>
         {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
       </div>
 
       <button type="submit"
-        className="w-full bg-brand-green hover:bg-brand-green-hover text-white font-semibold py-3 rounded-lg transition-colors">
+        className="w-full bg-gradient-to-b from-brand-blue-link to-brand-blue hover:from-blue-500 hover:to-blue-700 text-white font-heading font-bold py-3.5 rounded-xl shadow-[0_4px_16px_rgba(37,99,235,0.25)] transition-colors">
         Decodifica Codice Fiscale
       </button>
 
       {dati && (
-        <div className="p-5 bg-blue-50 border border-blue-200 rounded-lg">
-          <h3 className="font-semibold text-gray-800 mb-3 text-sm uppercase tracking-wide">
+        <div className="space-y-3">
+          <h3 className="font-heading font-bold text-slate-800 text-sm">
             Dati estratti dal codice fiscale
           </h3>
-          <dl className="grid grid-cols-2 gap-y-2 text-sm">
-            <dt className="text-gray-500">Sesso:</dt>
-            <dd className="font-medium">{dati.sesso === 'M' ? 'Maschile' : 'Femminile'}</dd>
-            <dt className="text-gray-500">Data di nascita:</dt>
-            <dd className="font-medium">{dati.giorno} {MESI[dati.mese]} {dati.annoCompleto}</dd>
-            <dt className="text-gray-500">Luogo di nascita:</dt>
-            <dd className="font-medium">{nomeComune || '...'}</dd>
-          </dl>
-          <p className="text-xs text-gray-400 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="bg-slate-50 rounded-xl p-5">
+              <p className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1">Sesso</p>
+              <p className="text-base font-semibold text-slate-900">{dati.sesso === 'M' ? 'Maschile' : 'Femminile'}</p>
+            </div>
+            <div className="bg-slate-50 rounded-xl p-5">
+              <p className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1">Data di nascita</p>
+              <p className="text-base font-semibold text-slate-900">{dati.giorno} {MESI[dati.mese]} {dati.annoCompleto}</p>
+            </div>
+            <div className="bg-slate-50 rounded-xl p-5">
+              <p className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1">Luogo di nascita</p>
+              <p className="text-base font-semibold text-slate-900">{nomeComune || '...'}</p>
+            </div>
+          </div>
+          <p className="text-xs text-slate-400 mt-3">
             * L'anno potrebbe essere {dati.annoCompleto} o {dati.annoCompleto - 100} in caso di omonimia.
             Non è possibile risalire al nome o cognome esatti.
           </p>
