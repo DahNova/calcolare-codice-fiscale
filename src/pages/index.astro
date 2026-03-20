@@ -67,20 +67,33 @@ const schemaWebSite = {
   description="Calcola il tuo codice fiscale online in pochi secondi. Inserisci nome, cognome, data e luogo di nascita. Strumento gratuito e aggiornato 2026."
   schemaJson={[schemaWebApp, schemaFAQ, schemaWebSite]}
 >
-  <h1 class="text-3xl font-bold text-brand-blue mb-1">Calcola il Codice Fiscale Online</h1>
-  <p class="text-gray-500 mb-6 text-sm">
-    Gratis, immediato, aggiornato 2026 — calcolo secondo il D.M. 12/03/1974
-  </p>
+  <!-- Hero section with gradient background -->
+  <div class="bg-gradient-to-br from-brand-navy via-brand-navy-light to-brand-blue rounded-2xl p-8 sm:p-12 text-center mb-8">
+    <p class="text-white/50 text-sm tracking-widest uppercase font-heading mb-3">Calcola il tuo</p>
+    <h1 class="text-4xl sm:text-5xl font-heading font-extrabold text-white mb-6 tracking-tight">Codice Fiscale</h1>
 
+    <!-- Color-coded CF example -->
+    <div class="inline-flex items-center gap-0.5 bg-white/10 border border-white/10 rounded-xl px-6 py-3 mb-4">
+      <span class="font-mono text-lg sm:text-2xl font-bold text-red-400">RSS</span>
+      <span class="font-mono text-lg sm:text-2xl font-bold text-blue-400">MRA</span>
+      <span class="font-mono text-lg sm:text-2xl font-bold text-green-400">80A01</span>
+      <span class="font-mono text-lg sm:text-2xl font-bold text-purple-400">H501</span>
+      <span class="font-mono text-lg sm:text-2xl font-bold text-orange-400">U</span>
+    </div>
+
+    <p class="text-white/40 text-sm tracking-wide">Gratis — Immediato — Aggiornato 2026</p>
+  </div>
+
+  <!-- Calculator Form (React component) -->
   <CalcolaForm client:load />
 
-  <!-- Slot AdSense: inserire qui il codice AdSense dopo approvazione account -->
-  <div class="my-8 min-h-[90px]"></div>
+  <!-- AdSense slot -->
+  <div class="my-10 min-h-[90px]"></div>
 
-  <!-- Testo SEO -->
+  <!-- SEO Content -->
   <section class="mt-2">
-    <h2 class="text-xl font-bold text-gray-800 mb-3">Cos'è il Codice Fiscale?</h2>
-    <div class="text-gray-700 text-sm leading-relaxed space-y-3">
+    <h2 class="text-2xl font-heading font-bold text-slate-800 mb-4">Cos'è il Codice Fiscale?</h2>
+    <div class="text-slate-600 text-sm leading-relaxed space-y-3">
       <p>
         Il <strong>codice fiscale</strong> è un codice alfanumerico di 16 caratteri utilizzato
         in Italia per identificare univocamente i cittadini a fini fiscali e amministrativi.
@@ -108,27 +121,71 @@ const schemaWebSite = {
     </div>
   </section>
 
-  <!-- Link alle altre pagine -->
-  <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
-    {[
-      { href: '/codice-fiscale-inverso/', title: 'Codice Fiscale Inverso', desc: 'Estrai i dati da un CF esistente' },
-      { href: '/verifica-codice-fiscale/', title: 'Verifica Codice Fiscale', desc: 'Controlla se un CF è valido' },
-      { href: '/come-si-calcola-codice-fiscale/', title: 'Come si calcola', desc: 'Guida completa all\'algoritmo' },
-      { href: '/omocodia-codice-fiscale/', title: 'Omocodia', desc: 'Codici fiscali duplicati e come vengono gestiti' },
-      { href: '/tabelle-codice-fiscale/', title: 'Tabelle di Riferimento', desc: 'Mesi, check digit, codici catastali' },
-      { href: '/codice-fiscale-stranieri/', title: 'Nati all\'Estero', desc: 'CF per chi è nato fuori dall\'Italia' },
-    ].map(({ href, title, desc }) => (
-      <a href={href}
-        class="block p-4 border border-gray-200 rounded-lg hover:border-brand-blue hover:bg-blue-50 transition-colors group">
-        <div class="font-semibold text-sm text-brand-blue group-hover:underline">{title}</div>
-        <div class="text-xs text-gray-500 mt-1">{desc}</div>
+  <!-- Feature Grid -->
+  <section class="mt-10">
+    <h2 class="text-2xl font-heading font-bold text-slate-800 mb-2">Strumenti e Guide</h2>
+    <p class="text-slate-500 text-sm mb-6">Tutto quello che ti serve per il codice fiscale italiano</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <!-- Card 1: Inverso -->
+      <a href="/codice-fiscale-inverso/" class="block p-6 bg-white border border-slate-200 rounded-2xl hover:border-brand-blue-link hover:shadow-md transition-all group">
+        <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center mb-3">
+          <svg class="w-5 h-5 text-brand-blue-link" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
+        </div>
+        <div class="font-heading font-semibold text-slate-900 group-hover:text-brand-blue-link transition-colors">Codice Fiscale Inverso</div>
+        <div class="text-xs text-slate-500 mt-1.5 leading-relaxed">Estrai data di nascita, sesso e comune da un CF esistente</div>
       </a>
-    ))}
-  </div>
+
+      <!-- Card 2: Verifica -->
+      <a href="/verifica-codice-fiscale/" class="block p-6 bg-white border border-slate-200 rounded-2xl hover:border-brand-green hover:shadow-md transition-all group">
+        <div class="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center mb-3">
+          <svg class="w-5 h-5 text-brand-green" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div class="font-heading font-semibold text-slate-900 group-hover:text-brand-green transition-colors">Verifica Codice Fiscale</div>
+        <div class="text-xs text-slate-500 mt-1.5 leading-relaxed">Controlla se un codice fiscale è formalmente valido</div>
+      </a>
+
+      <!-- Card 3: Come si Calcola -->
+      <a href="/come-si-calcola-codice-fiscale/" class="block p-6 bg-white border border-slate-200 rounded-2xl hover:border-amber-500 hover:shadow-md transition-all group">
+        <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center mb-3">
+          <svg class="w-5 h-5 text-amber-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="font-heading font-semibold text-slate-900 group-hover:text-amber-600 transition-colors">Come si Calcola</div>
+        <div class="text-xs text-slate-500 mt-1.5 leading-relaxed">Guida completa all'algoritmo del codice fiscale</div>
+      </a>
+
+      <!-- Card 4: Omocodia -->
+      <a href="/omocodia-codice-fiscale/" class="block p-6 bg-white border border-slate-200 rounded-2xl hover:border-red-500 hover:shadow-md transition-all group">
+        <div class="w-11 h-11 rounded-xl bg-red-50 flex items-center justify-center mb-3">
+          <svg class="w-5 h-5 text-red-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        </div>
+        <div class="font-heading font-semibold text-slate-900 group-hover:text-red-600 transition-colors">Omocodia</div>
+        <div class="text-xs text-slate-500 mt-1.5 leading-relaxed">CF duplicati e come l'Agenzia delle Entrate li risolve</div>
+      </a>
+
+      <!-- Card 5: Tabelle -->
+      <a href="/tabelle-codice-fiscale/" class="block p-6 bg-white border border-slate-200 rounded-2xl hover:border-purple-500 hover:shadow-md transition-all group">
+        <div class="w-11 h-11 rounded-xl bg-purple-50 flex items-center justify-center mb-3">
+          <svg class="w-5 h-5 text-purple-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
+        </div>
+        <div class="font-heading font-semibold text-slate-900 group-hover:text-purple-600 transition-colors">Tabelle di Riferimento</div>
+        <div class="text-xs text-slate-500 mt-1.5 leading-relaxed">Mesi, check digit, codici catastali di tutti i comuni</div>
+      </a>
+
+      <!-- Card 6: Stranieri (inverted) -->
+      <a href="/codice-fiscale-stranieri/" class="block p-6 bg-brand-navy-light rounded-2xl hover:bg-brand-navy transition-all group">
+        <div class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center mb-3">
+          <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </div>
+        <div class="font-heading font-semibold text-white">Nati all'Estero</div>
+        <div class="text-xs text-white/70 mt-1.5 leading-relaxed">216 codici catastali per paesi esteri — tabella completa</div>
+      </a>
+    </div>
+  </section>
 
   <!-- FAQ -->
-  <section class="mt-8">
-    <h2 class="text-xl font-bold text-gray-800 mb-4">Domande Frequenti</h2>
+  <section class="mt-10">
+    <h2 class="text-2xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
     <div class="space-y-2">
       {[
         { q: "Come si calcola il codice fiscale?", a: "Si calcola partendo da 3 lettere del cognome, 3 del nome, 2 cifre dell'anno, 1 lettera del mese, 2 cifre del giorno (+40 per donne), codice catastale del comune e carattere di controllo." },
@@ -137,12 +194,12 @@ const schemaWebSite = {
         { q: "Il codice fiscale dipende dal sesso?", a: "Sì. Il giorno di nascita per le donne viene aumentato di 40, rendendo il sesso immediatamente riconoscibile." },
         { q: "Posso decodificare un CF esistente?", a: "Sì! Usa la nostra pagina Codice Fiscale Inverso per estrarre data, sesso e comune da un CF." },
       ].map(({ q, a }) => (
-        <details class="border border-gray-200 rounded-lg group">
-          <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-gray-800 hover:bg-gray-50 list-none flex justify-between items-center">
+        <details class="bg-white border border-slate-200 rounded-xl group">
+          <summary class="px-5 py-4 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 rounded-xl list-none flex justify-between items-center">
             {q}
-            <span class="text-gray-400 text-xs group-open:rotate-180 transition-transform">▼</span>
+            <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform ml-4 shrink-0">▼</span>
           </summary>
-          <p class="px-4 pb-3 text-sm text-gray-600">{a}</p>
+          <p class="px-5 pb-4 text-sm text-slate-600">{a}</p>
         </details>
       ))}
     </div>
