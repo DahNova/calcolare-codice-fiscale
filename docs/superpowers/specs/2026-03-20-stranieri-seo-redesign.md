@@ -75,7 +75,7 @@ Individual pages for 15-20 countries with demonstrated search volume or high imm
 | 11 | India | Z222 | — | Growing community |
 | 12 | Filippine | Z216 | — | Large community (calcolocf.com data) |
 | 13 | Bangladesh | Z249 | — | Growing community |
-| 14 | Moldavia | Z140 | — | 7 impressions at position 4.1 |
+| 14 | Moldova | Z140 | — | 7 impressions at position 4.1 |
 | 15 | Spagna | Z131 | — | Neighbor, AIRE community |
 | 16 | Polonia | Z127 | — | EU community |
 | 17 | Brasile | Z602 | — | Large AIRE/immigrant community |
