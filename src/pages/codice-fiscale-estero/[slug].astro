@@ -1,0 +1,229 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EsempioCF from '../../components/EsempioCF.astro';
+import { paesiEsteri } from '../../data/paesiEsteri';
+import { countryContent } from '../../data/countryContent';
+import type { CountryContent } from '../../data/countryContent';
+
+export function getStaticPaths() {
+  return countryContent.map(c => ({
+    params: { slug: c.slug },
+    props: { content: c },
+  }));
+}
+
+function articoloDi(articolo: string, nome: string): string {
+  switch (articolo) {
+    case "l'": return `dell'${nome}`;
+    case 'la': return `della ${nome}`;
+    case 'le': return `delle ${nome}`;
+    case 'gli': return `degli ${nome}`;
+    case 'il': return `del ${nome}`;
+    default: return `di ${nome}`;
+  }
+}
+
+interface Props { content: CountryContent; }
+const { content } = Astro.props;
+const c = content;
+const diPaese = articoloDi(c.articolo, c.nomeBreve);
+
+// Parse example date
+const mesiMap: Record<string, number> = {
+  'gennaio':1,'febbraio':2,'marzo':3,'aprile':4,'maggio':5,'giugno':6,
+  'luglio':7,'agosto':8,'settembre':9,'ottobre':10,'novembre':11,'dicembre':12,
+};
+const dataParts = c.esempioData.split(' ');
+const esGiorno = parseInt(dataParts[0]);
+const esMese = mesiMap[dataParts[1].toLowerCase()];
+const esAnno = parseInt(dataParts[2]);
+const esNomeParts = c.esempioNome.split(' ');
+const esCognome = esNomeParts.length > 1 ? esNomeParts.slice(1).join(' ') : esNomeParts[0];
+const esNome = esNomeParts[0];
+
+// Related countries: up to 4 from same continent with dedicated pages
+let related = paesiEsteri
+  .filter(p => p.hasDedicatedPage && p.slug !== c.slug && p.continente === c.continente);
+if (related.length < 4) {
+  const others = paesiEsteri.filter(p => p.hasDedicatedPage && p.slug !== c.slug && p.continente !== c.continente);
+  related = [...related, ...others].slice(0, 4);
+} else {
+  related = related.slice(0, 4);
+}
+const relatedContent = related.map(r => {
+  const rc = countryContent.find(cc => cc.slug === r.slug);
+  return { slug: r.slug, nome: rc?.nomeBreve || r.nome, codice: r.codiceCatastale };
+});
+
+// Schema
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `Qual è il codice catastale ${diPaese} nel codice fiscale?`,
+      "acceptedAnswer": { "@type": "Answer", "text": `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Viene usato nel codice fiscale italiano al posto del codice di un comune per le persone nate all'estero.` }
+    },
+    {
+      "@type": "Question",
+      "name": `Come si calcola il codice fiscale per chi è nato ${c.preposizione} ${c.nomeBreve}?`,
+      "acceptedAnswer": { "@type": "Answer", "text": `Il calcolo segue la stessa procedura dei nati in Italia: 3 lettere dal cognome, 3 dal nome, data di nascita codificata, e il codice catastale ${c.codiceCatastale} (${c.nomeBreve}) al posto del codice di un comune italiano.` }
+    },
+    {
+      "@type": "Question",
+      "name": `${c.codiceCatastale} a quale stato corrisponde nel codice fiscale?`,
+      "acceptedAnswer": { "@type": "Answer", "text": `Il codice ${c.codiceCatastale} corrisponde a ${c.nomeCompleto}. È un codice catastale assegnato dall'Agenzia delle Entrate per identificare le persone nate ${c.preposizione} ${c.nomeBreve} nel codice fiscale italiano.` }
+    },
+    ...(c.faqExtra ? [{
+      "@type": "Question",
+      "name": c.faqExtra.q,
+      "acceptedAnswer": { "@type": "Answer", "text": c.faqExtra.a }
+    }] : []),
+  ],
+};
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `Codice Fiscale ${c.nomeBreve} (${c.codiceCatastale}) — Calcolo e Guida`,
+  "description": `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Calcola il codice fiscale per chi è nato ${c.preposizione} ${c.nomeBreve}.`,
+  "url": `https://www.calcolare-codice-fiscale.it/codice-fiscale-estero/${c.slug}/`,
+  "inLanguage": "it",
+  "datePublished": "2026-03-20",
+  "dateModified": "2026-03-20",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+};
+
+const title = `Codice Fiscale ${c.nomeBreve} (${c.codiceCatastale}) — Calcolo e Guida`;
+const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Calcola il codice fiscale per chi è nato ${c.preposizione} ${c.nomeBreve}: esempio pratico, guida e FAQ.`;
+---
+
+<Layout title={title} description={description} schemaJson={[schemaFAQ, schemaArticle]}
+  breadcrumbs={[{name:'Home',url:'/'},{name:"Nati all'Estero",url:'/codice-fiscale-stranieri/'},{name:c.nomeBreve,url:`/codice-fiscale-estero/${c.slug}/`}]}>
+
+  <!-- Breadcrumb -->
+  <nav class="text-xs text-gray-400 mb-4">
+    <a href="/" class="hover:underline">Home</a>
+    <span class="mx-1">&rsaquo;</span>
+    <a href="/codice-fiscale-stranieri/" class="hover:underline">Nati all'Estero</a>
+    <span class="mx-1">&rsaquo;</span>
+    <span>{c.nomeBreve}</span>
+  </nav>
+
+  <!-- H1 -->
+  <h1 class="text-3xl font-bold text-brand-blue mb-1">Codice Fiscale {c.nomeBreve} &mdash; Codice Catastale {c.codiceCatastale}</h1>
+  <p class="text-gray-500 mb-6 text-sm">Come calcolare il CF per chi è nato {c.preposizione} {c.nomeBreve}</p>
+
+  <!-- CTA box -->
+  <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
+    <strong>Calcola subito il tuo CF</strong> &mdash; Usa il calcolatore e seleziona "Nato/a all'estero" per cercare {c.nomeBreve}.
+    <a href="/" class="ml-1 font-semibold hover:underline">Vai al calcolatore &rarr;</a>
+  </div>
+
+  <div class="space-y-8 text-sm text-gray-700 leading-relaxed">
+
+    <!-- Section: Il Codice Catastale -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Il Codice Catastale {c.codiceCatastale}</h2>
+      <p>
+        Nel codice fiscale italiano, le persone nate {c.preposizione} {c.nomeBreve} utilizzano il codice catastale
+        <strong>{c.codiceCatastale}</strong> al posto del codice di un comune italiano. Questo codice occupa le
+        posizioni 12-15 del codice fiscale (i 4 caratteri che identificano il luogo di nascita).
+      </p>
+      <p class="mt-3">
+        I codici catastali per gli stati esteri iniziano tutti con la lettera <strong>Z</strong> e sono assegnati
+        dall'Agenzia delle Entrate. Il codice {c.codiceCatastale} è univocamente associato a {c.nomeCompleto}
+        e rimane stabile nel tempo.
+      </p>
+    </section>
+
+    <!-- Section: Esempio Pratico -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Esempio Pratico</h2>
+      <EsempioCF
+        cognome={esCognome}
+        nome={esNome}
+        sesso={c.esempioSesso}
+        giorno={esGiorno}
+        mese={esMese}
+        anno={esAnno}
+        paese={c.nomeBreve}
+        codiceCatastale={c.codiceCatastale}
+      />
+    </section>
+
+    <!-- Section: Comunita in Italia -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Comunità {c.nomeBreve} in Italia</h2>
+      <p>{c.comunita}</p>
+    </section>
+
+    <!-- Section: Come Richiedere -->
+    <section>
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Come Richiedere il Codice Fiscale</h2>
+      <p>Chi è nato {c.preposizione} {c.nomeBreve} può richiedere il codice fiscale:</p>
+      <div class="mt-3 space-y-3">
+        <div class="flex gap-3 bg-gray-50 rounded-lg p-4">
+          <div class="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0"></div>
+          <div>
+            <p class="font-semibold text-gray-800">In Italia</p>
+            <p class="text-gray-600 mt-1">Presso qualsiasi ufficio dell'Agenzia delle Entrate presentando un documento di identità valido. Il codice viene rilasciato immediatamente e gratuitamente.</p>
+          </div>
+        </div>
+        <div class="flex gap-3 bg-gray-50 rounded-lg p-4">
+          <div class="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0"></div>
+          <div>
+            <p class="font-semibold text-gray-800">All'estero</p>
+            <p class="text-gray-600 mt-1">Presso il Consolato o l'Ambasciata italiana {c.preposizione} {c.nomeBreve}. I cittadini italiani iscritti all'AIRE possono richiederlo anche online tramite il sito dell'Agenzia delle Entrate.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FAQ -->
+  <section class="mt-10">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Domande Frequenti</h2>
+    <div class="space-y-2">
+      {[
+        { q: `Qual è il codice catastale ${diPaese}?`, a: `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Si usa nel codice fiscale per identificare le persone nate ${c.preposizione} ${c.nomeBreve}.` },
+        { q: `Come si calcola il CF per chi è nato ${c.preposizione} ${c.nomeBreve}?`, a: `Il calcolo è identico a quello per i nati in Italia. L'unica differenza è il codice catastale: si usa ${c.codiceCatastale} al posto del codice di un comune italiano.` },
+        { q: `${c.codiceCatastale} a quale stato corrisponde?`, a: `Il codice ${c.codiceCatastale} corrisponde a ${c.nomeCompleto}. È assegnato dall'Agenzia delle Entrate per il codice fiscale.` },
+        ...(c.faqExtra ? [c.faqExtra] : []),
+      ].map(({ q, a }) => (
+        <details class="border border-gray-200 rounded-lg group">
+          <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-gray-800 hover:bg-gray-50 list-none flex justify-between items-center">
+            {q}
+            <span class="text-gray-400 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+          </summary>
+          <p class="px-4 pb-3 text-sm text-gray-600">{a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related countries -->
+  <section class="mt-8">
+    <h2 class="text-lg font-bold text-gray-800 mb-3">Codici Fiscali &mdash; Altri Paesi</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      {relatedContent.map(r => (
+        <a href={`/codice-fiscale-estero/${r.slug}/`}
+          class="block p-3 border border-gray-200 rounded-lg hover:border-brand-blue hover:bg-blue-50 transition-colors text-center">
+          <div class="font-semibold text-sm text-brand-blue">{r.nome}</div>
+          <div class="text-xs text-gray-400 font-mono mt-1">{r.codice}</div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="mt-10 p-5 bg-green-50 border border-green-200 rounded-xl text-center">
+    <p class="font-semibold text-green-800 mb-2">Calcola il tuo codice fiscale</p>
+    <a href="/" class="inline-block bg-brand-green hover:bg-brand-green-hover text-white px-6 py-2.5 rounded-lg transition-colors font-medium text-sm">
+      Vai al Calcolatore &rarr;
+    </a>
+  </div>
+</Layout>
