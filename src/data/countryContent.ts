@@ -462,4 +462,54 @@ export const countryContent: CountryContent[] = [
     comunita:
       'La comunità cubana in Italia conta circa 20 000 residenti, presenti soprattutto a Milano, Roma e Napoli. I rapporti tra Italia e Cuba sono storicamente intensi, alimentati dal turismo e dai legami culturali che uniscono i due Paesi. Molti cittadini cubani risiedono in Italia per motivi familiari, di studio o lavorativi, e sono impiegati prevalentemente nella ristorazione, nei servizi e nel settore artistico-culturale.',
   },
+  {
+    slug: 'federazione-russa',
+    codiceCatastale: 'Z154',
+    continente: 'Europa',
+    nomeCompleto: 'Federazione russa',
+    nomeBreve: 'Russia',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Dmitri Ivanov',
+    esempioSesso: 'M',
+    esempioData: '27 gennaio 1987',
+    comunita:
+      'La comunità russa in Italia conta circa 40 000 residenti regolarmente iscritti all\'anagrafe, con concentrazioni particolarmente elevate in Lombardia, Lazio ed Emilia-Romagna. I cittadini russi presenti in Italia sono impiegati in settori diversificati: dalla moda al business, dal turismo all\'ambito accademico e professionale. Una quota significativa è composta da studenti universitari e ricercatori che frequentano atenei italiani di prestigio. A partire dal 2022, a seguito degli eventi geopolitici legati al conflitto in Ucraina, si è registrato un incremento significativo degli arrivi dalla Russia, con un profilo migratorio che comprende professionisti del settore tecnologico e imprenditori alla ricerca di nuove opportunità nel contesto europeo.',
+    faqExtra: {
+      q: 'I cittadini russi hanno bisogno di un visto per risiedere in Italia?',
+      a: 'Sì. I cittadini della Federazione russa necessitano di un visto Schengen o di un permesso di soggiorno per risiedere legalmente in Italia. A partire dal 2022, le procedure per il rilascio dei visti ai cittadini russi sono divenute più restrittive a seguito delle misure adottate dall\'Unione Europea in risposta al conflitto in Ucraina. Per soggiorni di lunga durata è necessario richiedere un permesso di soggiorno presso la Questura competente.',
+    },
+  },
+  {
+    slug: 'venezuela',
+    codiceCatastale: 'Z614',
+    continente: 'Americhe',
+    nomeCompleto: 'Venezuela',
+    nomeBreve: 'Venezuela',
+    preposizione: 'in',
+    articolo: 'il',
+    esempioNome: 'Isabella Moreno',
+    esempioSesso: 'F',
+    esempioData: '5 agosto 1991',
+    comunita:
+      'La comunità venezuelana in Italia conta circa 50 000 residenti, molti dei quali vantano origini italiane riconducibili alle grandi ondate migratorie del Novecento, quando centinaia di migliaia di italiani emigrarono in Venezuela in cerca di lavoro e fortuna. Numerosi cittadini venezuelani hanno riacquistato la cittadinanza italiana per discendenza (jure sanguinis), un percorso facilitato dai legami familiari ancora vivi con il Paese d\'origine degli antenati. Le principali comunità si trovano a Milano, Roma e Torino, dove i venezuelani sono impiegati nei settori dei servizi, della ristorazione e delle professioni qualificate. A partire dal 2015, la grave crisi economica e politica che ha colpito il Venezuela ha determinato un\'accelerazione significativa dei flussi migratori verso l\'Italia, con l\'arrivo di professionisti, studenti e famiglie intere.',
+    faqExtra: {
+      q: 'I venezuelani di origine italiana possono ottenere il codice fiscale italiano tramite il riconoscimento jure sanguinis?',
+      a: 'Sì. I cittadini venezuelani che discendono da emigrati italiani possono richiedere il riconoscimento della cittadinanza italiana per discendenza (jure sanguinis) e, una volta ottenuto il riconoscimento, hanno diritto al codice fiscale italiano. Il codice fiscale viene attribuito dall\'Agenzia delle Entrate al momento dell\'iscrizione anagrafica e può essere calcolato preventivamente tramite questo strumento, inserendo il Paese estero di nascita.',
+    },
+  },
+  {
+    slug: 'etiopia',
+    codiceCatastale: 'Z315',
+    continente: 'Africa',
+    nomeCompleto: 'Etiopia',
+    nomeBreve: 'Etiopia',
+    preposizione: 'in',
+    articolo: "l'",
+    esempioNome: 'Abeba Tadesse',
+    esempioSesso: 'F',
+    esempioData: '12 giugno 1988',
+    comunita:
+      'La comunità etiope in Italia conta circa 30 000 residenti e vanta legami storici profondi con il Paese, risalenti al periodo coloniale italiano in Africa orientale. Le principali concentrazioni si trovano a Roma, Milano e Bologna, dove i cittadini etiopi hanno dato vita a una rete di attività imprenditoriali nel settore della ristorazione e dell\'ospitalità: la cucina etiope è oggi tra le più apprezzate e diffuse tra le gastronomie etniche presenti in Italia. La comunità si è consolidata nel corso dei decenni attraverso i ricongiungimenti familiari e la migrazione umanitaria, e si distingue per un forte senso di identità culturale e per la partecipazione attiva alla vita sociale delle città di insediamento.',
+  },
 ];
