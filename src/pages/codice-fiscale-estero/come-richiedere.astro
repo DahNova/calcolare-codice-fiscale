@@ -1,0 +1,300 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Come Richiedere il Codice Fiscale per Stranieri - Guida Completa",
+  "description": "Procedura completa per richiedere il codice fiscale per stranieri in Italia: documenti necessari, tempistiche e differenze tra cittadini UE e non-UE.",
+  "url": "https://www.calcolare-codice-fiscale.it/codice-fiscale-estero/come-richiedere/",
+  "inLanguage": "it",
+  "datePublished": "2026-03-22",
+  "dateModified": "2026-03-22",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+};
+
+const faqItems = [
+  {
+    q: "Quanto costa richiedere il codice fiscale?",
+    a: "Il rilascio del codice fiscale è completamente gratuito. Non sono previsti costi né bolli, sia che venga richiesto all'Agenzia delle Entrate in Italia, sia presso un Consolato italiano all'estero."
+  },
+  {
+    q: "Posso richiedere il codice fiscale online?",
+    a: "Attualmente la richiesta del codice fiscale online è possibile solo per i cittadini italiani residenti all'estero (AIRE) tramite il sito dell'Agenzia delle Entrate. I cittadini stranieri devono recarsi di persona all'Agenzia delle Entrate o al Consolato italiano."
+  },
+  {
+    q: "Quanto tempo ci vuole per ottenere il codice fiscale?",
+    a: "Presso l'Agenzia delle Entrate il codice fiscale viene rilasciato immediatamente al momento della richiesta. Presso il Consolato italiano all'estero i tempi possono variare da pochi giorni a qualche settimana."
+  },
+  {
+    q: "Il codice fiscale ha una scadenza?",
+    a: "No, il codice fiscale non ha scadenza. Una volta attribuito, rimane valido per tutta la vita del titolare, indipendentemente dallo status del permesso di soggiorno o dalla residenza."
+  },
+  {
+    q: "Posso calcolare il mio codice fiscale prima di richiederlo ufficialmente?",
+    a: "Si, puoi calcolare il codice fiscale in anticipo con il nostro calcolatore online. Il codice calcolato corrisponde a quello ufficiale nella quasi totalita dei casi, salvo rari casi di omocodia."
+  },
+];
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(({ q, a }) => ({
+    "@type": "Question",
+    "name": q,
+    "acceptedAnswer": { "@type": "Answer", "text": a },
+  })),
+};
+---
+
+<Layout
+  title="Come Richiedere il Codice Fiscale per Stranieri - Guida Completa"
+  description="Procedura completa per richiedere il codice fiscale per stranieri in Italia: documenti necessari, dove richiederlo, tempistiche e differenze tra cittadini UE e non-UE."
+  schemaJson={[schemaArticle, schemaFAQ]}
+  breadcrumbs={[{name:'Home',url:'/'},{name:"Nati all'Estero",url:'/codice-fiscale-stranieri/'},{name:'Come Richiedere',url:'/codice-fiscale-estero/come-richiedere/'}]}
+>
+  <!-- Gradient page header -->
+  <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
+    <nav class="text-xs mb-4">
+      <a href="/" class="text-white/50 hover:text-white/70">Home</a>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
+      <a href="/codice-fiscale-stranieri/" class="text-white/50 hover:text-white/70">Nati all'Estero</a>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
+      <span class="text-white/80">Come Richiedere</span>
+    </nav>
+    <h1 class="text-3xl font-heading font-bold text-white mb-2">Come Richiedere il Codice Fiscale per Stranieri</h1>
+    <p class="text-white/60 text-sm">Procedura, documenti e tempistiche per cittadini stranieri e nati all'estero</p>
+  </div>
+
+  <article>
+    <div class="space-y-8 text-sm text-slate-700 leading-relaxed">
+
+      <!-- Section 1: Chi deve richiedere -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Chi Deve Richiedere il Codice Fiscale</h2>
+        <p>
+          Il codice fiscale e obbligatorio per tutti i cittadini stranieri che hanno qualsiasi tipo di rapporto con l'amministrazione italiana o con soggetti privati operanti in Italia. In pratica, chiunque non sia cittadino italiano e necessiti di interagire con il sistema burocratico, sanitario, lavorativo o finanziario italiano deve disporre di un codice fiscale.
+        </p>
+        <p class="mt-3">In particolare, il codice fiscale e necessario per:</p>
+        <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            { icon: '💼', title: 'Lavoro', desc: 'Stipulare un contratto di lavoro dipendente o autonomo' },
+            { icon: '🏥', title: 'Sanita', desc: "Accedere al Servizio Sanitario Nazionale e iscriversi al medico di base" },
+            { icon: '🏦', title: 'Banca', desc: 'Aprire un conto corrente bancario o postale' },
+            { icon: '🏠', title: 'Immobili', desc: 'Acquistare, vendere o affittare un immobile' },
+            { icon: '📋', title: 'Pubblica Amministrazione', desc: 'Qualsiasi pratica con enti pubblici (INPS, INAIL, Comune)' },
+            { icon: '📄', title: 'Contratti', desc: 'Sottoscrivere utenze (luce, gas, telefono, internet)' },
+          ].map(({ icon, title, desc }) => (
+            <div class="flex gap-3 bg-white border border-slate-200 rounded-xl p-4">
+              <span class="text-lg shrink-0">{icon}</span>
+              <div>
+                <p class="font-semibold text-slate-800">{title}</p>
+                <p class="text-slate-600 mt-0.5">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Section 2: Documenti necessari -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Documenti Necessari</h2>
+        <p>I documenti richiesti variano a seconda della nazionalita del richiedente:</p>
+
+        <div class="mt-4 space-y-4">
+          <div class="bg-white border border-slate-200 rounded-xl p-5">
+            <h3 class="font-heading font-bold text-slate-800 mb-2">Cittadini dell'Unione Europea</h3>
+            <ul class="space-y-1.5 list-disc list-inside text-slate-700">
+              <li><strong>Documento di identita</strong> valido (carta d'identita o passaporto)</li>
+              <li><strong>Modulo AA4/8</strong> compilato (disponibile presso l'ufficio o scaricabile dal sito dell'Agenzia delle Entrate)</li>
+            </ul>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-xl p-5">
+            <h3 class="font-heading font-bold text-slate-800 mb-2">Cittadini extra-UE</h3>
+            <ul class="space-y-1.5 list-disc list-inside text-slate-700">
+              <li><strong>Passaporto</strong> valido con visto d'ingresso</li>
+              <li><strong>Permesso di soggiorno</strong> (o ricevuta della richiesta di rinnovo)</li>
+              <li><strong>Modulo AA4/8</strong> compilato</li>
+            </ul>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-xl p-5">
+            <h3 class="font-heading font-bold text-slate-800 mb-2">Italiani nati all'estero (AIRE)</h3>
+            <ul class="space-y-1.5 list-disc list-inside text-slate-700">
+              <li><strong>Documento di identita</strong> italiano valido</li>
+              <li><strong>Certificato di iscrizione AIRE</strong> (consigliato)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Dove e come richiederlo -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Dove e Come Richiedere il Codice Fiscale</h2>
+        <p class="mb-4">Esistono tre modalita principali per ottenere il codice fiscale:</p>
+
+        <div class="space-y-3">
+          <div class="flex gap-3 bg-slate-50 rounded-lg p-4">
+            <div class="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-bold text-sm shrink-0">1</div>
+            <div>
+              <p class="font-semibold text-slate-800">Agenzia delle Entrate (di persona)</p>
+              <p class="text-slate-600 mt-1">
+                Il metodo piu rapido. Ci si reca presso un qualsiasi ufficio dell'Agenzia delle Entrate sul territorio italiano con i documenti richiesti. Il codice fiscale viene <strong>rilasciato immediatamente</strong> e gratuitamente. Non e necessario prendere appuntamento, ma in alcuni uffici e consigliato per ridurre i tempi di attesa.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-3 bg-slate-50 rounded-lg p-4">
+            <div class="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-bold text-sm shrink-0">2</div>
+            <div>
+              <p class="font-semibold text-slate-800">Consolato italiano all'estero</p>
+              <p class="text-slate-600 mt-1">
+                Per chi si trova ancora all'estero, e possibile richiedere il codice fiscale presso il Consolato o l'Ambasciata italiana nel proprio paese. I tempi di rilascio sono generalmente di <strong>pochi giorni lavorativi</strong>. Questa modalita e particolarmente utile per chi deve avviare pratiche burocratiche italiane prima di trasferirsi.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-3 bg-slate-50 rounded-lg p-4">
+            <div class="flex items-center justify-center w-8 h-8 rounded-full bg-brand-navy text-white font-bold text-sm shrink-0">3</div>
+            <div>
+              <p class="font-semibold text-slate-800">Online (solo per cittadini AIRE)</p>
+              <p class="text-slate-600 mt-1">
+                I cittadini italiani iscritti all'AIRE possono richiedere il codice fiscale online attraverso il portale dell'Agenzia delle Entrate. Per i cittadini stranieri non e attualmente prevista la possibilita di richiesta telematica.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Tempistiche -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Tempistiche di Rilascio</h2>
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+          <table class="text-sm border-collapse w-full">
+            <thead>
+              <tr class="bg-slate-50">
+                <th class="border-b border-slate-200 px-4 py-2.5 text-left text-xs font-semibold text-slate-500">Modalita</th>
+                <th class="border-b border-slate-200 px-4 py-2.5 text-left text-xs font-semibold text-slate-500">Tempi</th>
+                <th class="border-b border-slate-200 px-4 py-2.5 text-left text-xs font-semibold text-slate-500">Costo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border-b border-slate-100 px-4 py-2 font-medium">Agenzia delle Entrate</td>
+                <td class="border-b border-slate-100 px-4 py-2">Immediato</td>
+                <td class="border-b border-slate-100 px-4 py-2 text-green-700 font-medium">Gratuito</td>
+              </tr>
+              <tr>
+                <td class="border-b border-slate-100 px-4 py-2 font-medium">Consolato italiano</td>
+                <td class="border-b border-slate-100 px-4 py-2">Pochi giorni - qualche settimana</td>
+                <td class="border-b border-slate-100 px-4 py-2 text-green-700 font-medium">Gratuito</td>
+              </tr>
+              <tr>
+                <td class="border-b border-slate-100 px-4 py-2 font-medium">Online (AIRE)</td>
+                <td class="border-b border-slate-100 px-4 py-2">Pochi giorni lavorativi</td>
+                <td class="border-b border-slate-100 px-4 py-2 text-green-700 font-medium">Gratuito</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 5: Differenze UE e non-UE -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Differenze tra Cittadini UE e Non-UE</h2>
+        <p>La procedura di richiesta del codice fiscale presenta alcune differenze importanti in base alla nazionalita del richiedente:</p>
+
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
+            <h3 class="font-heading font-bold text-blue-800 mb-2">Cittadini UE</h3>
+            <ul class="space-y-1.5 text-sm text-blue-900">
+              <li class="flex gap-2"><span class="text-blue-500 shrink-0">&#10003;</span> Basta la carta d'identita o il passaporto</li>
+              <li class="flex gap-2"><span class="text-blue-500 shrink-0">&#10003;</span> Non serve il permesso di soggiorno</li>
+              <li class="flex gap-2"><span class="text-blue-500 shrink-0">&#10003;</span> Liberta di circolazione e soggiorno</li>
+              <li class="flex gap-2"><span class="text-blue-500 shrink-0">&#10003;</span> Possono risiedere in Italia senza limiti di tempo</li>
+            </ul>
+          </div>
+
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+            <h3 class="font-heading font-bold text-amber-800 mb-2">Cittadini extra-UE</h3>
+            <ul class="space-y-1.5 text-sm text-amber-900">
+              <li class="flex gap-2"><span class="text-amber-500 shrink-0">&#10003;</span> Necessitano del passaporto con visto</li>
+              <li class="flex gap-2"><span class="text-amber-500 shrink-0">&#10003;</span> Devono avere il permesso di soggiorno</li>
+              <li class="flex gap-2"><span class="text-amber-500 shrink-0">&#10003;</span> La ricevuta del rinnovo e sufficiente</li>
+              <li class="flex gap-2"><span class="text-amber-500 shrink-0">&#10003;</span> Soggiorno regolato dalla normativa sull'immigrazione</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Calcolo preventivo -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Calcolo Preventivo del Codice Fiscale</h2>
+        <p>
+          In attesa di richiedere ufficialmente il codice fiscale all'Agenzia delle Entrate o al Consolato, e possibile <strong>calcolare il proprio codice fiscale in anticipo</strong> utilizzando il nostro strumento online. Il calcolo si basa sullo stesso algoritmo ufficiale (D.M. 12/03/1974) e il risultato coincide con quello ufficiale nella quasi totalita dei casi.
+        </p>
+        <p class="mt-3">
+          Per i nati all'estero, il codice fiscale utilizza il <a href="/codice-belfiore/" class="text-brand-blue-link hover:underline font-medium">codice Belfiore</a> del paese di nascita (un codice che inizia con la lettera Z) al posto del codice catastale del comune italiano.
+        </p>
+
+        <div class="mt-4 inline-flex items-center gap-2 bg-white/10 border border-slate-200 rounded-xl px-5 py-3 text-sm text-slate-700">
+          <strong class="text-slate-800">Calcola subito il tuo CF</strong>: seleziona "Nato/a all'estero" nel calcolatore
+          <a href="/" class="font-semibold text-brand-blue-link hover:underline ml-1">Vai al calcolatore &rarr;</a>
+        </div>
+      </section>
+
+      <!-- Paesi piu cercati -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Codice Fiscale per Paese di Nascita</h2>
+        <p class="mb-4">Consulta le guide dedicate per i paesi con le comunita straniere piu numerose in Italia:</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          {[
+            { slug: 'romania', nome: 'Romania', codice: 'Z129' },
+            { slug: 'albania', nome: 'Albania', codice: 'Z100' },
+            { slug: 'marocco', nome: 'Marocco', codice: 'Z330' },
+            { slug: 'ucraina', nome: 'Ucraina', codice: 'Z138' },
+            { slug: 'germania', nome: 'Germania', codice: 'Z112' },
+            { slug: 'svizzera', nome: 'Svizzera', codice: 'Z133' },
+            { slug: 'francia', nome: 'Francia', codice: 'Z110' },
+            { slug: 'regno-unito', nome: 'Regno Unito', codice: 'Z114' },
+          ].map(p => (
+            <a href={`/codice-fiscale-estero/${p.slug}/`}
+              class="block p-3 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors text-center">
+              <div class="font-semibold text-sm text-brand-blue-link">{p.nome}</div>
+              <div class="text-xs text-slate-500 font-mono mt-1">{p.codice}</div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+    </div>
+
+    <div class="my-10 min-h-[90px]"></div>
+
+    <!-- FAQ -->
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+        <div class="divide-y divide-slate-100">
+          {faqItems.map(({ q, a }) => (
+            <details class="group">
+              <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+                {q}
+                <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+              </summary>
+              <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Green CTA -->
+    <div class="mt-8 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 text-sm text-green-800 text-center">
+      <strong>Calcola il tuo codice fiscale ora</strong>: seleziona "Nato/a all'estero" e inserisci i tuoi dati.
+      <a href="/" class="ml-1 font-semibold hover:underline">Vai al calcolatore &rarr;</a>
+    </div>
+  </article>
+</Layout>

@@ -112,9 +112,9 @@ const description = `${c.codiceCatastale} codice fiscale: il codice catastale ${
   <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
     <nav class="text-xs mb-4">
       <a href="/" class="text-white/50 hover:text-white/70">Home</a>
-      <span class="mx-1.5 text-white/30">&rsaquo;</span>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
       <a href="/codice-fiscale-stranieri/" class="text-white/50 hover:text-white/70">Nati all'Estero</a>
-      <span class="mx-1.5 text-white/30">&rsaquo;</span>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
       <span class="text-white/80">{c.nomeBreve}</span>
     </nav>
     <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-1">{c.codiceCatastale} Codice Fiscale - {c.nomeBreve}</h1>
@@ -209,7 +209,7 @@ const description = `${c.codiceCatastale} codice fiscale: il codice catastale ${
           <details class="group">
             <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
               {q}
-              <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+              <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
             </summary>
             <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
           </details>
@@ -226,7 +226,7 @@ const description = `${c.codiceCatastale} codice fiscale: il codice catastale ${
         <a href={`/codice-fiscale-estero/${r.slug}/`}
           class="block p-3 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors text-center">
           <div class="font-semibold text-sm text-brand-blue-link">{r.nome}</div>
-          <div class="text-xs text-slate-400 font-mono mt-1">{r.codice}</div>
+          <div class="text-xs text-slate-500 font-mono mt-1">{r.codice}</div>
         </a>
       ))}
     </div>

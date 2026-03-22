@@ -56,6 +56,7 @@ const allSchemas = breadcrumbs && breadcrumbs.length > 0
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0F172A" />
 
     <!-- GTM: paste Google Tag Manager snippet here -->
   </head>
@@ -104,7 +105,7 @@ const allSchemas = breadcrumbs && breadcrumbs.length > 0
       <!-- Drawer nav -->
       <nav class="flex-1 overflow-y-auto p-5 space-y-6">
         <div>
-          <p class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 px-3">Strumenti</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 px-3">Strumenti</p>
           <ul class="space-y-0.5">
             <li><a href="/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Calcola Codice Fiscale</a></li>
             <li><a href="/codice-fiscale-inverso/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Codice Fiscale Inverso</a></li>
@@ -112,7 +113,7 @@ const allSchemas = breadcrumbs && breadcrumbs.length > 0
           </ul>
         </div>
         <div>
-          <p class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 px-3">Guide e Riferimenti</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 px-3">Guide e Riferimenti</p>
           <ul class="space-y-0.5">
             <li><a href="/come-si-calcola-codice-fiscale/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Come si Calcola</a></li>
             <li><a href="/omocodia-codice-fiscale/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Omocodia</a></li>
@@ -131,10 +132,10 @@ const allSchemas = breadcrumbs && breadcrumbs.length > 0
     <!-- Footer -->
     <footer class="bg-brand-navy py-10 text-center mt-auto">
       <p class="font-heading font-semibold text-white text-base mb-2">Calcolare Codice Fiscale</p>
-      <p class="text-white/40 text-sm mb-4">
+      <p class="text-white/60 text-sm mb-4">
         Strumento gratuito per il calcolo del codice fiscale italiano - D.M. 12/03/1974
       </p>
-      <p class="flex justify-center flex-wrap gap-5 text-xs">
+      <nav aria-label="Navigazione footer" class="flex justify-center flex-wrap gap-5 text-xs">
         <a href="/" class="text-white/50 hover:text-white/80 transition-colors">Calcola CF</a>
         <a href="/codice-fiscale-inverso/" class="text-white/50 hover:text-white/80 transition-colors">Inverso</a>
         <a href="/verifica-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Verifica</a>
@@ -142,7 +143,7 @@ const allSchemas = breadcrumbs && breadcrumbs.length > 0
         <a href="/omocodia-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Omocodia</a>
         <a href="/tabelle-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Tabelle</a>
         <a href="/codice-fiscale-stranieri/" class="text-white/50 hover:text-white/80 transition-colors">Paesi Esteri</a>
-      </p>
+      </nav>
     </footer>
 
     <script>

@@ -189,7 +189,7 @@ export default function CalcolaForm() {
           autoComplete="off"
           className={fieldClass('comune')} />
         {selectedComune && (
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             {natoEstero
               ? `Codice: ${selectedComune.codiceCatastale}`
               : `Prov: ${selectedComune.provincia} · Codice catastale: ${selectedComune.codiceCatastale}`
@@ -204,7 +204,7 @@ export default function CalcolaForm() {
                 onMouseDown={() => selectComune(c)}
                 className="px-3 py-2 text-sm hover:bg-blue-50 cursor-pointer flex justify-between gap-2">
                 <span>{c.nome}</span>
-                {!natoEstero && <span className="text-slate-400 text-xs shrink-0">{c.provincia}</span>}
+                {!natoEstero && <span className="text-slate-500 text-xs shrink-0">{c.provincia}</span>}
               </li>
             ))}
           </ul>
@@ -230,7 +230,7 @@ export default function CalcolaForm() {
               {copied ? '✓ Copiato!' : 'Copia'}
             </button>
           </div>
-          <p className="text-xs text-slate-400 mt-3">
+          <p className="text-xs text-slate-500 mt-3">
             Calcolato secondo il D.M. 12/03/1974. In rari casi di omocodia il codice
             assegnato dall'Agenzia delle Entrate potrebbe differire.
           </p>

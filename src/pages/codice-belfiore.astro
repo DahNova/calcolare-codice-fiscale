@@ -1,0 +1,288 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Codice Belfiore - Cos'e e Come si Usa nel Codice Fiscale",
+  "description": "Il codice Belfiore identifica il luogo di nascita nel codice fiscale italiano. Scopri cos'e, come funziona e la tabella completa dei codici per comuni italiani e paesi esteri.",
+  "url": "https://www.calcolare-codice-fiscale.it/codice-belfiore/",
+  "inLanguage": "it",
+  "datePublished": "2026-03-22",
+  "dateModified": "2026-03-22",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+};
+
+const faqItems = [
+  {
+    q: "Cos'e il codice Belfiore?",
+    a: "Il codice Belfiore e un codice alfanumerico di 4 caratteri che identifica in modo univoco il luogo di nascita nel codice fiscale italiano. Per i comuni italiani e composto da una lettera seguita da 3 cifre (es. H501 per Roma), per i paesi esteri inizia sempre con la lettera Z seguita da 3 cifre (es. Z112 per la Germania)."
+  },
+  {
+    q: "Dove si trova il codice Belfiore nel codice fiscale?",
+    a: "Il codice Belfiore occupa le posizioni dal 12 al 15 del codice fiscale, cioe i 4 caratteri che precedono il carattere di controllo finale. Ad esempio, nel codice fiscale RSSMRA80A01H501U, il codice Belfiore e H501 (Roma)."
+  },
+  {
+    q: "Il codice Belfiore e uguale al codice catastale?",
+    a: "Si, il codice Belfiore, il codice catastale e il codice comune sono la stessa cosa. Sono tre denominazioni diverse per lo stesso codice alfanumerico di 4 caratteri che identifica un comune italiano o un paese estero nel codice fiscale."
+  },
+  {
+    q: "Come trovo il codice Belfiore del mio comune di nascita?",
+    a: "Puoi trovare il codice Belfiore del tuo comune nella nostra pagina delle tabelle di riferimento, oppure utilizzare direttamente il calcolatore di codice fiscale che seleziona automaticamente il codice corretto in base al comune scelto."
+  },
+  {
+    q: "Perche i codici Belfiore dei paesi esteri iniziano con Z?",
+    a: "La lettera Z e stata riservata dall'Agenzia delle Entrate per identificare i paesi esteri, distinguendoli dai comuni italiani che iniziano con lettere dalla A alla V. La Z e seguita da 3 cifre che identificano in modo univoco ciascun paese."
+  },
+];
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(({ q, a }) => ({
+    "@type": "Question",
+    "name": q,
+    "acceptedAnswer": { "@type": "Answer", "text": a },
+  })),
+};
+---
+
+<Layout
+  title="Codice Belfiore - Cos'e e Come si Usa nel Codice Fiscale"
+  description="Il codice Belfiore identifica il luogo di nascita nel codice fiscale italiano. Scopri cos'e, come funziona, la tabella dei codici per comuni e paesi esteri (codici Z)."
+  schemaJson={[schemaArticle, schemaFAQ]}
+  breadcrumbs={[{name:'Home',url:'/'},{name:'Codice Belfiore',url:'/codice-belfiore/'}]}
+>
+  <!-- Gradient page header -->
+  <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
+    <nav class="text-xs mb-4">
+      <a href="/" class="text-white/50 hover:text-white/70">Home</a>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
+      <span class="text-white/80">Codice Belfiore</span>
+    </nav>
+    <h1 class="text-3xl font-heading font-bold text-white mb-2">Codice Belfiore</h1>
+    <p class="text-white/60 text-sm">Il codice che identifica il luogo di nascita nel codice fiscale italiano</p>
+  </div>
+
+  <article>
+    <div class="space-y-8 text-sm text-slate-700 leading-relaxed">
+
+      <!-- Section 1: Cos'e il codice Belfiore -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Cos'e il Codice Belfiore</h2>
+        <p>
+          Il <strong>codice Belfiore</strong> (detto anche codice catastale o codice comune) e un codice alfanumerico di <strong>4 caratteri</strong> che identifica in modo univoco il luogo di nascita all'interno del codice fiscale italiano. Occupa le posizioni dalla 12a alla 15a del codice fiscale, cioe i quattro caratteri immediatamente prima della lettera di controllo finale.
+        </p>
+        <p class="mt-3">
+          Il nome "Belfiore" deriva dal sistema di codifica catastale dei comuni italiani, gestito dall'Agenzia del Territorio (oggi confluita nell'Agenzia delle Entrate). Ogni comune italiano e ogni paese estero ha un proprio codice Belfiore univoco e stabile nel tempo.
+        </p>
+        <p class="mt-3">
+          La struttura del codice varia a seconda che si tratti di un comune italiano o di un paese estero:
+        </p>
+        <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="bg-white border border-slate-200 rounded-xl p-4">
+            <p class="font-semibold text-slate-800 mb-1">Comuni italiani</p>
+            <p class="text-slate-600">Una lettera (A-V) + 3 cifre</p>
+            <p class="font-mono text-sm mt-2 text-purple-700 font-bold">H501 = Roma</p>
+            <p class="font-mono text-sm text-purple-700 font-bold">F205 = Milano</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4">
+            <p class="font-semibold text-slate-800 mb-1">Paesi esteri</p>
+            <p class="text-slate-600">Lettera Z + 3 cifre</p>
+            <p class="font-mono text-sm mt-2 text-purple-700 font-bold">Z112 = Germania</p>
+            <p class="font-mono text-sm text-purple-700 font-bold">Z110 = Francia</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Codice Belfiore per comuni italiani -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Codice Belfiore per Comuni Italiani</h2>
+        <p>
+          I codici Belfiore dei comuni italiani sono assegnati dall'Agenzia delle Entrate e iniziano con una lettera dalla <strong>A alla V</strong>, seguita da 3 cifre. L'Italia conta oltre 7.900 comuni, ciascuno con il proprio codice univoco.
+        </p>
+        <p class="mt-3">Ecco alcuni esempi dei codici Belfiore per le principali citta italiane:</p>
+        <div class="mt-3 bg-white border border-slate-200 rounded-xl overflow-hidden">
+          <table class="text-sm border-collapse w-full">
+            <thead>
+              <tr class="bg-slate-50">
+                <th class="border-b border-slate-200 px-4 py-2.5 text-left text-xs font-semibold text-slate-500">Comune</th>
+                <th class="border-b border-slate-200 px-4 py-2.5 text-center w-28 text-xs font-semibold text-slate-500">Codice Belfiore</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Roma', 'H501'],
+                ['Milano', 'F205'],
+                ['Napoli', 'F839'],
+                ['Torino', 'L219'],
+                ['Palermo', 'G273'],
+                ['Genova', 'D969'],
+                ['Bologna', 'A944'],
+                ['Firenze', 'D612'],
+                ['Bari', 'A662'],
+                ['Catania', 'C351'],
+              ].map(([comune, codice]) => (
+                <tr>
+                  <td class="border-b border-slate-100 px-4 py-1.5 font-medium">{comune}</td>
+                  <td class="border-b border-slate-100 px-4 py-1.5 text-center font-mono font-bold text-brand-navy-light">{codice}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3">
+          Per la tabella completa dei codici catastali dei comuni italiani, consulta la nostra <a href="/tabelle-codice-fiscale/" class="text-brand-blue-link hover:underline font-medium">pagina delle tabelle di riferimento</a>.
+        </p>
+      </section>
+
+      <!-- Section 3: Codice Belfiore per paesi esteri -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Codice Belfiore per Paesi Esteri</h2>
+        <p>
+          I codici Belfiore dei paesi esteri iniziano tutti con la lettera <strong>Z</strong> seguita da 3 cifre. Sono detti anche "codici Z" e vengono assegnati dall'Agenzia delle Entrate. Attualmente sono censiti <strong>216 paesi esteri</strong>, ciascuno con il proprio codice univoco.
+        </p>
+        <p class="mt-3">
+          Questi codici vengono utilizzati nel codice fiscale per le persone nate all'estero, siano esse cittadini stranieri residenti in Italia o cittadini italiani nati fuori dal territorio nazionale.
+        </p>
+
+        <h3 class="text-lg font-heading font-bold text-slate-800 mt-6 mb-3">Codici Belfiore dei Paesi Esteri Piu Cercati</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          {[
+            { slug: 'romania', nome: 'Romania', codice: 'Z129' },
+            { slug: 'germania', nome: 'Germania', codice: 'Z112' },
+            { slug: 'albania', nome: 'Albania', codice: 'Z100' },
+            { slug: 'francia', nome: 'Francia', codice: 'Z110' },
+            { slug: 'regno-unito', nome: 'Regno Unito', codice: 'Z114' },
+            { slug: 'svizzera', nome: 'Svizzera', codice: 'Z133' },
+            { slug: 'marocco', nome: 'Marocco', codice: 'Z330' },
+            { slug: 'argentina', nome: 'Argentina', codice: 'Z600' },
+            { slug: 'ucraina', nome: 'Ucraina', codice: 'Z138' },
+            { slug: 'brasile', nome: 'Brasile', codice: 'Z602' },
+            { slug: 'stati-uniti', nome: 'Stati Uniti', codice: 'Z404' },
+            { slug: 'ecuador', nome: 'Ecuador', codice: 'Z605' },
+          ].map(p => (
+            <a href={`/codice-fiscale-estero/${p.slug}/`}
+              class="block p-3 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors text-center">
+              <div class="font-semibold text-sm text-brand-blue-link">{p.nome}</div>
+              <div class="text-xs text-slate-500 font-mono mt-1">{p.codice}</div>
+            </a>
+          ))}
+        </div>
+        <p class="mt-4">
+          Per la tabella completa dei 216 codici catastali dei paesi esteri, visita la pagina <a href="/codice-fiscale-stranieri/" class="text-brand-blue-link hover:underline font-medium">Codice Fiscale Estero e Stranieri</a>.
+        </p>
+      </section>
+
+      <!-- Section 4: Dove si trova nel codice fiscale -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Dove si Trova nel Codice Fiscale</h2>
+        <p>
+          Il codice Belfiore occupa le <strong>posizioni 12-15</strong> del codice fiscale, cioe i 4 caratteri che si trovano subito dopo la codifica della data di nascita e prima del carattere di controllo finale.
+        </p>
+
+        <!-- Visual CF breakdown -->
+        <div class="mt-4 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 text-center">
+          <p class="text-xs text-slate-500 mb-3">Esempio: Mario Rossi, nato a Roma il 1 Gennaio 1980</p>
+          <div class="font-mono text-2xl font-bold tracking-widest mb-3">
+            <span class="text-slate-500">RSS</span><span class="text-slate-500">MRA</span><span
+              class="text-slate-500">80A01</span><span class="text-purple-600 bg-purple-100 px-1 rounded">H501</span><span
+              class="text-slate-500">U</span>
+          </div>
+          <div class="flex justify-center flex-wrap gap-4 text-xs font-semibold">
+            <span class="text-slate-500">Cognome (1-3)</span>
+            <span class="text-slate-500">Nome (4-6)</span>
+            <span class="text-slate-500">Data (7-11)</span>
+            <span class="text-purple-600">Belfiore (12-15)</span>
+            <span class="text-slate-500">Check (16)</span>
+          </div>
+        </div>
+
+        <div class="mt-5 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 text-center">
+          <p class="text-xs text-slate-500 mb-3">Esempio: Maria Schmidt, nata in Germania il 15 Marzo 1990</p>
+          <div class="font-mono text-2xl font-bold tracking-widest mb-3">
+            <span class="text-slate-500">SCH</span><span class="text-slate-500">MRA</span><span
+              class="text-slate-500">90C55</span><span class="text-purple-600 bg-purple-100 px-1 rounded">Z112</span><span
+              class="text-slate-500">T</span>
+          </div>
+          <div class="flex justify-center flex-wrap gap-4 text-xs font-semibold">
+            <span class="text-slate-500">Cognome (1-3)</span>
+            <span class="text-slate-500">Nome (4-6)</span>
+            <span class="text-slate-500">Data (7-11)</span>
+            <span class="text-purple-600">Belfiore (12-15)</span>
+            <span class="text-slate-500">Check (16)</span>
+          </div>
+        </div>
+
+        <p class="mt-4">
+          Vuoi capire nel dettaglio come viene calcolato ogni singolo carattere del codice fiscale? Consulta la nostra <a href="/come-si-calcola-codice-fiscale/" class="text-brand-blue-link hover:underline font-medium">guida completa al calcolo del codice fiscale</a>.
+        </p>
+      </section>
+
+      <!-- Section 5: Sinonimi -->
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Codice Belfiore, Codice Catastale e Codice Comune: Sono la Stessa Cosa?</h2>
+        <p>
+          Si. I termini <strong>codice Belfiore</strong>, <strong>codice catastale</strong> e <strong>codice comune</strong> sono sinonimi e vengono usati in modo intercambiabile per indicare lo stesso codice alfanumerico di 4 caratteri.
+        </p>
+        <div class="mt-4 bg-slate-50 rounded-xl p-5">
+          <p class="font-semibold text-slate-800 mb-2">Le diverse denominazioni:</p>
+          <ul class="space-y-2 text-slate-700">
+            <li class="flex gap-3">
+              <span class="font-mono font-bold text-purple-700 shrink-0 w-32">Codice Belfiore</span>
+              <span>Nome storico, dal sistema di codifica dei comuni. Usato frequentemente nella documentazione tecnica e nel contesto del codice fiscale.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="font-mono font-bold text-purple-700 shrink-0 w-32">Codice catastale</span>
+              <span>Nome tecnico ufficiale utilizzato dall'Agenzia delle Entrate e dall'Agenzia del Territorio (catasto).</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="font-mono font-bold text-purple-700 shrink-0 w-32">Codice comune</span>
+              <span>Nome informale usato nel linguaggio comune per indicare lo stesso codice quando si riferisce a un comune italiano.</span>
+            </li>
+          </ul>
+        </div>
+        <p class="mt-3">
+          Indipendentemente dalla denominazione utilizzata, il codice e sempre lo stesso: 4 caratteri alfanumerici che identificano univocamente un comune italiano o un paese estero nel sistema dell'Agenzia delle Entrate.
+        </p>
+      </section>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-10 p-5 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl text-center">
+      <p class="font-semibold text-green-800 mb-2">Pronto a calcolare il tuo codice fiscale?</p>
+      <a href="/"
+        class="inline-block bg-gradient-to-b from-brand-green to-brand-green-dark text-white font-heading font-semibold px-6 py-2.5 rounded-xl shadow-sm transition-colors text-sm">
+        Vai al Calcolatore &rarr;
+      </a>
+    </div>
+
+    <div class="my-10 min-h-[90px]"></div>
+
+    <!-- FAQ -->
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+        <div class="divide-y divide-slate-100">
+          {faqItems.map(({ q, a }) => (
+            <details class="group">
+              <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+                {q}
+                <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+              </summary>
+              <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Green CTA bottom -->
+    <div class="mt-8 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 text-sm text-green-800 text-center">
+      <strong>Consulta la tabella completa dei codici</strong>: comuni italiani e paesi esteri.
+      <a href="/codice-fiscale-stranieri/" class="ml-1 font-semibold hover:underline">Vedi tutti i codici paesi esteri &rarr;</a>
+    </div>
+  </article>
+</Layout>

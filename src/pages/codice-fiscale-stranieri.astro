@@ -78,7 +78,7 @@ const schemaFAQ = {
   <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
     <nav class="text-xs mb-4">
       <a href="/" class="text-white/50 hover:text-white/70">Home</a>
-      <span class="mx-1.5 text-white/30">&rsaquo;</span>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
       <span class="text-white/80">Nati all'Estero</span>
     </nav>
     <h1 class="text-3xl font-heading font-bold text-white mb-2">Calcolo Codice Fiscale Estero e Stranieri</h1>
@@ -141,7 +141,7 @@ const schemaFAQ = {
           <a href={`/codice-fiscale-estero/${p.slug}/`}
             class="block p-3 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors text-center">
             <div class="font-semibold text-sm text-brand-blue-link">{p.nome}</div>
-            <div class="text-xs text-slate-400 font-mono mt-1">{p.codice}</div>
+            <div class="text-xs text-slate-500 font-mono mt-1">{p.codice}</div>
           </a>
         ))}
       </div>
@@ -166,7 +166,7 @@ const schemaFAQ = {
         return (
           <div data-continente={cid}>
             <h3 id={cid} class="text-lg font-heading font-bold text-slate-800 mb-3 scroll-mt-20">
-              {c} <span class="text-sm font-normal text-slate-400 ml-2">({countries.length} paesi)</span>
+              {c} <span class="text-sm font-normal text-slate-500 ml-2">({countries.length} paesi)</span>
             </h3>
             <div class="bg-white rounded-xl border border-slate-200 overflow-hidden mb-8">
               <div class="overflow-x-auto">
@@ -263,7 +263,7 @@ const schemaFAQ = {
           <details class="group">
             <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
               {q}
-              <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+              <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
             </summary>
             <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
           </details>

@@ -55,7 +55,7 @@ export default function InversoForm() {
           placeholder="es. RSSMRA80A01H501U"
           className="w-full border border-slate-200 rounded-xl px-4 py-3 font-mono text-lg tracking-wide uppercase bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-brand-blue-link focus:bg-white transition-colors"
         />
-        <p className="text-xs text-slate-400 mt-1 text-right">{cf.length}/16</p>
+        <p className="text-xs text-slate-500 mt-1 text-right">{cf.length}/16</p>
         {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
       </div>
 
@@ -71,19 +71,19 @@ export default function InversoForm() {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="bg-slate-50 rounded-xl p-5">
-              <p className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1">Sesso</p>
+              <p className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Sesso</p>
               <p className="text-base font-semibold text-slate-900">{dati.sesso === 'M' ? 'Maschile' : 'Femminile'}</p>
             </div>
             <div className="bg-slate-50 rounded-xl p-5">
-              <p className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1">Data di nascita</p>
+              <p className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Data di nascita</p>
               <p className="text-base font-semibold text-slate-900">{dati.giorno} {MESI[dati.mese]} {dati.annoCompleto}</p>
             </div>
             <div className="bg-slate-50 rounded-xl p-5">
-              <p className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1">Luogo di nascita</p>
+              <p className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Luogo di nascita</p>
               <p className="text-base font-semibold text-slate-900">{nomeComune || '...'}</p>
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-3">
+          <p className="text-xs text-slate-500 mt-3">
             * L'anno potrebbe essere {dati.annoCompleto} o {dati.annoCompleto - 100} in caso di omonimia.
             Non è possibile risalire al nome o cognome esatti.
           </p>

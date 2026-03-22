@@ -29,7 +29,7 @@ export default function VerificaForm() {
           placeholder="es. RSSMRA80A01H501U"
           className="w-full border border-slate-200 rounded-xl px-4 py-3 font-mono text-lg tracking-wide uppercase text-center bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-brand-blue-link focus:bg-white transition-colors"
         />
-        <div className="flex justify-between text-xs text-slate-400 mt-1">
+        <div className="flex justify-between text-xs text-slate-500 mt-1">
           <span>La verifica è automatica al completamento dei 16 caratteri</span>
           <span>{cf.length}/16</span>
         </div>
