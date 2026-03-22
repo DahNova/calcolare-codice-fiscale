@@ -62,8 +62,13 @@ const schemaFAQ = {
   "mainEntity": [
     {
       "@type": "Question",
+      "name": `${c.codiceCatastale} codice fiscale: a quale stato corrisponde?`,
+      "acceptedAnswer": { "@type": "Answer", "text": `${c.codiceCatastale} nel codice fiscale corrisponde a ${c.nomeCompleto}. È il codice catastale assegnato dall'Agenzia delle Entrate per identificare le persone nate ${c.preposizione} ${c.nomeBreve}.` }
+    },
+    {
+      "@type": "Question",
       "name": `Qual è il codice catastale ${diPaese} nel codice fiscale?`,
-      "acceptedAnswer": { "@type": "Answer", "text": `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Viene usato nel codice fiscale italiano al posto del codice di un comune per le persone nate all'estero.` }
+      "acceptedAnswer": { "@type": "Answer", "text": `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Viene usato nel codice fiscale italiano al posto del codice di un comune per le persone nate ${c.preposizione} ${c.nomeBreve}.` }
     },
     {
       "@type": "Question",
@@ -72,8 +77,8 @@ const schemaFAQ = {
     },
     {
       "@type": "Question",
-      "name": `${c.codiceCatastale} a quale stato corrisponde nel codice fiscale?`,
-      "acceptedAnswer": { "@type": "Answer", "text": `Il codice ${c.codiceCatastale} corrisponde a ${c.nomeCompleto}. È un codice catastale assegnato dall'Agenzia delle Entrate per identificare le persone nate ${c.preposizione} ${c.nomeBreve} nel codice fiscale italiano.` }
+      "name": `${c.codiceCatastale} è il codice comune o il codice catastale ${diPaese}?`,
+      "acceptedAnswer": { "@type": "Answer", "text": `${c.codiceCatastale} è sia il codice catastale sia il codice comune ${diPaese}. "Codice catastale", "codice comune" e "codice Belfiore" sono tre denominazioni diverse per lo stesso codice identificativo usato nel codice fiscale per indicare il luogo di nascita. Per chi è nato ${c.preposizione} ${c.nomeBreve}, il codice è ${c.codiceCatastale}.` }
     },
     ...(c.faqExtra ? [{
       "@type": "Question",
@@ -86,8 +91,8 @@ const schemaFAQ = {
 const schemaArticle = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": `Codice Fiscale ${c.nomeBreve} (${c.codiceCatastale}) - Calcolo e Guida`,
-  "description": `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Calcola il codice fiscale per chi è nato ${c.preposizione} ${c.nomeBreve}.`,
+  "headline": `${c.codiceCatastale} Codice Fiscale ${c.nomeBreve} - Calcolo, Esempio e Guida`,
+  "description": `${c.codiceCatastale} codice fiscale: il codice catastale ${diPaese} per chi è nato ${c.preposizione} ${c.nomeBreve}. Esempio pratico di calcolo, procedura di richiesta e FAQ.`,
   "url": `https://www.calcolare-codice-fiscale.it/codice-fiscale-estero/${c.slug}/`,
   "inLanguage": "it",
   "datePublished": "2026-03-20",
@@ -96,8 +101,8 @@ const schemaArticle = {
   "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
 };
 
-const title = `Codice Fiscale ${c.nomeBreve} (${c.codiceCatastale}) - Calcolo e Guida`;
-const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Calcola il codice fiscale per chi è nato ${c.preposizione} ${c.nomeBreve}: esempio pratico, guida e FAQ.`;
+const title = `${c.codiceCatastale} Codice Fiscale ${c.nomeBreve} - Calcolo, Esempio e Guida`;
+const description = `${c.codiceCatastale} codice fiscale: il codice catastale ${diPaese} per chi è nato ${c.preposizione} ${c.nomeBreve}. Esempio pratico di calcolo, procedura di richiesta e FAQ.`;
 ---
 
 <Layout title={title} description={description} schemaJson={[schemaFAQ, schemaArticle]}
@@ -112,9 +117,9 @@ const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Cal
       <span class="mx-1.5 text-white/30">&rsaquo;</span>
       <span class="text-white/80">{c.nomeBreve}</span>
     </nav>
-    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-1">Codice Fiscale {c.nomeBreve}</h1>
-    <p class="text-white/60 text-sm mb-1">Codice catastale <span class="font-mono font-bold text-white/90">{c.codiceCatastale}</span></p>
-    <p class="text-white/50 text-sm">Come calcolare il CF per chi è nato {c.preposizione} {c.nomeBreve}</p>
+    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-1">{c.codiceCatastale} Codice Fiscale - {c.nomeBreve}</h1>
+    <p class="text-white/60 text-sm mb-1">Il codice catastale (Belfiore) <span class="font-mono font-bold text-white/90">{c.codiceCatastale}</span> identifica {c.nomeCompleto} nel codice fiscale</p>
+    <p class="text-white/50 text-sm">Calcolo, esempio pratico e guida per chi è nato {c.preposizione} {c.nomeBreve}</p>
     <a href="/" class="mt-5 inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-5 py-2.5 text-sm text-white hover:bg-white/15 transition-colors">
       Vai al calcolatore
       <span class="text-white/60">&rarr;</span>
@@ -125,16 +130,20 @@ const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Cal
 
     <!-- Section: Il Codice Catastale -->
     <section>
-      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Il Codice Catastale {c.codiceCatastale}</h2>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">{c.codiceCatastale}: Codice Fiscale {c.nomeBreve}</h2>
       <p>
-        Nel codice fiscale italiano, le persone nate {c.preposizione} {c.nomeBreve} utilizzano il codice catastale
-        <strong>{c.codiceCatastale}</strong> al posto del codice di un comune italiano. Questo codice occupa le
-        posizioni 12-15 del codice fiscale (i 4 caratteri che identificano il luogo di nascita).
+        <strong>{c.codiceCatastale}</strong> è il codice catastale {diPaese} nel codice fiscale italiano.
+        Chi è nato {c.preposizione} {c.nomeBreve} utilizza il codice {c.codiceCatastale} al posto del codice
+        di un comune italiano. Questo codice occupa le posizioni 12-15 del codice fiscale
+        (i 4 caratteri che identificano il luogo di nascita).
       </p>
       <p class="mt-3">
         I codici catastali per gli stati esteri iniziano tutti con la lettera <strong>Z</strong> e sono assegnati
         dall'Agenzia delle Entrate. Il codice {c.codiceCatastale} è univocamente associato a {c.nomeCompleto}
         e rimane stabile nel tempo.
+      </p>
+      <p class="mt-3">
+        Il codice {c.codiceCatastale} è indicato anche come <strong>codice comune</strong> o <strong>codice Belfiore</strong> {diPaese}: si tratta di denominazioni diverse per lo stesso identificativo assegnato dall'Agenzia delle Entrate a ogni stato estero.
       </p>
     </section>
 
@@ -191,9 +200,10 @@ const description = `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Cal
     <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
       <div class="divide-y divide-slate-100">
         {[
+          { q: `${c.codiceCatastale} codice fiscale: a quale stato corrisponde?`, a: `${c.codiceCatastale} nel codice fiscale corrisponde a ${c.nomeCompleto}. È il codice catastale assegnato dall'Agenzia delle Entrate per identificare le persone nate ${c.preposizione} ${c.nomeBreve}.` },
           { q: `Qual è il codice catastale ${diPaese}?`, a: `Il codice catastale ${diPaese} è ${c.codiceCatastale}. Si usa nel codice fiscale per identificare le persone nate ${c.preposizione} ${c.nomeBreve}.` },
           { q: `Come si calcola il CF per chi è nato ${c.preposizione} ${c.nomeBreve}?`, a: `Il calcolo è identico a quello per i nati in Italia. L'unica differenza è il codice catastale: si usa ${c.codiceCatastale} al posto del codice di un comune italiano.` },
-          { q: `${c.codiceCatastale} a quale stato corrisponde?`, a: `Il codice ${c.codiceCatastale} corrisponde a ${c.nomeCompleto}. È assegnato dall'Agenzia delle Entrate per il codice fiscale.` },
+          { q: `${c.codiceCatastale} è il codice comune o il codice catastale ${diPaese}?`, a: `${c.codiceCatastale} è sia il codice catastale sia il codice comune ${diPaese}. "Codice catastale", "codice comune" e "codice Belfiore" sono tre denominazioni diverse per lo stesso codice identificativo usato nel codice fiscale per indicare il luogo di nascita. Per chi è nato ${c.preposizione} ${c.nomeBreve}, il codice è ${c.codiceCatastale}.` },
           ...(c.faqExtra ? [c.faqExtra] : []),
         ].map(({ q, a }) => (
           <details class="group">
