@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CercaComuneDaCodice from '../components/CercaComuneDaCodice';
+import { paesiEsteri } from '../data/paesiEsteri';
+
+const paesiForClient = paesiEsteri.map(p => ({
+  nome: p.nome,
+  codiceCatastale: p.codiceCatastale,
+  continente: p.continente,
+}));
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cerca Comune da Codice Catastale - Lookup Codice Belfiore",
+  "description": "Inserisci un codice catastale (es. H501, Z112) e scopri a quale comune italiano o stato estero corrisponde. Ricerca istantanea e gratuita.",
+  "url": "https://www.calcolare-codice-fiscale.it/cerca-comune-da-codice/",
+  "inLanguage": "it",
+  "datePublished": "2026-03-29",
+  "dateModified": "2026-03-29",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+};
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Come faccio a sapere a quale comune corrisponde un codice catastale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Inserisci il codice catastale di 4 caratteri nel nostro strumento di ricerca e ti verrà mostrato immediatamente il comune italiano o lo stato estero corrispondente. Ad esempio, H501 corrisponde a Roma, F205 a Milano, Z112 alla Germania." }
+    },
+    {
+      "@type": "Question",
+      "name": "Dove trovo il codice catastale nel codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il codice catastale occupa le posizioni 12-15 del codice fiscale, cioè i 4 caratteri che precedono il carattere di controllo finale. Se il codice inizia con una lettera dalla A alla V, si tratta di un comune italiano; se inizia con Z, si tratta di uno stato estero." }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual è la differenza tra codice catastale, codice Belfiore e codice comune?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Nessuna: sono tre denominazioni diverse per lo stesso codice alfanumerico di 4 caratteri che identifica il luogo di nascita nel codice fiscale italiano. Il termine 'Belfiore' deriva dal nome del sistema informatico dell'Agenzia delle Entrate che gestisce questi codici." }
+    },
+  ],
+};
+---
+
+<Layout
+  title="Cerca Comune da Codice Catastale - Lookup Codice Belfiore"
+  description="Inserisci un codice catastale (es. H501, Z112) e scopri a quale comune italiano o stato estero corrisponde. Ricerca istantanea e gratuita."
+  schemaJson={[schemaArticle, schemaFAQ]}
+  breadcrumbs={[{name:'Home',url:'/'},{name:'Cerca Comune da Codice',url:'/cerca-comune-da-codice/'}]}
+>
+  <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
+    <nav class="text-xs mb-4">
+      <a href="/" class="text-white/50 hover:text-white/70">Home</a>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
+      <span class="text-white/80">Cerca Comune da Codice</span>
+    </nav>
+    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-2">Cerca Comune da Codice Catastale</h1>
+    <p class="text-white/60 text-sm">Inserisci un codice catastale per scoprire il comune italiano o lo stato estero corrispondente.</p>
+  </div>
+
+  <CercaComuneDaCodice client:load paesiEsteri={paesiForClient} />
+
+  <div class="my-10 min-h-[90px]"></div>
+
+  <section class="text-sm text-slate-600 space-y-4">
+    <h2 class="text-xl font-heading font-bold text-slate-800">Cos'è il codice catastale nel codice fiscale?</h2>
+    <p>
+      Il <strong>codice catastale</strong> (o codice Belfiore, o codice comune) è un codice alfanumerico di 4 caratteri
+      che identifica il luogo di nascita all'interno del codice fiscale italiano. Occupa le posizioni 12-15 del codice fiscale,
+      subito prima del carattere di controllo finale.
+    </p>
+    <p>
+      I codici catastali dei <strong>comuni italiani</strong> iniziano con una lettera dalla A alla V, seguita da 3 cifre
+      (ad esempio H501 per Roma, F205 per Milano). I codici degli <strong>stati esteri</strong> iniziano sempre con la
+      lettera Z seguita da 3 cifre (ad esempio Z112 per la Germania, Z129 per la Romania).
+    </p>
+
+    <h3 class="text-lg font-heading font-semibold text-slate-800 pt-2">Esempi di codici catastali comuni</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      {[
+        { codice: 'H501', nome: 'Roma' },
+        { codice: 'F205', nome: 'Milano' },
+        { codice: 'L219', nome: 'Torino' },
+        { codice: 'F839', nome: 'Napoli' },
+        { codice: 'Z129', nome: 'Romania' },
+        { codice: 'Z112', nome: 'Germania' },
+      ].map(({ codice, nome }) => (
+        <div class="bg-slate-50 rounded-lg p-3 text-center">
+          <div class="font-mono font-bold text-brand-blue-link">{codice}</div>
+          <div class="text-xs text-slate-500 mt-1">{nome}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
+    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+      <div class="divide-y divide-slate-100">
+        {[
+          { q: "Come faccio a sapere a quale comune corrisponde un codice catastale?", a: "Inserisci il codice catastale di 4 caratteri nel nostro strumento di ricerca qui sopra e ti verrà mostrato immediatamente il comune italiano o lo stato estero corrispondente." },
+          { q: "Dove trovo il codice catastale nel codice fiscale?", a: "Il codice catastale occupa le posizioni 12-15 del codice fiscale, cioè i 4 caratteri che precedono il carattere di controllo finale. Se il codice inizia con una lettera dalla A alla V, si tratta di un comune italiano; se inizia con Z, si tratta di uno stato estero." },
+          { q: "Codice catastale, codice Belfiore e codice comune sono la stessa cosa?", a: "Sì: sono tre denominazioni diverse per lo stesso codice alfanumerico di 4 caratteri che identifica il luogo di nascita nel codice fiscale italiano." },
+        ].map(({ q, a }) => (
+          <details class="group">
+            <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+              {q}
+              <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+            </summary>
+            <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="mt-10 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 text-center">
+    <p class="font-semibold text-green-800 mb-2">Calcola il tuo codice fiscale</p>
+    <a href="/" class="inline-block bg-brand-green hover:bg-brand-green-hover text-white px-6 py-2.5 rounded-lg transition-colors font-medium text-sm">
+      Vai al Calcolatore &rarr;
+    </a>
+  </div>
+</Layout>

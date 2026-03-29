@@ -1,11 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import VerificaForm from '../components/VerificaForm';
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Verifica Codice Fiscale - Controlla se è Valido",
+  "description": "Verifica se un codice fiscale italiano è valido. Controllo del carattere di controllo, della struttura e del formato in tempo reale, gratuito e immediato.",
+  "url": "https://www.calcolare-codice-fiscale.it/verifica-codice-fiscale/",
+  "inLanguage": "it",
+  "datePublished": "2026-01-01",
+  "dateModified": "2026-03-29",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+};
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Come si verifica un codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Per verificare un codice fiscale si controlla che abbia 16 caratteri, che rispetti il formato previsto (lettere e numeri nelle posizioni corrette) e che il carattere di controllo finale sia coerente con i primi 15 caratteri, secondo l'algoritmo definito dal D.M. 12/03/1974." }
+    },
+    {
+      "@type": "Question",
+      "name": "La verifica online del codice fiscale è ufficiale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. La verifica online controlla la correttezza formale del codice fiscale (struttura e carattere di controllo), ma non può confermare che il codice sia effettivamente assegnato a una persona reale. Per la verifica ufficiale è necessario utilizzare il servizio dell'Agenzia delle Entrate." }
+    },
+    {
+      "@type": "Question",
+      "name": "Cosa significa se il codice fiscale non supera la verifica?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Se il codice fiscale non supera la verifica, significa che contiene un errore: potrebbe essere stato trascritto in modo errato, potrebbe avere un carattere di controllo sbagliato, oppure potrebbe non rispettare il formato di 16 caratteri alfanumerici previsto dalla normativa." }
+    },
+    {
+      "@type": "Question",
+      "name": "Il codice fiscale può cambiare nel tempo?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il codice fiscale ordinario non cambia, a meno che non venga riscontrata un'omocodia (due persone con lo stesso codice fiscale). In quel caso, l'Agenzia delle Entrate assegna un codice fiscale modificato, sostituendo una o più cifre con lettere secondo una tabella di conversione predefinita." }
+    },
+  ],
+};
 ---
 
 <Layout
   title="Verifica Codice Fiscale - Controlla se è Valido"
-  description="Verifica se un codice fiscale italiano è valido. Controllo del carattere di controllo in tempo reale, gratuito e immediato."
+  description="Verifica se un codice fiscale italiano è valido. Controllo del carattere di controllo, della struttura e del formato in tempo reale, gratuito e immediato."
+  schemaJson={[schemaArticle, schemaFAQ]}
   breadcrumbs={[{name:'Home',url:'/'},{name:'Verifica Codice Fiscale',url:'/verifica-codice-fiscale/'}]}
 >
   <!-- Gradient page header -->
@@ -23,16 +64,97 @@ import VerificaForm from '../components/VerificaForm';
 
   <div class="my-10 min-h-[90px]"></div>
 
-  <section class="mt-8 text-sm text-slate-600 space-y-3">
-    <h2 class="text-xl font-heading font-bold text-slate-800">Come funziona la verifica?</h2>
+  <section class="text-sm text-slate-600 space-y-4">
+    <h2 class="text-xl font-heading font-bold text-slate-800">Come funziona la verifica del codice fiscale?</h2>
     <p>
       La verifica controlla la correttezza del <strong>carattere di controllo</strong>
       (il 16° carattere del CF), calcolato con un algoritmo definito dal D.M. 12/03/1974.
+      Il nostro strumento esegue tre controlli:
+    </p>
+    <div class="space-y-3 mt-3">
+      <div class="flex gap-3 bg-slate-50 rounded-lg p-4">
+        <div class="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0"></div>
+        <div>
+          <p class="font-semibold text-slate-800">Controllo della lunghezza</p>
+          <p class="text-slate-600 mt-1">Il codice fiscale deve essere composto esattamente da 16 caratteri alfanumerici.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 bg-slate-50 rounded-lg p-4">
+        <div class="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0"></div>
+        <div>
+          <p class="font-semibold text-slate-800">Controllo del formato</p>
+          <p class="text-slate-600 mt-1">Lettere e numeri devono trovarsi nelle posizioni corrette: 6 lettere iniziali, 2 cifre per l'anno, 1 lettera per il mese, 2 cifre per il giorno, 1 lettera + 3 cifre per il luogo, 1 lettera finale di controllo.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 bg-slate-50 rounded-lg p-4">
+        <div class="w-2 h-2 rounded-full bg-brand-green mt-1.5 shrink-0"></div>
+        <div>
+          <p class="font-semibold text-slate-800">Controllo del carattere di controllo</p>
+          <p class="text-slate-600 mt-1">L'ultimo carattere viene ricalcolato a partire dai primi 15 e confrontato con quello inserito. Se non coincide, il codice contiene un errore.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-8 text-sm text-slate-600 space-y-3">
+    <h2 class="text-xl font-heading font-bold text-slate-800">Verifica formale vs verifica ufficiale</h2>
+    <p>
+      Il nostro strumento esegue una <strong>verifica formale</strong>: controlla che la struttura del codice
+      sia corretta e che il carattere di controllo sia valido. Questo garantisce che il codice non contenga
+      errori di trascrizione.
     </p>
     <p>
-      Un CF formalmente valido non garantisce che sia effettivamente assegnato a una
-      persona reale dall'Agenzia delle Entrate. Per una verifica ufficiale, usa il
-      servizio dell'Agenzia delle Entrate.
+      Per sapere se un codice fiscale è <strong>effettivamente assegnato</strong> a una persona, è necessario
+      utilizzare il servizio ufficiale dell'Agenzia delle Entrate, che confronta il codice con l'anagrafe tributaria.
     </p>
   </section>
+
+  <!-- FAQ -->
+  <section class="mt-8">
+    <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
+    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+      <div class="divide-y divide-slate-100">
+        {[
+          { q: "Come si verifica un codice fiscale?", a: "Si controlla che abbia 16 caratteri, che rispetti il formato previsto e che il carattere di controllo finale sia coerente con i primi 15 caratteri." },
+          { q: "La verifica online è ufficiale?", a: "No. Controlla la correttezza formale, ma non conferma che il codice sia effettivamente assegnato. Per questo serve il servizio dell'Agenzia delle Entrate." },
+          { q: "Cosa significa se il CF non supera la verifica?", a: "Significa che contiene un errore di trascrizione, un carattere di controllo sbagliato oppure non rispetta il formato di 16 caratteri." },
+          { q: "Il codice fiscale può cambiare?", a: "Solo in caso di omocodia, quando l'Agenzia delle Entrate sostituisce alcune cifre con lettere per rendere il codice univoco." },
+        ].map(({ q, a }) => (
+          <details class="group">
+            <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+              {q}
+              <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+            </summary>
+            <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="mt-8">
+    <h2 class="text-lg font-heading font-bold text-slate-800 mb-3">Strumenti correlati</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <a href="/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors">
+        <div class="font-semibold text-sm text-brand-blue-link">Calcola Codice Fiscale</div>
+        <div class="text-xs text-slate-500 mt-1">Genera il CF da nome, cognome e data</div>
+      </a>
+      <a href="/codice-fiscale-inverso/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors">
+        <div class="font-semibold text-sm text-brand-blue-link">Codice Fiscale Inverso</div>
+        <div class="text-xs text-slate-500 mt-1">Estrai i dati dal codice fiscale</div>
+      </a>
+      <a href="/come-leggere-codice-fiscale/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors">
+        <div class="font-semibold text-sm text-brand-blue-link">Come Leggere il CF</div>
+        <div class="text-xs text-slate-500 mt-1">Decifrare lettere e numeri</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="mt-10 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 text-center">
+    <p class="font-semibold text-green-800 mb-2">Calcola il tuo codice fiscale</p>
+    <a href="/" class="inline-block bg-brand-green hover:bg-brand-green-hover text-white px-6 py-2.5 rounded-lg transition-colors font-medium text-sm">
+      Vai al Calcolatore &rarr;
+    </a>
+  </div>
 </Layout>

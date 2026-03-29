@@ -1,0 +1,247 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Come Leggere il Codice Fiscale - Decifrare Lettere e Numeri",
+  "description": "Guida completa per leggere e decifrare un codice fiscale italiano: come interpretare cognome, nome, data di nascita, luogo e carattere di controllo.",
+  "url": "https://www.calcolare-codice-fiscale.it/come-leggere-codice-fiscale/",
+  "inLanguage": "it",
+  "datePublished": "2026-03-29",
+  "dateModified": "2026-03-29",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+};
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Come si legge il codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il codice fiscale si legge dividendolo in 5 parti: le prime 3 lettere indicano il cognome, le successive 3 il nome, i 2 caratteri dopo la data di nascita e il sesso, i 4 caratteri il luogo di nascita (codice Belfiore), e l'ultimo carattere è il carattere di controllo." }
+    },
+    {
+      "@type": "Question",
+      "name": "Cosa significa la lettera del mese nel codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ogni mese dell'anno corrisponde a una lettera: A=Gennaio, B=Febbraio, C=Marzo, D=Aprile, E=Maggio, H=Giugno, L=Luglio, M=Agosto, P=Settembre, R=Ottobre, S=Novembre, T=Dicembre. La lettera occupa la nona posizione del codice fiscale." }
+    },
+    {
+      "@type": "Question",
+      "name": "Come si distingue un codice fiscale maschile da uno femminile?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il giorno di nascita (posizioni 10-11) permette di distinguere il sesso: per i maschi è il giorno esatto (01-31), per le femmine si aggiunge 40 al giorno (41-71). Ad esempio, il giorno 05 indica un maschio nato il 5 del mese, mentre 45 indica una femmina nata il 5." }
+    },
+    {
+      "@type": "Question",
+      "name": "Cosa significa se il codice fiscale inizia con Z?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Se il codice catastale (posizioni 12-15) inizia con Z, significa che la persona è nata all'estero. La Z seguita da 3 cifre identifica lo stato estero di nascita (ad esempio Z129 = Romania, Z112 = Germania)." }
+    },
+  ],
+};
+
+const mesiTabella = [
+  { mese: 'Gennaio', lettera: 'A' },
+  { mese: 'Febbraio', lettera: 'B' },
+  { mese: 'Marzo', lettera: 'C' },
+  { mese: 'Aprile', lettera: 'D' },
+  { mese: 'Maggio', lettera: 'E' },
+  { mese: 'Giugno', lettera: 'H' },
+  { mese: 'Luglio', lettera: 'L' },
+  { mese: 'Agosto', lettera: 'M' },
+  { mese: 'Settembre', lettera: 'P' },
+  { mese: 'Ottobre', lettera: 'R' },
+  { mese: 'Novembre', lettera: 'S' },
+  { mese: 'Dicembre', lettera: 'T' },
+];
+---
+
+<Layout
+  title="Come Leggere il Codice Fiscale - Decifrare Lettere e Numeri"
+  description="Guida completa per leggere e decifrare un codice fiscale italiano: come interpretare cognome, nome, data di nascita, luogo e carattere di controllo."
+  schemaJson={[schemaArticle, schemaFAQ]}
+  breadcrumbs={[{name:'Home',url:'/'},{name:'Come Leggere il Codice Fiscale',url:'/come-leggere-codice-fiscale/'}]}
+>
+  <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
+    <nav class="text-xs mb-4">
+      <a href="/" class="text-white/50 hover:text-white/70">Home</a>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
+      <span class="text-white/80">Come Leggere il Codice Fiscale</span>
+    </nav>
+    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-2">Come Leggere il Codice Fiscale</h1>
+    <p class="text-white/60 text-sm">Impara a decifrare ogni lettera e numero del codice fiscale italiano.</p>
+  </div>
+
+  <div class="space-y-8 text-sm text-slate-600 leading-relaxed">
+
+    <!-- Esempio visivo -->
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Struttura del codice fiscale</h2>
+      <p class="mb-4">Il codice fiscale italiano è composto da <strong>16 caratteri alfanumerici</strong>, suddivisi in 5 sezioni:</p>
+
+      <div class="bg-slate-50 rounded-xl p-5 font-mono text-lg sm:text-xl tracking-widest text-center mb-4 overflow-x-auto">
+        <span class="text-purple-600 font-bold">RSS</span><span class="text-blue-600 font-bold">MRA</span><span class="text-green-600 font-bold">85A</span><span class="text-amber-600 font-bold">01</span><span class="text-red-600 font-bold">H501</span><span class="text-slate-500 font-bold">J</span>
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex items-start gap-3 bg-purple-50 rounded-lg p-3">
+          <span class="font-mono font-bold text-purple-600 shrink-0 w-12">RSS</span>
+          <div><strong class="text-slate-800">Cognome</strong> — prime 3 consonanti del cognome (Rossi → R, S, S)</div>
+        </div>
+        <div class="flex items-start gap-3 bg-blue-50 rounded-lg p-3">
+          <span class="font-mono font-bold text-blue-600 shrink-0 w-12">MRA</span>
+          <div><strong class="text-slate-800">Nome</strong> — 1ª, 3ª e 4ª consonante del nome (Mario → M, R... + vocale A)</div>
+        </div>
+        <div class="flex items-start gap-3 bg-green-50 rounded-lg p-3">
+          <span class="font-mono font-bold text-green-600 shrink-0 w-12">85A</span>
+          <div><strong class="text-slate-800">Anno e Mese</strong> — ultime 2 cifre dell'anno (1985) + lettera del mese (A = Gennaio)</div>
+        </div>
+        <div class="flex items-start gap-3 bg-amber-50 rounded-lg p-3">
+          <span class="font-mono font-bold text-amber-600 shrink-0 w-12">01</span>
+          <div><strong class="text-slate-800">Giorno e Sesso</strong> — giorno di nascita (01-31 maschi, 41-71 femmine)</div>
+        </div>
+        <div class="flex items-start gap-3 bg-red-50 rounded-lg p-3">
+          <span class="font-mono font-bold text-red-600 shrink-0 w-12">H501</span>
+          <div><strong class="text-slate-800">Luogo di nascita</strong> — codice Belfiore del comune (H501 = Roma) o stato estero (Z...)</div>
+        </div>
+        <div class="flex items-start gap-3 bg-slate-100 rounded-lg p-3">
+          <span class="font-mono font-bold text-slate-500 shrink-0 w-12">J</span>
+          <div><strong class="text-slate-800">Carattere di controllo</strong> — calcolato algoritmicamente per verificare la correttezza</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cognome -->
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Posizioni 1-3: il cognome</h2>
+      <p>Si prendono le <strong>consonanti del cognome</strong> nell'ordine in cui compaiono. Se le consonanti sono meno di 3, si completano con le vocali. Se il cognome ha meno di 3 caratteri totali, si aggiunge la lettera X.</p>
+      <div class="mt-3 bg-slate-50 rounded-lg p-4 space-y-1">
+        <p><strong>Rossi</strong> → R, S, S → <span class="font-mono font-bold">RSS</span></p>
+        <p><strong>Bianchi</strong> → B, N, C → <span class="font-mono font-bold">BNC</span></p>
+        <p><strong>Aiello</strong> → L, L + A → <span class="font-mono font-bold">LLA</span></p>
+        <p><strong>Hu</strong> → H + U + X → <span class="font-mono font-bold">HUX</span></p>
+      </div>
+    </section>
+
+    <!-- Nome -->
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Posizioni 4-6: il nome</h2>
+      <p>Si prendono le consonanti del nome. Se il nome ha <strong>4 o più consonanti</strong>, si prendono la 1ª, 3ª e 4ª (saltando la seconda). Se ha 3 consonanti, si prendono nell'ordine. Se meno di 3, si completano con le vocali.</p>
+      <div class="mt-3 bg-slate-50 rounded-lg p-4 space-y-1">
+        <p><strong>Mario</strong> → M, R (2 cons.) + A → <span class="font-mono font-bold">MRA</span></p>
+        <p><strong>Giuseppe</strong> → G, S, P, P (4 cons.) → 1ª, 3ª, 4ª → <span class="font-mono font-bold">GPP</span></p>
+        <p><strong>Luca</strong> → L, C + U → <span class="font-mono font-bold">LCU</span></p>
+      </div>
+    </section>
+
+    <!-- Data di nascita -->
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Posizioni 7-11: data di nascita e sesso</h2>
+      <p>L'anno è codificato con le <strong>ultime 2 cifre</strong> (1985 → 85). Il mese con una <strong>lettera</strong> secondo questa tabella:</p>
+
+      <div class="mt-3 grid grid-cols-3 sm:grid-cols-4 gap-2">
+        {mesiTabella.map(({ mese, lettera }) => (
+          <div class="bg-slate-50 rounded-lg p-2 text-center">
+            <div class="font-mono font-bold text-brand-blue-link text-lg">{lettera}</div>
+            <div class="text-xs text-slate-500">{mese}</div>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-4">Il <strong>giorno di nascita</strong> distingue il sesso:</p>
+      <ul class="mt-2 space-y-1 list-disc pl-5">
+        <li><strong>Maschi</strong>: il giorno esatto (da 01 a 31)</li>
+        <li><strong>Femmine</strong>: il giorno + 40 (da 41 a 71)</li>
+      </ul>
+      <div class="mt-3 bg-slate-50 rounded-lg p-4 space-y-1">
+        <p>Maschio nato il 5 gennaio 1985 → <span class="font-mono font-bold">85A05</span></p>
+        <p>Femmina nata il 5 gennaio 1985 → <span class="font-mono font-bold">85A45</span></p>
+      </div>
+    </section>
+
+    <!-- Luogo -->
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Posizioni 12-15: il luogo di nascita</h2>
+      <p>Il luogo di nascita è codificato con il <strong>codice Belfiore</strong> (o codice catastale) di 4 caratteri:</p>
+      <ul class="mt-2 space-y-1 list-disc pl-5">
+        <li><strong>Comuni italiani</strong>: lettera (A-V) + 3 cifre (es. H501 = Roma, F205 = Milano)</li>
+        <li><strong>Stati esteri</strong>: Z + 3 cifre (es. Z129 = Romania, Z112 = Germania)</li>
+      </ul>
+      <div class="mt-3 flex flex-wrap gap-3">
+        <a href="/cerca-codice-belfiore/" class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 text-xs text-blue-700 hover:bg-blue-100 transition-colors">
+          Cerca codice Belfiore &rarr;
+        </a>
+        <a href="/cerca-comune-da-codice/" class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 text-xs text-blue-700 hover:bg-blue-100 transition-colors">
+          Cerca comune da codice &rarr;
+        </a>
+      </div>
+    </section>
+
+    <!-- Carattere di controllo -->
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Posizione 16: il carattere di controllo</h2>
+      <p>
+        L'ultimo carattere del codice fiscale è una <strong>lettera calcolata algoritmicamente</strong> a partire dai
+        primi 15 caratteri. Serve a verificare che il codice fiscale sia stato trascritto correttamente,
+        analogamente al check digit di un codice IBAN.
+      </p>
+      <p class="mt-3">
+        Puoi usare il nostro <a href="/verifica-codice-fiscale/" class="text-brand-blue-link hover:underline">strumento di verifica</a>
+        per controllare se un codice fiscale è formalmente valido.
+      </p>
+    </section>
+
+  </div>
+
+  <div class="my-10 min-h-[90px]"></div>
+
+  <!-- FAQ -->
+  <section>
+    <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
+    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+      <div class="divide-y divide-slate-100">
+        {[
+          { q: "Come si legge il codice fiscale?", a: "Il codice fiscale si legge dividendolo in 5 parti: 3 lettere del cognome, 3 del nome, 5 caratteri per data e sesso, 4 caratteri per il luogo di nascita, e 1 carattere di controllo." },
+          { q: "Cosa significa la lettera del mese nel codice fiscale?", a: "Ogni mese ha una lettera: A=Gennaio, B=Febbraio, C=Marzo, D=Aprile, E=Maggio, H=Giugno, L=Luglio, M=Agosto, P=Settembre, R=Ottobre, S=Novembre, T=Dicembre." },
+          { q: "Come si distingue maschio e femmina nel codice fiscale?", a: "Dal giorno di nascita: i maschi hanno il giorno esatto (01-31), le femmine il giorno + 40 (41-71)." },
+          { q: "Cosa significa Z nel codice fiscale?", a: "Se il codice Belfiore (posizioni 12-15) inizia con Z, la persona è nata all'estero. Le 3 cifre dopo la Z identificano lo stato." },
+        ].map(({ q, a }) => (
+          <details class="group">
+            <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+              {q}
+              <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+            </summary>
+            <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="mt-8">
+    <h2 class="text-lg font-heading font-bold text-slate-800 mb-3">Approfondimenti</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <a href="/come-si-calcola-codice-fiscale/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors">
+        <div class="font-semibold text-sm text-brand-blue-link">Come si Calcola</div>
+        <div class="text-xs text-slate-500 mt-1">L'algoritmo completo passo per passo</div>
+      </a>
+      <a href="/omocodia-codice-fiscale/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors">
+        <div class="font-semibold text-sm text-brand-blue-link">Omocodia</div>
+        <div class="text-xs text-slate-500 mt-1">Quando due persone hanno lo stesso CF</div>
+      </a>
+      <a href="/verifica-codice-fiscale/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors">
+        <div class="font-semibold text-sm text-brand-blue-link">Verifica Codice Fiscale</div>
+        <div class="text-xs text-slate-500 mt-1">Controlla se un CF è valido</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="mt-10 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 text-center">
+    <p class="font-semibold text-green-800 mb-2">Calcola il tuo codice fiscale</p>
+    <a href="/" class="inline-block bg-brand-green hover:bg-brand-green-hover text-white px-6 py-2.5 rounded-lg transition-colors font-medium text-sm">
+      Vai al Calcolatore &rarr;
+    </a>
+  </div>
+</Layout>

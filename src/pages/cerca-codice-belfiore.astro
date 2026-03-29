@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CercaCodiceBelfiore from '../components/CercaCodiceBelfiore';
+import { paesiEsteri } from '../data/paesiEsteri';
+
+const paesiForClient = paesiEsteri.map(p => ({
+  nome: p.nome,
+  codiceCatastale: p.codiceCatastale,
+  continente: p.continente,
+}));
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cerca Codice Belfiore per Comune o Stato Estero",
+  "description": "Cerca il codice Belfiore (codice catastale) di qualsiasi comune italiano o stato estero. Inserisci il nome e trova il codice per il codice fiscale.",
+  "url": "https://www.calcolare-codice-fiscale.it/cerca-codice-belfiore/",
+  "inLanguage": "it",
+  "datePublished": "2026-03-29",
+  "dateModified": "2026-03-29",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+};
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qual è il codice Belfiore di Milano?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il codice Belfiore di Milano è F205. Questo codice identifica il comune di Milano nel codice fiscale italiano e occupa le posizioni 12-15 del CF." }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual è il codice Belfiore di Roma?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il codice Belfiore di Roma è H501. È il codice catastale più diffuso nei codici fiscali italiani, data la popolazione della capitale." }
+    },
+    {
+      "@type": "Question",
+      "name": "Come trovo il codice Belfiore del mio comune?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Utilizza il nostro strumento di ricerca: digita il nome del comune (anche parziale) e il codice Belfiore verrà mostrato immediatamente. La ricerca funziona sia per i comuni italiani che per gli stati esteri." }
+    },
+    {
+      "@type": "Question",
+      "name": "A cosa serve il codice Belfiore?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il codice Belfiore (o codice catastale) serve a identificare il luogo di nascita all'interno del codice fiscale italiano. Senza questo codice non è possibile calcolare correttamente il codice fiscale." }
+    },
+  ],
+};
+---
+
+<Layout
+  title="Cerca Codice Belfiore per Comune o Stato Estero"
+  description="Cerca il codice Belfiore (codice catastale) di qualsiasi comune italiano o stato estero. Inserisci il nome e trova il codice per il codice fiscale."
+  schemaJson={[schemaArticle, schemaFAQ]}
+  breadcrumbs={[{name:'Home',url:'/'},{name:'Cerca Codice Belfiore',url:'/cerca-codice-belfiore/'}]}
+>
+  <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
+    <nav class="text-xs mb-4">
+      <a href="/" class="text-white/50 hover:text-white/70">Home</a>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
+      <span class="text-white/80">Cerca Codice Belfiore</span>
+    </nav>
+    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-2">Cerca Codice Belfiore</h1>
+    <p class="text-white/60 text-sm">Inserisci il nome di un comune italiano o stato estero per trovare il codice Belfiore (codice catastale).</p>
+  </div>
+
+  <CercaCodiceBelfiore client:load paesiEsteri={paesiForClient} />
+
+  <div class="my-10 min-h-[90px]"></div>
+
+  <section class="text-sm text-slate-600 space-y-4">
+    <h2 class="text-xl font-heading font-bold text-slate-800">Il codice Belfiore nel codice fiscale</h2>
+    <p>
+      Il <strong>codice Belfiore</strong> è il codice alfanumerico di 4 caratteri che identifica il luogo di nascita
+      nel codice fiscale italiano. È chiamato anche <strong>codice catastale</strong> o <strong>codice comune</strong>:
+      tre nomi diversi per lo stesso codice.
+    </p>
+    <p>
+      Per i <strong>comuni italiani</strong>, il codice è composto da una lettera (A-V) seguita da 3 cifre.
+      Per gli <strong>stati esteri</strong>, inizia sempre con la lettera Z seguita da 3 cifre.
+    </p>
+
+    <h3 class="text-lg font-heading font-semibold text-slate-800 pt-2">Codici Belfiore più cercati</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      {[
+        { codice: 'F205', nome: 'Milano' },
+        { codice: 'H501', nome: 'Roma' },
+        { codice: 'L219', nome: 'Torino' },
+        { codice: 'F839', nome: 'Napoli' },
+        { codice: 'A944', nome: 'Bologna' },
+        { codice: 'G224', nome: 'Palermo' },
+        { codice: 'D612', nome: 'Firenze' },
+        { codice: 'C351', nome: 'Catania' },
+      ].map(({ codice, nome }) => (
+        <div class="bg-slate-50 rounded-lg p-3 text-center">
+          <div class="text-xs text-slate-500">{nome}</div>
+          <div class="font-mono font-bold text-brand-blue-link mt-1">{codice}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
+    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+      <div class="divide-y divide-slate-100">
+        {[
+          { q: "Qual è il codice Belfiore di Milano?", a: "Il codice Belfiore di Milano è F205." },
+          { q: "Qual è il codice Belfiore di Roma?", a: "Il codice Belfiore di Roma è H501." },
+          { q: "Come trovo il codice Belfiore del mio comune?", a: "Digita il nome del comune nel campo di ricerca qui sopra. Il codice Belfiore verrà mostrato immediatamente." },
+          { q: "A cosa serve il codice Belfiore?", a: "Serve a identificare il luogo di nascita nel codice fiscale italiano. Occupa le posizioni 12-15 del CF." },
+        ].map(({ q, a }) => (
+          <details class="group">
+            <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+              {q}
+              <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+            </summary>
+            <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="text-lg font-heading font-bold text-slate-800 mb-3">Strumenti correlati</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <a href="/cerca-comune-da-codice/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors">
+        <div class="font-semibold text-sm text-brand-blue-link">Cerca Comune da Codice</div>
+        <div class="text-xs text-slate-500 mt-1">Inserisci il codice, trova il comune</div>
+      </a>
+      <a href="/codice-belfiore/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors">
+        <div class="font-semibold text-sm text-brand-blue-link">Cos'è il Codice Belfiore</div>
+        <div class="text-xs text-slate-500 mt-1">Guida completa al codice Belfiore</div>
+      </a>
+      <a href="/codice-fiscale-stranieri/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors">
+        <div class="font-semibold text-sm text-brand-blue-link">Codici Fiscali Stranieri</div>
+        <div class="text-xs text-slate-500 mt-1">Tutti i codici Z dei paesi esteri</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="mt-10 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 text-center">
+    <p class="font-semibold text-green-800 mb-2">Calcola il tuo codice fiscale</p>
+    <a href="/" class="inline-block bg-brand-green hover:bg-brand-green-hover text-white px-6 py-2.5 rounded-lg transition-colors font-medium text-sm">
+      Vai al Calcolatore &rarr;
+    </a>
+  </div>
+</Layout>
