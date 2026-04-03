@@ -53,7 +53,7 @@ const schemaFAQ = {
     {
       "@type": "Question",
       "name": "Cosa significa 'codice fiscale estero'?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Il termine 'codice fiscale estero' indica il codice fiscale italiano calcolato per una persona nata all'estero. Non si tratta di un codice fiscale di un altro Paese, ma del normale CF italiano che usa un codice catastale Z al posto del codice di un comune italiano." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Il termine 'codice fiscale estero' indica il codice fiscale italiano calcolato per una persona nata all'estero. Non si tratta di un codice fiscale di un altro Paese, ma del normale CF italiano che usa un codice catastale Z (codice Belfiore) al posto del codice di un comune italiano. Ad esempio Z129 per la Romania, Z112 per la Germania, Z330 per il Marocco." }
     },
     {
       "@type": "Question",
@@ -70,8 +70,8 @@ const schemaFAQ = {
 ---
 
 <Layout
-  title="Calcolo Codice Fiscale Estero e Stranieri - Tabella Codici Paesi Esteri"
-  description="Calcolo codice fiscale per nati all'estero e stranieri residenti in Italia. Tabella completa dei 216 codici catastali (codici Z) dei paesi esteri. Calcola il CF estero online."
+  title="Codice Fiscale Estero - Tabella Completa 216 Codici Catastali Paesi"
+  description="Tabella completa dei 216 codici catastali (codici Z) dei paesi esteri per il codice fiscale italiano. Cerca il codice del tuo paese di nascita: Romania Z129, Germania Z112, Marocco Z330 e tutti gli altri."
   schemaJson={schemaFAQ}
   breadcrumbs={[{name:'Home',url:'/'},{name:"Nati all'Estero",url:'/codice-fiscale-stranieri/'}]}
 >
@@ -81,8 +81,8 @@ const schemaFAQ = {
       <span class="mx-1.5 text-white/50">&rsaquo;</span>
       <span class="text-white/80">Nati all'Estero</span>
     </nav>
-    <h1 class="text-3xl font-heading font-bold text-white mb-2">Calcolo Codice Fiscale Estero e Stranieri</h1>
-    <p class="text-white/60 text-sm">Calcola il codice fiscale per nati all'estero. Tabella completa dei 216 codici catastali dei paesi esteri</p>
+    <h1 class="text-3xl font-heading font-bold text-white mb-2">Codice Fiscale Estero - Codici Catastali Paesi</h1>
+    <p class="text-white/60 text-sm">Tabella completa dei 216 codici catastali (codici Z) per calcolare il codice fiscale di chi e nato all'estero</p>
     <div class="mt-4 inline-flex items-center gap-2 bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-sm text-white/80">
       <strong class="text-white">Calcola subito il tuo CF</strong>: seleziona "Nato/a all'estero"
       <a href="/" class="font-semibold text-white hover:underline ml-1">Vai al calcolatore &rarr;</a>
@@ -92,7 +92,7 @@ const schemaFAQ = {
   <div class="space-y-8 text-sm text-slate-700 leading-relaxed">
 
     <section>
-      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Come si Calcola il Codice Fiscale Estero</h2>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Codice Fiscale Estero: Come si Calcola</h2>
       <p>
         Il calcolo del codice fiscale per chi è nato all'estero - cittadini stranieri residenti in Italia o italiani nati fuori dal territorio nazionale - segue la stessa procedura del codice fiscale ordinario: 3 lettere dal cognome, 3 dal nome, data di nascita codificata, codice del luogo di nascita e carattere di controllo.
       </p>

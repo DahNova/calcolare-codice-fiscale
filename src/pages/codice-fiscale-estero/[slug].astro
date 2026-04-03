@@ -91,8 +91,8 @@ const schemaFAQ = {
 const schemaArticle = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": `${c.codiceCatastale} Codice Fiscale ${c.nomeBreve} - Calcolo, Esempio e Guida`,
-  "description": `${c.codiceCatastale} codice fiscale: il codice catastale ${diPaese} per chi è nato ${c.preposizione} ${c.nomeBreve}. Esempio pratico di calcolo, procedura di richiesta e FAQ.`,
+  "headline": `${c.codiceCatastale} Codice Fiscale ${c.nomeBreve} - Codice Catastale e Calcolo`,
+  "description": `${c.codiceCatastale} è il codice catastale ${diPaese}: usalo per calcolare il codice fiscale di chi è nato ${c.preposizione} ${c.nomeBreve}. Esempio pratico con nome e cognome, procedura di richiesta e FAQ.`,
   "url": `https://www.calcolare-codice-fiscale.it/codice-fiscale-estero/${c.slug}/`,
   "inLanguage": "it",
   "datePublished": "2026-03-20",
@@ -101,8 +101,8 @@ const schemaArticle = {
   "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
 };
 
-const title = `${c.codiceCatastale} Codice Fiscale ${c.nomeBreve} - Calcolo, Esempio e Guida`;
-const description = `${c.codiceCatastale} codice fiscale: il codice catastale ${diPaese} per chi è nato ${c.preposizione} ${c.nomeBreve}. Esempio pratico di calcolo, procedura di richiesta e FAQ.`;
+const title = `${c.codiceCatastale} Codice Fiscale ${c.nomeBreve} - Codice Catastale e Calcolo`;
+const description = `${c.codiceCatastale} è il codice catastale ${diPaese}: usalo per calcolare il codice fiscale di chi è nato ${c.preposizione} ${c.nomeBreve}. Esempio pratico con nome e cognome, procedura di richiesta e FAQ.`;
 ---
 
 <Layout title={title} description={description} schemaJson={[schemaFAQ, schemaArticle]}
