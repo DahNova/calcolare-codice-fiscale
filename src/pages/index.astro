@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import CalcolaForm from '../components/CalcolaForm';
+import homepageHero from '../assets/homepage-hero.webp';
 
 const schemaWebApp = {
   "@context": "https://schema.org",
@@ -93,6 +95,19 @@ const schemaWebSite = {
   <!-- SEO Content -->
   <section class="mt-2">
     <h2 class="text-2xl font-heading font-bold text-slate-800 mb-4">Cos'è il Codice Fiscale?</h2>
+
+    <figure class="mb-6">
+      <Image
+        src={homepageHero}
+        alt="Tessera del codice fiscale italiano su scrivania d'archivio istituzionale — guida al calcolo, struttura e codice catastale"
+        widths={[480, 768, 1024]}
+        sizes="(max-width: 768px) 100vw, 768px"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-auto rounded-2xl ring-1 ring-slate-200 shadow-sm"
+      />
+    </figure>
+
     <div class="text-slate-600 text-sm leading-relaxed space-y-3">
       <p>
         Il <strong>codice fiscale</strong> è un codice alfanumerico di 16 caratteri utilizzato

@@ -1,9 +1,17 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Layout from '../../layouts/Layout.astro';
 import EsempioCF from '../../components/EsempioCF.astro';
 import { paesiEsteri } from '../../data/paesiEsteri';
 import { countryContent } from '../../data/countryContent';
 import type { CountryContent } from '../../data/countryContent';
+import { flagUrl, flagUrlSrcset } from '../../data/countryFlags';
+
+const heroImports = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/countries-hero/*.webp',
+  { eager: true }
+);
 
 export function getStaticPaths() {
   return countryContent.map(c => ({
@@ -103,6 +111,13 @@ const schemaArticle = {
 
 const title = `${c.codiceCatastale} Codice Fiscale ${c.nomeBreve} - Codice Catastale e Calcolo`;
 const description = `${c.codiceCatastale} è il codice catastale ${diPaese}: usalo per calcolare il codice fiscale di chi è nato ${c.preposizione} ${c.nomeBreve}. Esempio pratico con nome e cognome, procedura di richiesta e FAQ.`;
+
+const flagSrc = flagUrl(c.slug, 'w40');
+const flagSrcset = flagUrlSrcset(c.slug);
+const flagAlt = `Bandiera ${diPaese}`;
+
+const heroImage = heroImports[`/src/assets/countries-hero/${c.slug}.webp`]?.default;
+const heroAlt = `Codice fiscale italiano per cittadini nati ${c.preposizione} ${c.nomeBreve} — scena d'archivio istituzionale con bandiere ${c.nomeBreve} e Italia, codice catastale ${c.codiceCatastale}`;
 ---
 
 <Layout title={title} description={description} schemaJson={[schemaFAQ, schemaArticle]}
@@ -117,7 +132,22 @@ const description = `${c.codiceCatastale} è il codice catastale ${diPaese}: usa
       <span class="mx-1.5 text-white/50">&rsaquo;</span>
       <span class="text-white/80">{c.nomeBreve}</span>
     </nav>
-    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-1">{c.codiceCatastale} Codice Fiscale - {c.nomeBreve}</h1>
+    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-1 flex items-center gap-3">
+      {flagSrc && (
+        <img
+          src={flagSrc}
+          srcset={flagSrcset || undefined}
+          alt={flagAlt}
+          width="40"
+          height="30"
+          loading="eager"
+          decoding="async"
+          class="inline-block shrink-0 rounded-sm shadow-sm ring-1 ring-white/20"
+          style="aspect-ratio: 4/3; object-fit: cover;"
+        />
+      )}
+      <span>{c.codiceCatastale} Codice Fiscale - {c.nomeBreve}</span>
+    </h1>
     <p class="text-white/60 text-sm mb-1">Il codice catastale (Belfiore) <span class="font-mono font-bold text-white/90">{c.codiceCatastale}</span> identifica {c.nomeCompleto} nel codice fiscale</p>
     <p class="text-white/50 text-sm">Calcolo, esempio pratico e guida per chi è nato {c.preposizione} {c.nomeBreve}</p>
     <a href="/" class="mt-5 inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-5 py-2.5 text-sm text-white hover:bg-white/15 transition-colors">
@@ -161,6 +191,20 @@ const description = `${c.codiceCatastale} è il codice catastale ${diPaese}: usa
         codiceCatastale={c.codiceCatastale}
       />
     </section>
+
+    {heroImage && (
+      <figure class="my-2">
+        <Image
+          src={heroImage}
+          alt={heroAlt}
+          widths={[480, 768, 1024]}
+          sizes="(max-width: 768px) 100vw, 768px"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-auto rounded-2xl ring-1 ring-slate-200 shadow-sm"
+        />
+      </figure>
+    )}
 
     <!-- Section: Comunita in Italia -->
     <section>
