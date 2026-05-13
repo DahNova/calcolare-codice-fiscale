@@ -68,6 +68,16 @@ export default function CalcolaForm() {
     setComuneQuery(c.nome);
     setSelectedComune(c);
     setSuggestions([]);
+
+    if (typeof window !== 'undefined') {
+      const w = window as unknown as { dataLayer?: Record<string, unknown>[] };
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: 'seleziona_localita',
+        tipo_calcolo: natoEstero ? 'estero' : 'italia',
+        paese_comune: c.nome,
+      });
+    }
   }
 
   function validate(): Errors {
@@ -92,6 +102,19 @@ export default function CalcolaForm() {
       cognome, nome, sesso, giorno, mese, anno,
       codiceCatastale: selectedComune!.codiceCatastale,
     };
+
+    if (typeof window !== 'undefined') {
+      const w = window as unknown as { dataLayer?: Record<string, unknown>[] };
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: 'calcola_cf',
+        tipo_calcolo: natoEstero ? 'estero' : 'italia',
+        paese_comune: selectedComune!.nome,
+        page_path: window.location.pathname,
+        previous_url: document.referrer || '',
+      });
+    }
+
     setRisultato(calcolaCodiceFiscale(input));
     setCopied(false);
   }
