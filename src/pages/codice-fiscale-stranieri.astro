@@ -241,6 +241,25 @@ const schemaFAQ = {
       </div>
     </section>
 
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Approfondisci sul Codice Fiscale</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {[
+          { href: '/tabelle-codice-fiscale/', title: 'Tabelle Codice Fiscale', desc: 'Mesi, codici catastali e carattere di controllo' },
+          { href: '/omocodia-codice-fiscale/', title: 'Omocodia del CF', desc: 'Quando il tuo CF ha lettere al posto delle cifre' },
+          { href: '/verifica-codice-fiscale/', title: 'Verifica Codice Fiscale', desc: 'Controlla se un CF è formalmente corretto' },
+          { href: '/come-leggere-codice-fiscale/', title: 'Come Leggere il CF', desc: 'Capisci ogni carattere del codice fiscale' },
+          { href: '/cerca-codice-belfiore/', title: 'Cerca Codice Belfiore', desc: 'Tutti i codici catastali italiani ed esteri' },
+          { href: '/codice-fiscale-estero/come-richiedere/', title: 'Come Richiedere il CF Estero', desc: "Procedura completa per chi vive all'estero" },
+        ].map(({ href, title, desc }) => (
+          <a href={href} class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
+            <div class="font-semibold text-sm text-brand-blue-link mb-1">{title} →</div>
+            <div class="text-xs text-slate-500">{desc}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
   </div>
 
   <div class="my-10 min-h-[90px]"></div>

@@ -27,12 +27,25 @@ const schemaFAQ = {
     },
   ],
 };
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Omocodia del Codice Fiscale: Tabella Lettere e Significato",
+  "description": "Omocodia codice fiscale: quando il CF ha lettere al posto delle cifre. Tabella di sostituzione (0→L, 1→M, 2→N, 3→P, 4→Q, 5→R, 6→S, 7→T, 8→U, 9→V), 7 posizioni soggette a omocodia, esempi pratici.",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "datePublished": "2026-03-01",
+  "dateModified": "2026-05-14",
+  "url": "https://www.calcolare-codice-fiscale.it/omocodia-codice-fiscale/",
+  "inLanguage": "it"
+};
 ---
 
 <Layout
-  title="Omocodia del Codice Fiscale - Cos'è e Come Funziona"
-  description="Scopri cos'è l'omocodia nel codice fiscale italiano: quando si verifica, la tabella di sostituzione cifre-lettere e come riconoscere un CF omocodice."
-  schemaJson={schemaFAQ}
+  title="Omocodia Codice Fiscale: Cos'è, Tabella Lettere e Come Riconoscerla"
+  description="Omocodia codice fiscale: quando il CF ha lettere al posto delle cifre (L, M, N, P, Q, R, S, T, U, V). Tabella completa, esempi pratici e come riconoscere un codice omocodice."
+  schemaJson={[schemaFAQ, schemaArticle]}
   breadcrumbs={[{name:'Home',url:'/'},{name:'Omocodia',url:'/omocodia-codice-fiscale/'}]}
 >
   <!-- Gradient page header -->
@@ -42,8 +55,8 @@ const schemaFAQ = {
       <span class="mx-1.5 text-white/50">›</span>
       <span class="text-white/80">Omocodia</span>
     </nav>
-    <h1 class="text-3xl font-heading font-bold text-white mb-2">Omocodia del Codice Fiscale</h1>
-    <p class="text-white/60 text-sm">Quando due persone generano lo stesso CF, e come l'Agenzia delle Entrate lo risolve</p>
+    <h1 class="text-3xl font-heading font-bold text-white mb-2">Omocodia del Codice Fiscale: Tabella Lettere e Significato</h1>
+    <p class="text-white/60 text-sm">Cos'è l'omocodia, quando il CF ha lettere al posto delle cifre, e come l'Agenzia delle Entrate la risolve</p>
   </div>
 
   <div class="space-y-8 text-sm text-slate-600 leading-relaxed">
@@ -110,6 +123,34 @@ const schemaFAQ = {
         sette sostituzioni possibili. Il carattere di controllo viene sempre ricalcolato sul
         codice modificato.
       </p>
+      <div class="mt-5 bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <table class="text-xs border-collapse w-full">
+          <thead>
+            <tr class="bg-slate-50">
+              <th class="border-b border-slate-200 px-3 py-2 text-left font-semibold text-slate-500">Ordine sostituzione</th>
+              <th class="border-b border-slate-200 px-3 py-2 text-center font-semibold text-slate-500">Posizione CF</th>
+              <th class="border-b border-slate-200 px-3 py-2 text-left font-semibold text-slate-500">Cosa rappresenta</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['1ª', '15', 'Comune di nascita (3ª cifra)'],
+              ['2ª', '14', 'Comune di nascita (2ª cifra)'],
+              ['3ª', '13', 'Comune di nascita (1ª cifra)'],
+              ['4ª', '11', 'Giorno di nascita (2ª cifra)'],
+              ['5ª', '10', 'Giorno di nascita (1ª cifra)'],
+              ['6ª', '8', 'Anno di nascita (2ª cifra)'],
+              ['7ª', '7', 'Anno di nascita (1ª cifra)'],
+            ].map(([ord, pos, what]) => (
+              <tr>
+                <td class="border-b border-slate-100 px-3 py-1.5 font-medium text-slate-700">{ord}</td>
+                <td class="border-b border-slate-100 px-3 py-1.5 text-center font-mono font-bold text-brand-navy-light">{pos}</td>
+                <td class="border-b border-slate-100 px-3 py-1.5 text-slate-600">{what}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section>
@@ -119,9 +160,9 @@ const schemaFAQ = {
       </p>
       <div class="space-y-2">
         {[
-          ['1° omocodia', 'RSSMRA80A01H50L', 'La cifra 1 in posizione 15 → L'],
-          ['2° omocodia', 'RSSMRA80A01H5ML', 'La cifra 0 in posizione 14 → L, poi 1 → M'],
-          ['3° omocodia', 'RSSMRA80A01HP ML', 'La cifra 5 in posizione 13 → R'],
+          ['1° omocodia', 'RSSMRA80A01H50M', 'Cifra 1 (pos 15) → M'],
+          ['2° omocodia', 'RSSMRA80A01H5LM', 'Cifre 0 (pos 14) → L, 1 (pos 15) → M'],
+          ['3° omocodia', 'RSSMRA80A01HRLM', 'Cifre 5 (pos 13) → R, 0 → L, 1 → M'],
         ].map(([step, cf, note]) => (
           <div class="flex items-start gap-3 bg-slate-50 rounded-xl p-3">
             <span class="text-xs font-semibold text-slate-500 w-24 shrink-0 mt-0.5">{step}</span>
@@ -147,6 +188,7 @@ const schemaFAQ = {
         Per verificare il tuo codice ufficiale, utilizza il servizio di verifica sul sito
         dell'Agenzia delle Entrate. Il nostro strumento calcola sempre il codice
         <em>teorico standard</em>, valido per la stragrande maggioranza delle persone.
+        Puoi anche usare il nostro <a href="/verifica-codice-fiscale/" class="text-brand-blue-link hover:underline font-medium">strumento di verifica CF</a> per controllare la validità formale di qualsiasi codice fiscale, incluso un omocodice.
       </p>
       <div class="mt-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl">
         <p class="text-sm font-medium text-green-800">
@@ -159,6 +201,25 @@ const schemaFAQ = {
     </section>
 
   </div>
+
+  <section class="mt-8">
+    <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Approfondisci sul Codice Fiscale</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {[
+        { href: '/verifica-codice-fiscale/', title: 'Verifica Codice Fiscale', desc: 'Controlla la validità formale di un CF (incluso omocodice)' },
+        { href: '/come-leggere-codice-fiscale/', title: 'Come Leggere il CF', desc: 'Significato di ogni carattere del codice fiscale' },
+        { href: '/come-si-calcola-codice-fiscale/', title: 'Come si Calcola il CF', desc: 'La procedura passo-passo con esempi pratici' },
+        { href: '/codice-fiscale-stranieri/', title: 'Codice Fiscale Esteri', desc: "Tabella di 216 codici Z per nati all'estero" },
+        { href: '/tabelle-codice-fiscale/', title: 'Tabelle Codice Fiscale', desc: 'Mesi, codici catastali e carattere di controllo' },
+        { href: '/cerca-codice-belfiore/', title: 'Cerca Codice Belfiore', desc: 'Tutti i codici catastali per comuni e paesi' },
+      ].map(({ href, title, desc }) => (
+        <a href={href} class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
+          <div class="font-semibold text-sm text-brand-blue-link mb-1">{title} →</div>
+          <div class="text-xs text-slate-500">{desc}</div>
+        </a>
+      ))}
+    </div>
+  </section>
 
   <div class="my-10 min-h-[90px]"></div>
 
