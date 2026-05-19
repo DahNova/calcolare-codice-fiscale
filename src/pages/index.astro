@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import CalcolaForm from '../components/CalcolaForm';
+import StrumentiCorrelati from '../components/StrumentiCorrelati.astro';
 import homepageHero from '../assets/homepage-hero.webp';
 
 const schemaWebApp = {
@@ -65,8 +66,8 @@ const schemaWebSite = {
 ---
 
 <Layout
-  title="Calcola Codice Fiscale Online Gratis - Italiano ed Estero"
-  description="Calcola il codice fiscale online gratis in pochi secondi: inserisci nome, cognome, data e luogo di nascita (Italia o estero). Strumento aggiornato 2026, anche per nati all'estero."
+  title="Calcola Codice Fiscale Online Gratis 2026 | Italia ed Estero"
+  description="Calcola codice fiscale online gratis in 5 secondi: nome, data e luogo di nascita (Italia o 216 paesi esteri). Strumento aggiornato 2026, senza registrazione."
   schemaJson={[schemaWebApp, schemaFAQ, schemaWebSite]}
 >
   <!-- Hero section with gradient background -->
@@ -219,4 +220,6 @@ const schemaWebSite = {
       ))}
     </div>
   </section>
+
+  <StrumentiCorrelati currentSlug="" />
 </Layout>

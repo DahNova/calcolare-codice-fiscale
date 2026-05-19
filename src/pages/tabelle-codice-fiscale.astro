@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import StrumentiCorrelati from '../components/StrumentiCorrelati.astro';
 ---
 
 <Layout
-  title="Tabelle Codice Fiscale - Mesi, Codici Catastali Comuni e Carattere di Controllo"
-  description="Tabelle di riferimento per il codice fiscale: lettere dei mesi (A-T), codici catastali dei principali comuni italiani (H501 Roma, F205 Milano, A662 Bari) e valori per il carattere di controllo."
+  title="Tabelle Codice Fiscale 2026: Mesi, Codici Comuni, Controllo"
+  description="Tabelle complete per il codice fiscale: lettere mesi (A-T), codici catastali comuni (H501 Roma, F205 Milano, A662 Bari), carattere di controllo. Aggiornato 2026."
   breadcrumbs={[{name:'Home',url:'/'},{name:'Tabelle di Riferimento',url:'/tabelle-codice-fiscale/'}]}
 >
   <!-- Gradient page header -->
@@ -201,4 +202,6 @@ import Layout from '../layouts/Layout.astro';
       Vai al Calcolatore →
     </a>
   </div>
+
+  <StrumentiCorrelati currentSlug="tabelle" />
 </Layout>

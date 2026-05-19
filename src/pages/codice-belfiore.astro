@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import StrumentiCorrelati from '../components/StrumentiCorrelati.astro';
 
 const schemaArticle = {
   "@context": "https://schema.org",
@@ -285,4 +286,6 @@ const schemaFAQ = {
       <a href="/codice-fiscale-stranieri/" class="ml-1 font-semibold hover:underline">Vedi tutti i codici paesi esteri &rarr;</a>
     </div>
   </article>
+
+  <StrumentiCorrelati currentSlug="codice-belfiore" />
 </Layout>

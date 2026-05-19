@@ -1,0 +1,37 @@
+---
+interface Props {
+  currentSlug: string;
+  heading?: string;
+  limit?: number;
+}
+
+const { currentSlug, heading = 'Strumenti e guide correlati', limit = 6 } = Astro.props;
+
+const tools = [
+  { slug: '', href: '/', title: 'Calcola Codice Fiscale', desc: 'Calcolatore CF online, anche per nati all\'estero' },
+  { slug: 'verifica', href: '/verifica-codice-fiscale/', title: 'Verifica Codice Fiscale', desc: 'Controlla se un CF è formalmente corretto' },
+  { slug: 'inverso', href: '/codice-fiscale-inverso/', title: 'Codice Fiscale Inverso', desc: 'Decodifica un CF: data, sesso e comune di nascita' },
+  { slug: 'stranieri', href: '/codice-fiscale-stranieri/', title: 'CF per Stranieri', desc: '216 codici catastali Z dei paesi esteri' },
+  { slug: 'tabelle', href: '/tabelle-codice-fiscale/', title: 'Tabelle Codice Fiscale', desc: 'Mesi, codici comuni e carattere di controllo' },
+  { slug: 'omocodia', href: '/omocodia-codice-fiscale/', title: 'Omocodia del CF', desc: 'Quando il CF ha lettere al posto delle cifre' },
+  { slug: 'come-leggere', href: '/come-leggere-codice-fiscale/', title: 'Come Leggere il CF', desc: 'Capisci ogni carattere del codice fiscale' },
+  { slug: 'come-si-calcola', href: '/come-si-calcola-codice-fiscale/', title: 'Come Si Calcola il CF', desc: 'La procedura completa passo per passo' },
+  { slug: 'cerca-comune', href: '/cerca-comune-da-codice/', title: 'Cerca Comune da Codice', desc: 'Trova il comune partendo dal codice catastale' },
+  { slug: 'cerca-belfiore', href: '/cerca-codice-belfiore/', title: 'Cerca Codice Belfiore', desc: 'Tutti i codici catastali italiani ed esteri' },
+  { slug: 'codice-belfiore', href: '/codice-belfiore/', title: 'Codice Belfiore', desc: 'Cos\'è il codice Belfiore e come si usa' },
+];
+
+const filtered = tools.filter(t => t.slug !== currentSlug).slice(0, limit);
+---
+
+<section class="mt-8">
+  <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">{heading}</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    {filtered.map(({ href, title, desc }) => (
+      <a href={href} class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
+        <div class="font-semibold text-sm text-brand-blue-link mb-1">{title} →</div>
+        <div class="text-xs text-slate-500">{desc}</div>
+      </a>
+    ))}
+  </div>
+</section>

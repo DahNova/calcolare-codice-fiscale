@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CercaComuneDaCodice from '../components/CercaComuneDaCodice';
+import StrumentiCorrelati from '../components/StrumentiCorrelati.astro';
 import { paesiEsteri } from '../data/paesiEsteri';
 
 const paesiForClient = paesiEsteri.map(p => ({
@@ -123,4 +124,6 @@ const schemaFAQ = {
       Vai al Calcolatore &rarr;
     </a>
   </div>
+
+  <StrumentiCorrelati currentSlug="cerca-comune" />
 </Layout>
