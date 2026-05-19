@@ -73,6 +73,17 @@ const demonymMap: Record<string, string> = {
   'svizzera': 'Swiss', 'svezia': 'Swedish', 'thailandia': 'Thai', 'tunisia': 'Tunisian',
   'turchia': 'Turkish', 'ucraina': 'Ukrainian', 'ungheria': 'Hungarian', 'uruguay': 'Uruguayan',
   'venezuela': 'Venezuelan', 'vietnam': 'Vietnamese', 'yemen': 'Yemeni',
+  // Batch 2 (19 mag 2026)
+  'kenya': 'Kenyan', 'maurizio': 'Mauritian', 'mali': 'Malian', 'somalia': 'Somali',
+  'tanzania': 'Tanzanian', 'mozambico': 'Mozambican', 'angola': 'Angolan',
+  'gambia': 'Gambian', 'niger': 'Nigerien', 'liberia': 'Liberian',
+  'nepal': 'Nepalese', 'afghanistan': 'Afghan', 'cipro': 'Cypriot',
+  'emirati-arabi-uniti': 'Emirati', 'qatar': 'Qatari', 'arabia-saudita': 'Saudi Arabian',
+  'mongolia': 'Mongolian', 'uzbekistan': 'Uzbek', 'armenia': 'Armenian',
+  'el-salvador': 'Salvadoran', 'honduras': 'Honduran', 'guatemala': 'Guatemalan',
+  'haiti': 'Haitian', 'trinidad-e-tobago': 'Trinidadian', 'giamaica': 'Jamaican',
+  'islanda': 'Icelandic', 'monaco': 'Monégasque', 'montenegro': 'Montenegrin',
+  'liechtenstein': 'Liechtensteiner',
 };
 
 async function generateOne(apiKey: string, slug: string, countryName: string, demonym: string): Promise<{ ok: boolean; error?: string }> {
