@@ -3,6 +3,10 @@
   "outputDirectory": "dist",
   "framework": "astro",
   "trailingSlash": true,
+  "redirects": [
+    { "source": "/codice-fiscale-estero/maurizio", "destination": "/codice-fiscale-estero/mauritius/", "permanent": true },
+    { "source": "/codice-fiscale-estero/maurizio/", "destination": "/codice-fiscale-estero/mauritius/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

@@ -74,7 +74,7 @@ const demonymMap: Record<string, string> = {
   'turchia': 'Turkish', 'ucraina': 'Ukrainian', 'ungheria': 'Hungarian', 'uruguay': 'Uruguayan',
   'venezuela': 'Venezuelan', 'vietnam': 'Vietnamese', 'yemen': 'Yemeni',
   // Batch 2 (19 mag 2026)
-  'kenya': 'Kenyan', 'maurizio': 'Mauritian', 'mali': 'Malian', 'somalia': 'Somali',
+  'kenya': 'Kenyan', 'mauritius': 'Mauritian', 'mali': 'Malian', 'somalia': 'Somali',
   'tanzania': 'Tanzanian', 'mozambico': 'Mozambican', 'angola': 'Angolan',
   'gambia': 'Gambian', 'niger': 'Nigerien', 'liberia': 'Liberian',
   'nepal': 'Nepalese', 'afghanistan': 'Afghan', 'cipro': 'Cypriot',

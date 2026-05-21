@@ -1480,7 +1480,7 @@ export const countryContent: CountryContent[] = [
       'La comunità keniota in Italia conta circa 10 000 residenti, in larga maggioranza donne impiegate nel lavoro domestico e nei servizi di assistenza alle persone anziane. La presenza si concentra in Lombardia, Lazio, Veneto ed Emilia-Romagna, dove sono attive numerose associazioni di mutuo soccorso e organizzazioni religiose anglicane e pentecostali che fanno da punto di riferimento per la diaspora. Il Kenya è anche meta consolidata di volontariato e cooperazione allo sviluppo per molte ONG italiane, con un flusso continuo di cooperanti italiani iscritti all\'AIRE soprattutto a Nairobi, Mombasa e Malindi.',
   },
   {
-    slug: 'maurizio',
+    slug: 'mauritius',
     codiceCatastale: 'Z332',
     continente: 'Africa',
     nomeCompleto: 'Repubblica di Mauritius',

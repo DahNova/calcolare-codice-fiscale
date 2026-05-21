@@ -131,7 +131,7 @@ export const paesiEsteri: PaeseEstero[] = [
   { nome: "Mali", slug: "mali", codiceCatastale: "Z329", continente: "Africa", hasDedicatedPage: true },
   { nome: "Marocco", slug: "marocco", codiceCatastale: "Z330", continente: "Africa", hasDedicatedPage: true },
   { nome: "Mauritania", slug: "mauritania", codiceCatastale: "Z331", continente: "Africa", hasDedicatedPage: false },
-  { nome: "Maurizio", slug: "maurizio", codiceCatastale: "Z332", continente: "Africa", hasDedicatedPage: true },
+  { nome: "Mauritius", slug: "mauritius", codiceCatastale: "Z332", continente: "Africa", hasDedicatedPage: true },
   { nome: "Mozambico", slug: "mozambico", codiceCatastale: "Z333", continente: "Africa", hasDedicatedPage: true },
   { nome: "Niger", slug: "niger", codiceCatastale: "Z334", continente: "Africa", hasDedicatedPage: true },
   { nome: "Nigeria", slug: "nigeria", codiceCatastale: "Z335", continente: "Africa", hasDedicatedPage: true },
