@@ -2,11 +2,62 @@
 import Layout from '../layouts/Layout.astro';
 import InversoForm from '../components/InversoForm';
 import StrumentiCorrelati from '../components/StrumentiCorrelati.astro';
+
+const faqs = [
+  {
+    q: "A cosa serve il codice fiscale inverso?",
+    a: "Il codice fiscale inverso serve a decodificare un CF già esistente per estrarne i dati anagrafici codificati: data di nascita, sesso e comune (o stato estero) di nascita. È utile per verificare la correttezza di un codice o per recuperare queste informazioni quando si possiede solo il codice fiscale.",
+  },
+  {
+    q: "Come si inverte il codice fiscale?",
+    a: "Si analizzano i 16 caratteri secondo l'algoritmo del D.M. 12/03/1974: i caratteri 7-8 indicano l'anno, il 9° il mese (una lettera), i caratteri 10-11 il giorno di nascita (con +40 per le donne), e i caratteri 12-15 il codice catastale del comune o dello stato estero. Il nostro strumento esegue automaticamente la decodifica: incolli il CF e ottieni i dati in un secondo.",
+  },
+  {
+    q: "Si può risalire al nome e cognome da un codice fiscale?",
+    a: "No, non in modo univoco. Le prime 6 lettere derivano dalle consonanti e vocali di cognome e nome, ma la trasformazione non è reversibile: persone diverse possono produrre le stesse lettere iniziali. Dalla decodifica inversa si ottengono solo data di nascita, sesso e comune di nascita, non il nome e cognome esatti.",
+  },
+  {
+    q: "Qual è la differenza tra codice fiscale inverso e verifica?",
+    a: "La decodifica inversa estrae i dati anagrafici contenuti in un CF. La verifica controlla invece che il codice sia formalmente valido, ricalcolando il carattere di controllo. I due termini spesso si sovrappongono: il nostro strumento fa entrambe le cose, decodifica i dati e segnala se il codice è formalmente corretto.",
+  },
+  {
+    q: "Come faccio a calcolare il codice fiscale di una persona?",
+    a: "Per il calcolo diretto, dai dati anagrafici al CF, usa il calcolatore principale: inserisci nome, cognome, sesso, data e comune di nascita e ottieni il codice fiscale. La decodifica inversa fa il percorso opposto, dal codice fiscale ai dati anagrafici.",
+  },
+  {
+    q: "Il codice fiscale inverso è gratuito?",
+    a: "Sì, lo strumento è gratuito, immediato e non richiede registrazione. Il codice fiscale inserito viene elaborato direttamente nel browser e non viene salvato sui nostri server.",
+  },
+];
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    "name": q,
+    "acceptedAnswer": { "@type": "Answer", "text": a },
+  })),
+};
+
+const schemaApp = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Codice Fiscale Inverso",
+  "url": "https://www.calcolare-codice-fiscale.it/codice-fiscale-inverso/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "it",
+  "description": "Strumento per la decodifica inversa del codice fiscale: estrae data di nascita, sesso e comune di nascita da un CF italiano in modo gratuito e immediato.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+};
 ---
 
 <Layout
-  title="Decodifica Codice Fiscale - Leggi i Dati dal CF"
-  description="Inserisci un codice fiscale e scopri data di nascita, sesso e comune. Decodifica inversa gratuita e immediata."
+  title="Codice Fiscale Inverso: Decodifica Data, Sesso e Comune"
+  description="Codice fiscale inverso: inserisci un CF e scopri data di nascita, sesso e comune di nascita. Decodifica online gratuita, immediata e senza registrazione."
+  schemaJson={[schemaFAQ, schemaApp]}
   breadcrumbs={[{name:'Home',url:'/'},{name:'Codice Fiscale Inverso',url:'/codice-fiscale-inverso/'}]}
 >
   <!-- Gradient page header -->
@@ -16,27 +67,152 @@ import StrumentiCorrelati from '../components/StrumentiCorrelati.astro';
       <span class="mx-1.5 text-white/50">›</span>
       <span class="text-white/80">Codice Fiscale Inverso</span>
     </nav>
-    <h1 class="text-3xl font-heading font-bold text-white mb-2">Decodifica Codice Fiscale</h1>
-    <p class="text-white/60 text-sm">Inserisci un codice fiscale per estrarne data di nascita, sesso e comune.</p>
+    <h1 class="text-3xl font-heading font-bold text-white mb-2">Codice Fiscale Inverso</h1>
+    <p class="text-white/60 text-sm">Decodifica un CF ed estrai data di nascita, sesso e comune di nascita in un secondo</p>
   </div>
 
   <InversoForm client:load />
 
   <div class="my-10 min-h-[90px]"></div>
 
-  <section class="mt-8 text-sm text-slate-600 space-y-3">
-    <h2 class="text-xl font-heading font-bold text-slate-800">Come funziona la decodifica?</h2>
-    <p>
-      Il <strong>codice fiscale inverso</strong> analizza i 16 caratteri del CF per
-      estrarne le informazioni anagrafiche codificate: <strong>sesso</strong>,
-      <strong>data di nascita</strong> completa e <strong>comune o stato estero di nascita</strong>.
-    </p>
-    <p>
-      Non è possibile risalire al nome o al cognome esatti: la codifica di questi dati
-      non è univocamente reversibile, poiché persone diverse possono condividere le stesse
-      tre lettere iniziali.
-    </p>
-  </section>
+  <div class="space-y-8 text-sm text-slate-600 leading-relaxed">
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Cos'è il Codice Fiscale Inverso?</h2>
+      <p>
+        Il <strong>codice fiscale inverso</strong> è l'operazione opposta al calcolo del CF: dato un
+        codice fiscale valido, permette di <strong>risalire ai dati anagrafici</strong> codificati al
+        suo interno. La <strong>decodifica inversa</strong> analizza i 16 caratteri del codice ed
+        estrae <strong>sesso</strong>, <strong>data di nascita</strong> completa e
+        <strong>comune o stato estero di nascita</strong>, segnalando anche se il codice è
+        formalmente valido.
+      </p>
+      <p class="mt-3">
+        Non è invece possibile risalire al <strong>nome e cognome</strong> esatti: la codifica delle
+        prime sei lettere non è univocamente reversibile, perché persone diverse possono condividere
+        le stesse iniziali. Per questo la decodifica inversa restituisce i dati di nascita, ma non
+        l'identità della persona.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Cosa Puoi Estrarre da un Codice Fiscale</h2>
+      <p class="mb-3">
+        Ogni gruppo di caratteri del codice fiscale codifica un'informazione precisa. Ecco cosa
+        decodifica lo strumento, prendendo come esempio <strong class="font-mono">RSSMRA80A01H501U</strong>:
+      </p>
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <table class="text-xs border-collapse w-full">
+          <thead>
+            <tr class="bg-slate-50">
+              <th class="border-b border-slate-200 px-3 py-2 text-left font-semibold text-slate-500">Caratteri</th>
+              <th class="border-b border-slate-200 px-3 py-2 text-left font-semibold text-slate-500">Dato anagrafico</th>
+              <th class="border-b border-slate-200 px-3 py-2 text-left font-semibold text-slate-500">Esempio</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['1–6', 'Cognome e nome (consonanti e vocali, non reversibili al nome esatto)', 'RSS MRA'],
+              ['7–8', 'Anno di nascita', '80 → 1980'],
+              ['9', 'Mese di nascita (lettera)', 'A → gennaio'],
+              ['10–11', 'Giorno di nascita (+40 se donna)', '01 → giorno 1, uomo'],
+              ['12–15', 'Comune o stato estero (codice catastale)', 'H501 → Roma'],
+              ['16', 'Carattere di controllo', 'U'],
+            ].map(([car, dato, es]) => (
+              <tr>
+                <td class="border-b border-slate-100 px-3 py-1.5 text-center font-mono font-bold text-brand-navy-light">{car}</td>
+                <td class="border-b border-slate-100 px-3 py-1.5 text-slate-600">{dato}</td>
+                <td class="border-b border-slate-100 px-3 py-1.5 font-mono text-slate-700">{es}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-slate-500">
+        Vuoi capire il significato di ogni singolo carattere? Leggi la guida
+        <a href="/come-leggere-codice-fiscale/" class="text-brand-blue-link hover:underline font-medium">come leggere il codice fiscale</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Si Può Risalire al Nome dal Codice Fiscale?</h2>
+      <p>
+        È la domanda più frequente, e la risposta è <strong>no, non in modo certo</strong>. Le prime
+        tre lettere derivano dalle consonanti del cognome (o consonanti più vocali se non bastano),
+        le successive tre da quelle del nome. Questa trasformazione <strong>perde informazione</strong>:
+        da "RSS" non si può sapere se il cognome è "Rossi", "Russo" o "Rossi". Per questo nessuno
+        strumento può ricostruire con certezza nome e cognome a partire dal solo CF.
+      </p>
+      <p class="mt-2">
+        Quello che la decodifica inversa restituisce con precisione sono invece <strong>data di
+        nascita, sesso e comune</strong>: questi dati sono codificati in modo deterministico e quindi
+        perfettamente recuperabili.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Inverso o Verifica: Qual è la Differenza?</h2>
+      <p>
+        I due termini vengono spesso usati come sinonimi, ma indicano due operazioni diverse:
+      </p>
+      <ul class="mt-3 space-y-2 list-disc pl-5">
+        <li>
+          <strong>Decodifica inversa</strong>: estrae i dati anagrafici (data, sesso, comune) contenuti
+          nel codice. Risponde a "cosa mi dice questo CF?".
+        </li>
+        <li>
+          <strong>Verifica</strong>: controlla che il codice sia formalmente corretto, ricalcolando il
+          16° carattere (carattere di controllo). Risponde a "questo CF è scritto bene?".
+        </li>
+      </ul>
+      <p class="mt-3">
+        Il nostro strumento fa entrambe le cose in un colpo solo. Se vuoi solo controllare la validità
+        formale di un codice, usa lo
+        <a href="/verifica-codice-fiscale/" class="text-brand-blue-link hover:underline font-medium">strumento di verifica del codice fiscale</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Come Usare lo Strumento</h2>
+      <p class="mb-3">La decodifica avviene in tre passaggi:</p>
+      <ol class="space-y-2">
+        {[
+          ['1', 'Incolla o digita il codice fiscale di 16 caratteri nel campo qui sopra.'],
+          ['2', "Lo strumento valida il codice e ne estrae anno, mese, giorno di nascita, sesso e comune."],
+          ['3', 'Leggi i dati anagrafici decodificati, con l\'indicazione del comune o stato estero di nascita.'],
+        ].map(([n, txt]) => (
+          <li class="flex items-start gap-3 bg-slate-50 rounded-xl p-3">
+            <span class="bg-brand-navy text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0">{n}</span>
+            <span class="text-sm text-slate-600">{txt}</span>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-5 p-4 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl">
+        <p class="text-sm font-medium text-green-800">Devi invece calcolare un CF dai dati anagrafici?</p>
+        <a href="/" class="mt-2 inline-block text-sm text-brand-green font-semibold hover:underline">
+          Vai al Calcolatore Codice Fiscale →
+        </a>
+      </div>
+    </section>
+
+  </div>
 
   <StrumentiCorrelati currentSlug="inverso" />
+
+  <div class="my-10 min-h-[90px]"></div>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti sul Codice Fiscale Inverso</h2>
+    <div class="space-y-2">
+      {faqs.map(({ q, a }) => (
+        <details class="bg-white border border-slate-200 rounded-xl group">
+          <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+            {q}
+            <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
 </Layout>
