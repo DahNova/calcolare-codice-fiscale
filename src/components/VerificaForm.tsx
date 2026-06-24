@@ -15,6 +15,21 @@ export default function VerificaForm() {
     }
   }
 
+  function trackNextStep(destination: string) {
+    if (typeof window !== 'undefined') {
+      const w = window as unknown as { dataLayer?: Record<string, unknown>[] };
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({ event: 'next_step_click', source: 'verifica', destination });
+    }
+  }
+
+  // Step evergreen, utili sia per CF valido sia non valido.
+  const nextSteps = [
+    { id: 'calcola', href: '/', title: 'Calcola un CF', desc: 'Genera un codice fiscale da zero' },
+    { id: 'inverso', href: '/codice-fiscale-inverso/', title: 'Codice Fiscale Inverso', desc: 'Estrai data, sesso e comune dal CF' },
+    { id: 'come-leggere', href: '/come-leggere-codice-fiscale/', title: 'Come leggere il CF', desc: 'Cosa significa ogni carattere' },
+  ];
+
   return (
     <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-[0_8px_32px_-4px_rgba(15,23,42,0.06)] space-y-4">
       <div>
@@ -51,6 +66,21 @@ export default function VerificaForm() {
             Il carattere di controllo non corrisponde. Verifica di aver inserito il CF correttamente.
           </p>
         </div>
+      )}
+
+      {result !== null && (
+        <nav aria-label="Prossimi passi" className="pt-1">
+          <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-2 text-center">E adesso?</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            {nextSteps.map(s => (
+              <a key={s.id} href={s.href} onClick={() => trackNextStep(s.id)}
+                className="block p-3 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all text-left">
+                <div className="text-[13px] font-semibold text-brand-blue-link leading-snug">{s.title} →</div>
+                <div className="text-[11px] text-slate-500 mt-0.5">{s.desc}</div>
+              </a>
+            ))}
+          </div>
+        </nav>
       )}
     </div>
   );

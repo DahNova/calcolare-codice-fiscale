@@ -126,6 +126,30 @@ export default function CalcolaForm() {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  function trackNextStep(destination: string) {
+    if (typeof window !== 'undefined') {
+      const w = window as unknown as { dataLayer?: Record<string, unknown>[] };
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: 'next_step_click',
+        source: 'calcola',
+        destination,
+        tipo_calcolo: natoEstero ? 'estero' : 'italia',
+      });
+    }
+  }
+
+  // Micro-navigazione contestuale mostrata sotto il risultato.
+  // Il secondo step è adattivo: chi nasce all'estero è indirizzato all'hub dei codici Z,
+  // chi nasce in Italia alla guida di lettura del CF.
+  const nextSteps = [
+    { id: 'verifica', href: '/verifica-codice-fiscale/', title: 'Verifica questo CF', desc: 'Controlla che sia formalmente corretto' },
+    natoEstero
+      ? { id: 'stranieri', href: '/codice-fiscale-stranieri/', title: 'Codici catastali esteri', desc: 'I codici Z dei 216 paesi esteri' }
+      : { id: 'come-leggere', href: '/come-leggere-codice-fiscale/', title: 'Come leggere il CF', desc: 'Cosa significa ogni carattere' },
+    { id: 'omocodia', href: '/omocodia-codice-fiscale/', title: 'È un caso di omocodia?', desc: 'Quando il CF cambia per duplicati' },
+  ];
+
   const fieldClass = (field: keyof Errors) =>
     `w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-brand-blue-link focus:bg-white transition-colors ${
       errors[field] ? 'border-red-400 bg-red-50' : 'border-slate-200 bg-slate-50'
@@ -242,22 +266,38 @@ export default function CalcolaForm() {
 
       {/* Risultato */}
       {risultato && (
-        <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl text-center">
-          <p className="text-xs uppercase tracking-wide text-slate-500 mb-2">Il tuo codice fiscale è:</p>
-          <div className="flex items-center justify-center gap-3 flex-wrap">
-            <span className="text-3xl font-mono font-bold text-brand-blue tracking-widest">
-              {risultato}
-            </span>
-            <button type="button" onClick={copy}
-              className="text-xs bg-white border border-slate-200 rounded-xl px-4 py-2 hover:bg-slate-50 transition-colors font-medium">
-              {copied ? '✓ Copiato!' : 'Copia'}
-            </button>
+        <>
+          <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl text-center">
+            <p className="text-xs uppercase tracking-wide text-slate-500 mb-2">Il tuo codice fiscale è:</p>
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              <span className="text-3xl font-mono font-bold text-brand-blue tracking-widest">
+                {risultato}
+              </span>
+              <button type="button" onClick={copy}
+                className="text-xs bg-white border border-slate-200 rounded-xl px-4 py-2 hover:bg-slate-50 transition-colors font-medium">
+                {copied ? '✓ Copiato!' : 'Copia'}
+              </button>
+            </div>
+            <p className="text-xs text-slate-500 mt-3">
+              Calcolato secondo il D.M. 12/03/1974. In rari casi di omocodia il codice
+              assegnato dall'Agenzia delle Entrate potrebbe differire.
+            </p>
           </div>
-          <p className="text-xs text-slate-500 mt-3">
-            Calcolato secondo il D.M. 12/03/1974. In rari casi di omocodia il codice
-            assegnato dall'Agenzia delle Entrate potrebbe differire.
-          </p>
-        </div>
+
+          {/* Prossimi passi contestuali — micro-navigazione post-risultato */}
+          <nav aria-label="Prossimi passi" className="pt-1">
+            <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-2 text-center">E adesso?</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {nextSteps.map(s => (
+                <a key={s.id} href={s.href} onClick={() => trackNextStep(s.id)}
+                  className="block p-3 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all text-left">
+                  <div className="text-[13px] font-semibold text-brand-blue-link leading-snug">{s.title} →</div>
+                  <div className="text-[11px] text-slate-500 mt-0.5">{s.desc}</div>
+                </a>
+              ))}
+            </div>
+          </nav>
+        </>
       )}
     </form>
   );
