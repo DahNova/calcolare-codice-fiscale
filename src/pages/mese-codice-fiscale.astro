@@ -1,0 +1,207 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StrumentiCorrelati from '../components/StrumentiCorrelati.astro';
+
+// Mese di nascita → lettera nel codice fiscale (D.M. 12/03/1974)
+const mesi: [string, string, string][] = [
+  ['Gennaio', '1', 'A'], ['Febbraio', '2', 'B'], ['Marzo', '3', 'C'], ['Aprile', '4', 'D'],
+  ['Maggio', '5', 'E'], ['Giugno', '6', 'H'], ['Luglio', '7', 'L'], ['Agosto', '8', 'M'],
+  ['Settembre', '9', 'P'], ['Ottobre', '10', 'R'], ['Novembre', '11', 'S'], ['Dicembre', '12', 'T'],
+];
+
+// Vista inversa: lettera → mese, ordinata per lettera
+const perLettera: [string, string][] = mesi.map(([mese, , lettera]) => [lettera, mese] as [string, string]);
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "A quale mese corrisponde la lettera del codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il nono carattere del codice fiscale indica il mese di nascita con una lettera: A=gennaio, B=febbraio, C=marzo, D=aprile, E=maggio, H=giugno, L=luglio, M=agosto, P=settembre, R=ottobre, S=novembre, T=dicembre." }
+    },
+    {
+      "@type": "Question",
+      "name": "Che mese è la lettera R nel codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La lettera R corrisponde al mese di ottobre. Nel codice fiscale i mesi non seguono l'ordine alfabetico: dopo E (maggio) si salta a H (giugno), L (luglio), M (agosto), P (settembre), R (ottobre), S (novembre) e T (dicembre)." }
+    },
+    {
+      "@type": "Question",
+      "name": "Perché nel codice fiscale i mesi sono indicati con lettere?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il D.M. 12/03/1974 ha scelto una lettera per ogni mese per occupare un solo carattere invece di due cifre, rendendo il codice più compatto. Le lettere usate sono dodici (A, B, C, D, E, H, L, M, P, R, S, T) e ne vengono escluse alcune per evitare confusione con altre parti del codice." }
+    },
+    {
+      "@type": "Question",
+      "name": "Quante e quali lettere si usano per i mesi nel codice fiscale?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Si usano dodici lettere, una per ogni mese: A, B, C, D, E, H, L, M, P, R, S, T. Le lettere F, G, I, N, O, Q, U, V, Z non vengono mai usate per indicare il mese." }
+    },
+    {
+      "@type": "Question",
+      "name": "In quale posizione del codice fiscale si trova la lettera del mese?",
+      "acceptedAnswer": { "@type": "Answer", "text": "La lettera del mese è il nono carattere del codice fiscale: viene subito dopo le tre lettere del cognome, le tre del nome e le due cifre dell'anno di nascita." }
+    },
+  ],
+};
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Il Mese nel Codice Fiscale: Tabella delle Lettere",
+  "description": "Quale mese corrisponde a ogni lettera del codice fiscale: A=gennaio, E=maggio, H=giugno, R=ottobre, T=dicembre. Tabella completa e come ricavare il mese dalla lettera.",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "datePublished": "2026-06-24",
+  "dateModified": "2026-06-24",
+  "url": "https://www.calcolare-codice-fiscale.it/mese-codice-fiscale/",
+  "inLanguage": "it"
+};
+---
+
+<Layout
+  title="Mese nel Codice Fiscale: la Tabella delle Lettere (A–T)"
+  description="A quale mese corrisponde ogni lettera del codice fiscale: A gennaio, E maggio, H giugno, R ottobre, T dicembre. Tabella completa, vista inversa lettera→mese e dove si trova nel CF."
+  schemaJson={[schemaFAQ, schemaArticle]}
+  breadcrumbs={[{name:'Home',url:'/'},{name:'Mese nel Codice Fiscale',url:'/mese-codice-fiscale/'}]}
+>
+  <!-- Gradient page header -->
+  <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
+    <nav class="text-xs mb-4">
+      <a href="/" class="text-white/50 hover:text-white/70">Home</a>
+      <span class="mx-1.5 text-white/50">›</span>
+      <span class="text-white/80">Mese nel Codice Fiscale</span>
+    </nav>
+    <h1 class="text-3xl font-heading font-bold text-white mb-2">Il Mese nel Codice Fiscale: Tabella delle Lettere</h1>
+    <p class="text-white/60 text-sm">A quale mese corrisponde ogni lettera, e come ricavare il mese di nascita da un codice fiscale</p>
+  </div>
+
+  <div class="space-y-8 text-sm text-slate-600 leading-relaxed">
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Come si codifica il mese nel codice fiscale</h2>
+      <p>
+        Nel codice fiscale il <strong>mese di nascita</strong> è rappresentato da una <strong>sola lettera</strong>,
+        non da un numero. È il <strong>nono carattere</strong> del codice: arriva subito dopo le tre lettere del
+        cognome, le tre del nome e le due cifre dell'anno di nascita.
+      </p>
+      <p class="mt-3">
+        La regola è stabilita dal <strong>D.M. 12/03/1974</strong>. Per i primi cinque mesi le lettere seguono
+        l'alfabeto (gennaio = A, febbraio = B, marzo = C, aprile = D, maggio = E), ma da giugno in poi
+        <strong>si salta qualche lettera</strong>: vengono escluse quelle che potrebbero creare ambiguità con altre
+        parti del codice. Per questo giugno è <strong>H</strong> e non F, e i mesi successivi usano L, M, P, R, S, T.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Tabella mese → lettera</h2>
+      <p class="mb-4">La corrispondenza completa tra i dodici mesi e le lettere usate nel codice fiscale:</p>
+      <div class="grid grid-cols-3 sm:grid-cols-4 gap-2">
+        {mesi.map(([mese, num, lettera]) => (
+          <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
+            <div class="text-xs text-slate-500 mb-1">{mese} ({num})</div>
+            <div class="font-mono font-black text-2xl text-brand-navy-light">{lettera}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Trova il mese dalla lettera</h2>
+      <p class="mb-4">
+        Hai una lettera e vuoi sapere a quale mese corrisponde? Questa è la vista inversa, utile quando
+        leggi il nono carattere di un codice fiscale già esistente:
+      </p>
+      <div class="overflow-hidden rounded-xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wide">
+              <th class="text-left font-semibold px-4 py-2.5 w-24">Lettera</th>
+              <th class="text-left font-semibold px-4 py-2.5">Mese di nascita</th>
+            </tr>
+          </thead>
+          <tbody>
+            {perLettera.map(([lettera, mese]) => (
+              <tr class="border-t border-slate-100">
+                <td class="px-4 py-2.5 font-mono font-bold text-brand-navy-light text-lg">{lettera}</td>
+                <td class="px-4 py-2.5 text-slate-700">{mese}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-slate-500">
+        Le lettere <strong>F, G, I, N, O, Q, U, V, Z</strong> non indicano mai un mese: se le trovi in nona
+        posizione, controlla di non aver contato male i caratteri (oppure il codice potrebbe essere
+        <a href="/codice-fiscale-inverso/" class="text-brand-blue-link hover:underline">decodificato qui</a>).
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Dove si trova il mese: esempio</h2>
+      <p class="mb-4">
+        Prendiamo un codice fiscale d'esempio. La lettera del mese è evidenziata: è sempre il nono carattere,
+        tra l'anno (due cifre) e il giorno di nascita.
+      </p>
+      <div class="bg-white border border-slate-200 rounded-xl p-5 text-center">
+        <div class="font-mono text-xl sm:text-2xl tracking-wider">
+          <span class="text-slate-400">RSSMRA</span><span class="text-slate-400">80</span><span class="font-black text-brand-navy-light bg-amber-100 px-1 rounded">A</span><span class="text-slate-400">01H501U</span>
+        </div>
+        <p class="text-xs text-slate-500 mt-3">
+          Mario Rossi, nato il 1° <strong>gennaio</strong> 1980 → la lettera del mese è <strong>A</strong>.
+          Se fosse nato a ottobre, in quella posizione ci sarebbe <strong>R</strong>.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Perché alcuni mesi "saltano" delle lettere</h2>
+      <p>
+        Il giorno di nascita, nel codice fiscale, viene scritto con due cifre e per le donne si aggiunge 40
+        (quindi va da 41 a 71). La scelta delle lettere dei mesi è pensata per restare leggibile accanto a
+        queste cifre e al resto del codice. È per questo che si usano solo dodici lettere
+        (<strong>A, B, C, D, E, H, L, M, P, R, S, T</strong>) e non le prime dodici dell'alfabeto in ordine.
+      </p>
+      <p class="mt-3">
+        La stessa logica di "lettera al posto di un numero" torna, in modo diverso, nei codici
+        <a href="/omocodia-codice-fiscale/" class="text-brand-blue-link hover:underline">omocodici</a>, dove però
+        a essere sostituite sono le cifre in caso di codici fiscali duplicati.
+      </p>
+    </section>
+
+    <!-- CTA -->
+    <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 text-center">
+      <p class="font-semibold text-green-800 mb-2">Vuoi il codice fiscale completo?</p>
+      <p class="text-slate-600 mb-3">Inserisci nome, data e comune: la lettera del mese viene calcolata in automatico.</p>
+      <a href="/" class="inline-block bg-brand-green hover:bg-brand-green-hover text-white px-6 py-2.5 rounded-lg transition-colors font-medium text-sm">
+        Vai al Calcolatore &rarr;
+      </a>
+    </div>
+
+  </div>
+
+  <div class="my-10 min-h-[90px]"></div>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
+    <div class="space-y-2">
+      {[
+        { q: "A quale mese corrisponde la lettera R nel codice fiscale?", a: "La lettera R corrisponde a ottobre. Nel codice fiscale i mesi non seguono l'ordine alfabetico: dopo E (maggio) si passa a H (giugno), L (luglio), M (agosto), P (settembre), R (ottobre), S (novembre) e T (dicembre)." },
+        { q: "Che mese sono le lettere P, H e T?", a: "P corrisponde a settembre, H a giugno e T a dicembre. La tabella completa è: A gennaio, B febbraio, C marzo, D aprile, E maggio, H giugno, L luglio, M agosto, P settembre, R ottobre, S novembre, T dicembre." },
+        { q: "Perché nel codice fiscale i mesi sono lettere e non numeri?", a: "Per occupare un solo carattere invece di due cifre, rendendo il codice più compatto. Le lettere usate sono dodici e vengono scelte per non confondersi con le cifre dell'anno e del giorno di nascita." },
+        { q: "In quale posizione si trova la lettera del mese?", a: "È il nono carattere del codice fiscale, subito dopo le tre lettere del cognome, le tre del nome e le due cifre dell'anno di nascita." },
+        { q: "Quali lettere non indicano mai un mese?", a: "Le lettere F, G, I, N, O, Q, U, V e Z non vengono mai usate per il mese. Se compaiono in nona posizione, è probabile un errore di lettura o un codice particolare da decodificare." },
+      ].map(({ q, a }) => (
+        <details class="bg-white border border-slate-200 rounded-xl group">
+          <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+            {q}
+            <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <StrumentiCorrelati currentSlug="mese" />
+
+</Layout>
