@@ -82,10 +82,11 @@ const allSchemas = breadcrumbs && breadcrumbs.length > 0
           <span class="font-heading font-semibold text-[17px] hidden sm:inline">Calcolare Codice Fiscale</span>
         </a>
         <!-- Desktop nav -->
-        <ul class="hidden md:flex gap-7 text-sm">
+        <ul class="hidden md:flex gap-6 text-sm">
           <li><a href="/codice-fiscale-inverso/" class="text-white/65 hover:text-white transition-colors">Inverso</a></li>
           <li><a href="/verifica-codice-fiscale/" class="text-white/65 hover:text-white transition-colors">Verifica</a></li>
           <li><a href="/come-si-calcola-codice-fiscale/" class="text-white/65 hover:text-white transition-colors">Guida</a></li>
+          <li><a href="/tabelle-codice-fiscale/" class="text-white/65 hover:text-white transition-colors">Tabelle</a></li>
           <li><a href="/codice-fiscale-stranieri/" class="text-white/65 hover:text-white transition-colors">Paesi Esteri</a></li>
         </ul>
         <!-- Mobile hamburger -->
@@ -122,15 +123,21 @@ const allSchemas = breadcrumbs && breadcrumbs.length > 0
             <li><a href="/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Calcola Codice Fiscale</a></li>
             <li><a href="/codice-fiscale-inverso/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Codice Fiscale Inverso</a></li>
             <li><a href="/verifica-codice-fiscale/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Verifica Codice Fiscale</a></li>
+            <li><a href="/cerca-codice-belfiore/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Cerca Codice Belfiore</a></li>
+            <li><a href="/cerca-comune-da-codice/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Cerca Comune da Codice</a></li>
           </ul>
         </div>
         <div>
           <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 px-3">Guide e Riferimenti</p>
           <ul class="space-y-0.5">
             <li><a href="/come-si-calcola-codice-fiscale/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Come si Calcola</a></li>
+            <li><a href="/come-leggere-codice-fiscale/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Come Leggere il CF</a></li>
+            <li><a href="/mese-codice-fiscale/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Mese nel Codice Fiscale</a></li>
             <li><a href="/omocodia-codice-fiscale/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Omocodia</a></li>
+            <li><a href="/codice-belfiore/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Codice Belfiore</a></li>
             <li><a href="/tabelle-codice-fiscale/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Tabelle di Riferimento</a></li>
-            <li><a href="/codice-fiscale-stranieri/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Nati all'Estero</a></li>
+            <li><a href="/richiedere-codice-fiscale/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Richiedere il Codice Fiscale</a></li>
+            <li><a href="/codice-fiscale-stranieri/" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-gray-800 hover:bg-blue-50 hover:text-brand-blue transition-colors">Codice Fiscale Estero</a></li>
           </ul>
         </div>
       </nav>
@@ -147,13 +154,19 @@ const allSchemas = breadcrumbs && breadcrumbs.length > 0
       <p class="text-white/60 text-sm mb-4">
         Strumento gratuito per il calcolo del codice fiscale italiano - D.M. 12/03/1974
       </p>
-      <nav aria-label="Navigazione footer" class="flex justify-center flex-wrap gap-5 text-xs">
+      <nav aria-label="Navigazione footer" class="flex justify-center flex-wrap gap-x-5 gap-y-2.5 text-xs max-w-3xl mx-auto px-6">
         <a href="/" class="text-white/50 hover:text-white/80 transition-colors">Calcola CF</a>
         <a href="/codice-fiscale-inverso/" class="text-white/50 hover:text-white/80 transition-colors">Inverso</a>
         <a href="/verifica-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Verifica</a>
-        <a href="/come-si-calcola-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Guida</a>
+        <a href="/cerca-codice-belfiore/" class="text-white/50 hover:text-white/80 transition-colors">Cerca Belfiore</a>
+        <a href="/cerca-comune-da-codice/" class="text-white/50 hover:text-white/80 transition-colors">Cerca Comune</a>
+        <a href="/come-si-calcola-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Come si Calcola</a>
+        <a href="/come-leggere-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Come Leggere</a>
+        <a href="/mese-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Mese nel CF</a>
         <a href="/omocodia-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Omocodia</a>
+        <a href="/codice-belfiore/" class="text-white/50 hover:text-white/80 transition-colors">Codice Belfiore</a>
         <a href="/tabelle-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Tabelle</a>
+        <a href="/richiedere-codice-fiscale/" class="text-white/50 hover:text-white/80 transition-colors">Richiedere CF</a>
         <a href="/codice-fiscale-stranieri/" class="text-white/50 hover:text-white/80 transition-colors">Paesi Esteri</a>
       </nav>
     </footer>
