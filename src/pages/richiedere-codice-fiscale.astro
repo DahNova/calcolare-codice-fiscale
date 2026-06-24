@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StrumentiCorrelati from '../components/StrumentiCorrelati.astro';
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Come si richiede il codice fiscale per la prima volta?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il codice fiscale viene rilasciato gratuitamente dall'Agenzia delle Entrate. Ci si può recare a qualsiasi ufficio territoriale con un documento d'identità valido, oppure inviare la richiesta tramite i servizi online dell'Agenzia. Per i cittadini stranieri la richiesta può passare anche dallo Sportello Unico per l'Immigrazione, dalla Questura o dal Consolato italiano." }
+    },
+    {
+      "@type": "Question",
+      "name": "Come faccio se ho perso il codice fiscale o la tessera sanitaria?",
+      "acceptedAnswer": { "@type": "Answer", "text": "In caso di smarrimento puoi richiedere un duplicato gratuito della tessera sanitaria / tesserino del codice fiscale. Si può fare online dal sito dell'Agenzia delle Entrate o dal Fascicolo Sanitario Elettronico (accesso con SPID, CIE o CNS), tramite l'app dell'Agenzia, oppure di persona in un ufficio. Il numero di codice fiscale resta sempre lo stesso: non cambia mai." }
+    },
+    {
+      "@type": "Question",
+      "name": "Come si richiede il codice fiscale per un neonato?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Per i neonati il codice fiscale viene generato automaticamente al momento della registrazione della nascita presso l'anagrafe del comune. Non serve una domanda separata: la tessera sanitaria con il codice fiscale viene poi recapitata per posta all'indirizzo di residenza. In caso di necessità immediata si può comunque richiedere l'attribuzione all'Agenzia delle Entrate." }
+    },
+    {
+      "@type": "Question",
+      "name": "Cos'è il codice fiscale provvisorio?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Il codice fiscale provvisorio (o numerico) è un codice temporaneo composto da sole cifre, attribuito in alcuni casi in attesa del codice fiscale alfanumerico definitivo, ad esempio per i neonati nei primi giorni o per alcune posizioni sanitarie. Viene poi sostituito dal codice fiscale standard di 16 caratteri." }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso ottenere il codice fiscale online?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sì. L'Agenzia delle Entrate mette a disposizione servizi online per richiedere l'attribuzione del codice fiscale e il duplicato della tessera, con accesso tramite SPID, CIE o CNS. Il calcolo del codice fiscale online (come su questo sito) è invece uno strumento informativo: produce il codice teorico, ma non sostituisce il documento ufficiale rilasciato dall'Agenzia." }
+    },
+  ],
+};
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Come Richiedere il Codice Fiscale: Prima Richiesta, Duplicato e Neonati",
+  "description": "Come richiedere il codice fiscale all'Agenzia delle Entrate: prima richiesta, duplicato in caso di smarrimento, codice fiscale per neonati e codice provvisorio.",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "datePublished": "2026-06-24",
+  "dateModified": "2026-06-24",
+  "url": "https://www.calcolare-codice-fiscale.it/richiedere-codice-fiscale/",
+  "inLanguage": "it"
+};
+---
+
+<Layout
+  title="Come Richiedere il Codice Fiscale: Prima Volta, Duplicato e Neonati"
+  description="Come richiedere il codice fiscale all'Agenzia delle Entrate: prima richiesta, duplicato se smarrito, codice fiscale per neonati e codice provvisorio. Guida pratica aggiornata."
+  schemaJson={[schemaFAQ, schemaArticle]}
+  breadcrumbs={[{name:'Home',url:'/'},{name:'Richiedere il Codice Fiscale',url:'/richiedere-codice-fiscale/'}]}
+>
+  <!-- Gradient page header -->
+  <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
+    <nav class="text-xs mb-4">
+      <a href="/" class="text-white/50 hover:text-white/70">Home</a>
+      <span class="mx-1.5 text-white/50">›</span>
+      <span class="text-white/80">Richiedere il Codice Fiscale</span>
+    </nav>
+    <h1 class="text-3xl font-heading font-bold text-white mb-2">Come Richiedere il Codice Fiscale</h1>
+    <p class="text-white/60 text-sm">Prima richiesta, duplicato in caso di smarrimento, codice fiscale per neonati e codice provvisorio</p>
+  </div>
+
+  <div class="space-y-8 text-sm text-slate-600 leading-relaxed">
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Chi rilascia il codice fiscale</h2>
+      <p>
+        Il codice fiscale è rilasciato <strong>gratuitamente dall'Agenzia delle Entrate</strong>, che lo attribuisce
+        a ogni cittadino e lo certifica con la <strong>tessera sanitaria</strong> (o, in passato, con il tesserino
+        plastificato del codice fiscale). Il calcolo online che trovi su questo sito è uno strumento
+        <strong>informativo</strong>: produce il codice <em>teorico</em> secondo la formula del D.M. 12/03/1974, ma
+        il codice ufficiale è quello assegnato dall'Agenzia.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Prima richiesta del codice fiscale</h2>
+      <p>
+        Se non hai mai avuto un codice fiscale, puoi richiederne l'attribuzione:
+      </p>
+      <ul class="mt-3 space-y-2">
+        <li class="flex gap-2"><span class="text-brand-blue-link font-bold">•</span> <span><strong>Di persona</strong>, in un qualsiasi ufficio territoriale dell'Agenzia delle Entrate, con un documento d'identità valido.</span></li>
+        <li class="flex gap-2"><span class="text-brand-blue-link font-bold">•</span> <span><strong>Online</strong>, tramite i servizi telematici dell'Agenzia delle Entrate (accesso con SPID, CIE o CNS).</span></li>
+        <li class="flex gap-2"><span class="text-brand-blue-link font-bold">•</span> <span>Per i <strong>cittadini stranieri</strong>, anche tramite Sportello Unico per l'Immigrazione, Questura o Consolato italiano nel Paese di origine. Vedi la guida al <a href="/codice-fiscale-stranieri/" class="text-brand-blue-link hover:underline">codice fiscale per nati all'estero</a>.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Codice fiscale per un neonato</h2>
+      <p>
+        Per i <strong>neonati</strong> non serve una domanda separata: il codice fiscale viene
+        <strong>generato automaticamente</strong> quando i genitori registrano la nascita all'<strong>anagrafe
+        del comune</strong>. La <strong>tessera sanitaria</strong> con il codice fiscale del bambino viene poi
+        recapitata per posta all'indirizzo di residenza nelle settimane successive.
+      </p>
+      <p class="mt-3">
+        Nei primi giorni, in attesa della tessera, può essere attribuito un <strong>codice fiscale provvisorio</strong>
+        (vedi sotto). Se ti serve conoscere in anticipo il codice teorico del neonato, puoi
+        <a href="/" class="text-brand-blue-link hover:underline">calcolarlo qui</a> inserendo nome, data e comune di nascita.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Codice fiscale smarrito: come ottenere un duplicato</h2>
+      <p>
+        Se hai <strong>perso la tessera sanitaria</strong> o il tesserino, il numero di codice fiscale
+        <strong>non cambia</strong>: ti serve solo un <strong>duplicato</strong> del documento, gratuito. Puoi richiederlo:
+      </p>
+      <ul class="mt-3 space-y-2">
+        <li class="flex gap-2"><span class="text-brand-blue-link font-bold">•</span> <span><strong>Online</strong> dal sito dell'Agenzia delle Entrate o dal <strong>Fascicolo Sanitario Elettronico</strong> della tua Regione (accesso con SPID, CIE o CNS).</span></li>
+        <li class="flex gap-2"><span class="text-brand-blue-link font-bold">•</span> <span>Dall'<strong>app dell'Agenzia delle Entrate</strong>, che permette di scaricare il duplicato in formato digitale.</span></li>
+        <li class="flex gap-2"><span class="text-brand-blue-link font-bold">•</span> <span><strong>Di persona</strong> in un ufficio dell'Agenzia, con un documento d'identità.</span></li>
+      </ul>
+      <p class="mt-3">
+        Se ricordi i tuoi dati anagrafici ma non il codice, puoi anche
+        <a href="/" class="text-brand-blue-link hover:underline">ricalcolarlo</a> oppure
+        <a href="/verifica-codice-fiscale/" class="text-brand-blue-link hover:underline">verificarne la correttezza</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Cos'è il codice fiscale provvisorio</h2>
+      <p>
+        Il <strong>codice fiscale provvisorio</strong> (detto anche <strong>numerico</strong>) è un codice temporaneo
+        composto da <strong>sole cifre</strong>, attribuito in alcune situazioni in attesa del codice fiscale
+        alfanumerico definitivo di 16 caratteri: ad esempio per i neonati nei primissimi giorni o per alcune
+        posizioni sanitarie. Una volta completata l'attribuzione, viene sostituito dal codice fiscale standard.
+      </p>
+    </section>
+
+    <!-- CTA -->
+    <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 text-center">
+      <p class="font-semibold text-green-800 mb-2">Ti serve solo il codice, non il documento?</p>
+      <p class="text-slate-600 mb-3">Calcola subito il codice fiscale teorico inserendo nome, data e comune di nascita.</p>
+      <a href="/" class="inline-block bg-brand-green hover:bg-brand-green-hover text-white px-6 py-2.5 rounded-lg transition-colors font-medium text-sm">
+        Vai al Calcolatore &rarr;
+      </a>
+    </div>
+
+  </div>
+
+  <div class="my-10 min-h-[90px]"></div>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
+    <div class="space-y-2">
+      {[
+        { q: "Come si richiede il codice fiscale per la prima volta?", a: "Gratuitamente dall'Agenzia delle Entrate: di persona in un ufficio territoriale con un documento d'identità, oppure online con SPID/CIE/CNS. I cittadini stranieri possono passare anche da Sportello Unico Immigrazione, Questura o Consolato." },
+        { q: "Come faccio se ho perso il codice fiscale o la tessera sanitaria?", a: "Richiedi un duplicato gratuito: online dal sito dell'Agenzia delle Entrate o dal Fascicolo Sanitario Elettronico, dall'app dell'Agenzia, o di persona. Il numero di codice fiscale non cambia mai." },
+        { q: "Come si richiede il codice fiscale per un neonato?", a: "Viene generato automaticamente quando si registra la nascita all'anagrafe del comune; la tessera sanitaria arriva poi per posta. Non serve una domanda separata." },
+        { q: "Cos'è il codice fiscale provvisorio o numerico?", a: "Un codice temporaneo composto da sole cifre, attribuito in attesa del codice fiscale alfanumerico definitivo (ad esempio per i neonati nei primi giorni). Viene poi sostituito dal CF standard di 16 caratteri." },
+        { q: "Il codice fiscale calcolato online è quello ufficiale?", a: "No: il calcolo online produce il codice teorico secondo la formula standard, utile per conoscerlo o verificarlo. Il documento ufficiale (tessera sanitaria) è rilasciato dall'Agenzia delle Entrate." },
+      ].map(({ q, a }) => (
+        <details class="bg-white border border-slate-200 rounded-xl group">
+          <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+            {q}
+            <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <StrumentiCorrelati currentSlug="richiedere" />
+
+</Layout>
