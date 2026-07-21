@@ -1,0 +1,62 @@
+---
+// src/pages/codice-catastale/index.astro
+import Layout from '../../layouts/Layout.astro';
+import { resolveComuni } from '../../lib/comuniCatastale';
+
+const comuni = resolveComuni().sort((a, b) => a.nome.localeCompare(b.nome, 'it'));
+
+const title = 'Codice Catastale dei Comuni: Cerca il Codice Belfiore | Codice Fiscale';
+const description = 'Il codice catastale (o codice Belfiore) è il codice del comune usato nel codice fiscale. Trova il codice catastale del tuo comune e scopri dove si trova nel CF.';
+
+const faqItems = [
+  { q: 'Cos’è il codice catastale di un comune?', a: 'Il codice catastale (o codice Belfiore) è un codice di una lettera e tre cifre (es. H501 per Roma) che identifica ogni comune italiano. Nel codice fiscale occupa le posizioni 12-15 e indica il comune di nascita.' },
+  { q: 'Il codice catastale è uguale al codice Belfiore?', a: 'Sì. "Codice catastale", "codice comune" e "codice Belfiore" sono tre nomi per lo stesso identificativo del comune usato nel codice fiscale.' },
+  { q: 'Il codice catastale è la visura catastale?', a: 'No. Il codice catastale nel codice fiscale è il codice del comune di nascita. La visura catastale immobiliare (dati di terreni e fabbricati) è un documento diverso, dell’Agenzia delle Entrate.' },
+];
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } })),
+};
+---
+
+<Layout title={title} description={description} schemaJson={schemaFAQ}
+  breadcrumbs={[{name:'Home',url:'/'},{name:'Codice Catastale',url:'/codice-catastale/'}]}>
+
+  <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
+    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-2">Codice Catastale dei Comuni</h1>
+    <p class="text-white/60 text-sm">Il codice del comune (Belfiore) usato nel codice fiscale. Trova quello del tuo comune.</p>
+  </div>
+
+  <div class="space-y-8 text-sm text-slate-600 leading-relaxed">
+    <section>
+      <p>Il <strong>codice catastale</strong> — chiamato anche <strong>codice Belfiore</strong> o codice comune — è formato da una lettera e tre cifre (per esempio <span class="font-mono">H501</span> per Roma). Nel codice fiscale occupa le <strong>posizioni 12-15</strong> e identifica il comune di nascita. Non va confuso con la visura catastale immobiliare.</p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Comuni</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {comuni.map(c => (
+          <a href={`/codice-catastale/${c.slug}/`} class="flex items-baseline justify-between p-3 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors">
+            <span class="font-semibold text-sm text-brand-blue-link">{c.nome}</span>
+            <span class="text-xs text-slate-500 font-mono">{c.codiceCatastale}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-heading font-bold text-slate-800 mb-3">Strumenti</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <a href="/cerca-codice-belfiore/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
+          <div class="font-semibold text-sm text-brand-blue-link mb-1">Cerca codice Belfiore &rarr;</div>
+          <div class="text-xs text-slate-500">Digita un comune, ottieni il codice</div>
+        </a>
+        <a href="/codice-belfiore/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
+          <div class="font-semibold text-sm text-brand-blue-link mb-1">Cos’è il codice Belfiore &rarr;</div>
+          <div class="text-xs text-slate-500">La guida al codice catastale nel CF</div>
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>
