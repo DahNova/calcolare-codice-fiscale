@@ -1,0 +1,161 @@
+---
+// src/pages/codice-catastale/[comune].astro
+import Layout from '../../layouts/Layout.astro';
+import EsempioCF from '../../components/EsempioCF.astro';
+import { resolveComuni, comuniVicini } from '../../lib/comuniCatastale';
+
+export function getStaticPaths() {
+  const all = resolveComuni();
+  return all.map(c => ({
+    params: { comune: c.slug },
+    props: { c, vicini: comuniVicini(c.slug, all) },
+  }));
+}
+
+const { c, vicini } = Astro.props;
+const code = c.codiceCatastale;
+
+const title = `Codice Catastale ${c.nome} (${c.provincia}): ${code} | Codice Fiscale`;
+const description = `${code} è il codice catastale (Belfiore) di ${c.nome} (${c.provincia}), usato nelle posizioni 12-15 del codice fiscale. Esempio pratico, come si legge e differenza dalla visura catastale.`;
+const url = `https://www.calcolare-codice-fiscale.it/codice-catastale/${c.slug}/`;
+
+const faqItems = [
+  { q: `Qual è il codice catastale di ${c.nome}?`, a: `Il codice catastale (o codice Belfiore) di ${c.nome} (${c.provincia}) è ${code}. Viene usato nelle posizioni 12-15 del codice fiscale per identificare chi è nato a ${c.nome}.` },
+  { q: `${code} a quale comune corrisponde?`, a: `${code} è il codice catastale del comune di ${c.nome}, in provincia di ${c.provincia}.` },
+  { q: `Dove si trova ${code} nel codice fiscale?`, a: `${code} occupa i 4 caratteri in posizione 12-15 del codice fiscale, subito prima del carattere di controllo finale. Identifica il comune di nascita, in questo caso ${c.nome}.` },
+  { q: `${code} è il codice comune o il codice catastale di ${c.nome}?`, a: `${code} è al tempo stesso codice comune, codice catastale e codice Belfiore di ${c.nome}: sono tre nomi per lo stesso identificativo. Non va confuso con la visura catastale immobiliare, che è un'altra cosa.` },
+];
+
+const schemaFAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `Codice Catastale ${c.nome}: ${code}`,
+  "description": description,
+  "url": url,
+  "inLanguage": "it",
+  "datePublished": "2026-07-21",
+  "dateModified": "2026-07-21",
+  "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+  "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
+};
+---
+
+<Layout title={title} description={description} schemaJson={[schemaFAQ, schemaArticle]}
+  breadcrumbs={[{name:'Home',url:'/'},{name:'Codice Catastale',url:'/codice-catastale/'},{name:c.nome,url:`/codice-catastale/${c.slug}/`}]}>
+
+  <!-- Header -->
+  <div class="bg-gradient-to-b from-brand-navy to-brand-navy-light rounded-2xl p-8 mb-8">
+    <nav class="text-xs mb-4">
+      <a href="/" class="text-white/50 hover:text-white/70">Home</a>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
+      <a href="/codice-catastale/" class="text-white/50 hover:text-white/70">Codice Catastale</a>
+      <span class="mx-1.5 text-white/50">&rsaquo;</span>
+      <span class="text-white/80">{c.nome}</span>
+    </nav>
+    <h1 class="text-2xl sm:text-3xl font-heading font-bold text-white mb-1">Codice Catastale {c.nome}: <span class="font-mono text-white">{code}</span></h1>
+    <p class="text-white/60 text-sm mb-1">Il codice catastale (Belfiore) <span class="font-mono font-bold text-white/90">{code}</span> identifica {c.nome} ({c.provincia}) nel codice fiscale</p>
+    <a href="/" class="mt-5 inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-5 py-2.5 text-sm text-white hover:bg-white/15 transition-colors">
+      Calcola un codice fiscale
+      <span class="text-white/60">&rarr;</span>
+    </a>
+  </div>
+
+  <div class="space-y-8 text-sm text-slate-600 leading-relaxed">
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">{code}: il codice catastale di {c.nome}</h2>
+      <p><strong>{code}</strong> è il codice catastale del comune di {c.nome}, in provincia di {c.provincia}. Nel codice fiscale occupa le posizioni 12-15 (i 4 caratteri che identificano il luogo di nascita), subito prima del carattere di controllo finale.</p>
+      <p class="mt-3">Il codice {code} è indicato anche come <strong>codice comune</strong> o <strong>codice Belfiore</strong> di {c.nome}: sono denominazioni diverse per lo stesso identificativo assegnato dall'Agenzia delle Entrate.</p>
+      <div class="mt-4 flex gap-3 bg-amber-50 border border-amber-200 rounded-lg p-4">
+        <div class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 shrink-0"></div>
+        <p class="text-slate-700"><strong>Da non confondere:</strong> il codice catastale {code} nel codice fiscale non è la <em>visura catastale</em> immobiliare (dati di terreni e fabbricati). Qui si parla del codice del comune di nascita usato nel codice fiscale delle persone.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Esempio pratico</h2>
+      <p class="mb-3">Ecco come appare {code} nel codice fiscale di una persona nata a {c.nome}:</p>
+      <EsempioCF cognome="Rossi" nome="Mario" sesso="M" giorno={1} mese={1} anno={1980} paese={c.nome} codiceCatastale={code} preposizione="a" />
+    </section>
+
+    {vicini.length > 0 && (
+      <section>
+        <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Altri comuni in provincia di {c.provincia}</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {vicini.map(v => (
+            <a href={`/codice-catastale/${v.slug}/`} class="block p-3 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link transition-colors text-center">
+              <div class="font-semibold text-sm text-brand-blue-link">{v.nome}</div>
+              <div class="text-xs text-slate-500 font-mono mt-1">{v.codiceCatastale}</div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+
+  <div class="my-10 min-h-[90px]"></div>
+
+  <!-- FAQ -->
+  <section>
+    <h2 class="text-xl font-heading font-bold text-slate-800 mb-4">Domande Frequenti</h2>
+    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+      <div class="divide-y divide-slate-100">
+        {faqItems.map(({ q, a }) => (
+          <details class="group">
+            <summary class="px-4 py-3 cursor-pointer font-medium text-sm text-slate-800 hover:bg-slate-50 list-none flex justify-between items-center">
+              {q}
+              <span class="text-slate-500 text-xs group-open:rotate-180 transition-transform">&#9660;</span>
+            </summary>
+            <p class="px-4 pb-3 text-sm text-slate-600">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Next-step (leva PV/session) -->
+  <section class="mt-8">
+    <h2 class="text-lg font-heading font-bold text-slate-800 mb-3">Prossimi passi</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <a href="/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
+        <div class="font-semibold text-sm text-brand-blue-link mb-1">Calcola un CF con {c.nome} &rarr;</div>
+        <div class="text-xs text-slate-500">Inserisci nome, cognome e data: il codice {code} è già pronto</div>
+      </a>
+      <a href="/verifica-codice-fiscale/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
+        <div class="font-semibold text-sm text-brand-blue-link mb-1">Verifica un codice fiscale &rarr;</div>
+        <div class="text-xs text-slate-500">Controlla se un CF di {c.nome} è formalmente corretto</div>
+      </a>
+      <a href="/cerca-codice-belfiore/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
+        <div class="font-semibold text-sm text-brand-blue-link mb-1">Cerca un altro comune &rarr;</div>
+        <div class="text-xs text-slate-500">Trova il codice catastale di qualsiasi comune italiano</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Approfondisci -->
+  <section class="mt-8">
+    <h2 class="text-lg font-heading font-bold text-slate-800 mb-3">Approfondisci</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {[
+        { href: '/codice-belfiore/', title: 'Cos’è il codice Belfiore', desc: 'Il codice catastale di nascita e dove si trova nel CF' },
+        { href: '/codice-catastale/', title: 'Tutti i comuni', desc: 'Directory dei codici catastali per comune' },
+        { href: '/omocodia-codice-fiscale/', title: 'Omocodia del CF', desc: 'Quando il CF ha lettere al posto delle cifre' },
+        { href: '/come-leggere-codice-fiscale/', title: 'Come leggere il CF', desc: 'Il significato di ogni carattere' },
+      ].map(({ href, title, desc }) => (
+        <a href={href} class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
+          <div class="font-semibold text-sm text-brand-blue-link mb-1">{title} &rarr;</div>
+          <div class="text-xs text-slate-500">{desc}</div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
