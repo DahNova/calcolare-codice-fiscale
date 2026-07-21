@@ -1,4 +1,4 @@
-import { comuniPriority } from '../data/comuniPriority';
+import { comuniPriority, type ComunePriority } from '../data/comuniPriority';
 import { findComune } from './comuniData';
 import { comuneSlug } from './comuneSlug';
 
@@ -11,12 +11,27 @@ export interface ComunePage {
 
 /**
  * Risolve la lista curata in pagine pronte da renderizzare.
- * Throw se un comune non è in comuni.json (fail-fast, no pagina fantasma).
- * Dedup: se due comuni producono lo stesso slug, tutti i collidenti
+ * Throw se la lista contiene un duplicato esatto (stesso nome+provincia) o
+ * se un comune non è in comuni.json (fail-fast, no pagina fantasma).
+ * Dedup: se due comuni DIVERSI producono lo stesso slug, tutti i collidenti
  * ricevono il suffisso "-<provincia lowercase>".
+ *
+ * @param priority lista da risolvere (default: la lista curata). Parametrizzato
+ *   per testabilità del guard sui duplicati.
  */
-export function resolveComuni(): ComunePage[] {
-  const base = comuniPriority.map(p => {
+export function resolveComuni(priority: ComunePriority[] = comuniPriority): ComunePage[] {
+  // Guard: un duplicato esatto (nome+provincia) genererebbe due path identici
+  // in getStaticPaths e Astro scarterebbe silenziosamente una delle pagine.
+  const seen = new Set<string>();
+  for (const p of priority) {
+    const key = `${p.nome.toLowerCase()}|${p.provincia}`;
+    if (seen.has(key)) {
+      throw new Error(`Comune duplicato in comuniPriority: ${p.nome} (${p.provincia})`);
+    }
+    seen.add(key);
+  }
+
+  const base = priority.map(p => {
     const found = findComune(p.nome, p.provincia);
     if (!found) {
       throw new Error(`Comune non trovato in comuni.json: ${p.nome} (${p.provincia})`);

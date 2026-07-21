@@ -19,6 +19,22 @@ describe('resolveComuni', () => {
     const slugs = all.map(c => c.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
   });
+  it('lancia su una entry duplicata esatta (stesso nome+provincia)', () => {
+    expect(() =>
+      resolveComuni([
+        { nome: 'Roma', provincia: 'RM', wave: 0 },
+        { nome: 'roma', provincia: 'RM', wave: 1 },
+      ])
+    ).toThrow(/duplicat/i);
+  });
+  it('suffissa gli slug collidenti di comuni diversi con la provincia', () => {
+    // Due comuni omonimi in province diverse (case gestito dal dedup).
+    const out = resolveComuni([
+      { nome: 'Livo', provincia: 'CO', wave: 0 },
+      { nome: 'Livo', provincia: 'TN', wave: 0 },
+    ]);
+    expect(out.map(c => c.slug).sort()).toEqual(['livo-co', 'livo-tn']);
+  });
 });
 
 describe('comuniVicini', () => {
