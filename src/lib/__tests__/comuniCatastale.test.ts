@@ -1,11 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { resolveComuni, comuniVicini, type ComunePage } from '../comuniCatastale';
+import { comuniPriority } from '../../data/comuniPriority';
 
 describe('resolveComuni', () => {
   const all = resolveComuni();
 
-  it('risolve tutti i comuni della Wave 0 senza lanciare', () => {
-    expect(all.length).toBe(20);
+  it('risolve ogni comune in lista senza lanciare', () => {
+    // Legato alla lista, non a un numero fisso: ogni ondata la allunga.
+    expect(all.length).toBe(comuniPriority.length);
   });
   it('Roma -> slug roma, codice H501', () => {
     const roma = all.find(c => c.nome === 'Roma');
