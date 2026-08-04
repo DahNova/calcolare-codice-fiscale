@@ -31,3 +31,6 @@ submit-indexnow.sh
 
 # local SEO reports (non committare)
 seo-reports/
+
+# artefatti delle sessioni di browser automation (log e dump di pagina)
+.playwright-mcp/
