@@ -9,7 +9,8 @@
     "check": "astro check",
     "astro": "astro",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lastmod": "tsx scripts/generate-lastmod.ts"
   },
   "engines": {
     "node": ">=20.3.0",
