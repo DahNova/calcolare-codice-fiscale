@@ -1901,4 +1901,154 @@ export const countryContent: CountryContent[] = [
     comunita:
       'Il Principato del Liechtenstein, microstato alpino tra Svizzera e Austria, è membro dello Spazio Economico Europeo (SEE) e dell\'Associazione europea di libero scambio (EFTA). I residenti del Liechtenstein in Italia sono molto pochi, mentre gli italiani AIRE nel Principato sono qualche centinaio, attratti dal regime fiscale favorevole e dal settore dei servizi finanziari di Vaduz. Il codice fiscale Z119 viene utilizzato dall\'Agenzia delle Entrate per identificare i nati nel Principato che hanno necessità di un codice fiscale italiano per investimenti, successioni o trasferimenti di residenza.',
   },
+
+  // ---------------------------------------------------------------------------
+  // Pilota estero, 4 set 2026. Fra i 93 paesi senza pagina, questi 8 sono gli
+  // unici con domanda misurabile sul codice Z (DataForSEO, "z### codice fiscale"
+  // 10-40 ricerche/mese ciascuno). Gate a 6 settimane: >= 0,15 click/pag/sett.
+  // ---------------------------------------------------------------------------
+  {
+    slug: 'libia',
+    codiceCatastale: 'Z326',
+    continente: 'Africa',
+    nomeCompleto: 'Libia',
+    nomeBreve: 'Libia',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Giuseppe Marini',
+    esempioSesso: 'M',
+    esempioData: '15 maggio 1955',
+    comunita:
+      'Il codice Z326 è uno dei codici esteri più diffusi tra i cittadini italiani: decine di migliaia di italiani sono nati a Tripoli, Bengasi, Misurata o Derna tra gli anni Trenta e il 1970, quando la comunità italiana di Libia fu espulsa dal regime di Gheddafi. Per tutti loro il codice fiscale riporta Z326 nelle posizioni 12-15, anche se sono cittadini italiani dalla nascita. A questo gruppo si aggiungono i cittadini libici residenti in Italia, alcune migliaia tra studenti, pazienti in cura, professionisti e famiglie arrivate dopo il 2011, concentrati soprattutto a Roma e Milano.',
+    faqExtra: {
+      q: 'Sono nato a Tripoli da genitori italiani: nel codice fiscale devo usare Z326?',
+      a: 'Sì. Il codice catastale indica il luogo di nascita, non la cittadinanza: chi è nato in Libia, anche da genitori italiani e con cittadinanza italiana dalla nascita, ha Z326 nelle posizioni 12-15. È il caso di gran parte degli italiani di Libia rimpatriati nel 1970 e dei loro figli nati prima del rimpatrio.',
+    },
+  },
+  {
+    slug: 'guinea',
+    codiceCatastale: 'Z319',
+    continente: 'Africa',
+    nomeCompleto: 'Repubblica di Guinea (Conakry)',
+    nomeBreve: 'Guinea',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Mamadou Diallo',
+    esempioSesso: 'M',
+    esempioData: '2 febbraio 1998',
+    comunita:
+      'La comunità guineana in Italia è cresciuta rapidamente dopo il 2015, quando la Guinea è diventata uno dei principali paesi di origine degli arrivi via mare: oggi i residenti sono intorno ai diecimila, in gran parte giovani uomini, con presenze rilevanti in Lombardia, Piemonte, Emilia-Romagna, Lazio e Sicilia. Molti sono passati dal sistema di accoglienza e hanno poi ottenuto un permesso per lavoro o per protezione. Il codice Z319 identifica la Guinea con capitale Conakry e non va confuso con la Guinea-Bissau (Z320) e la Guinea Equatoriale (Z321), che sono stati diversi con codici diversi.',
+    faqExtra: {
+      q: 'Guinea, Guinea-Bissau e Guinea Equatoriale hanno lo stesso codice nel codice fiscale?',
+      a: 'No. Sono tre stati distinti con tre codici diversi: Z319 per la Guinea (Conakry), Z320 per la Guinea-Bissau e Z321 per la Guinea Equatoriale. Un codice sbagliato produce un codice fiscale diverso da quello ufficiale: in caso di dubbio fa fede lo stato di nascita indicato sul passaporto.',
+    },
+  },
+  {
+    slug: 'palestina',
+    codiceCatastale: 'Z161',
+    continente: 'Asia',
+    nomeCompleto: 'Palestina (Territori Palestinesi)',
+    nomeBreve: 'Palestina',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Rania Khalil',
+    esempioSesso: 'F',
+    esempioData: '17 marzo 1989',
+    comunita:
+      'La comunità palestinese in Italia è numericamente contenuta, nell\'ordine di poche migliaia di persone, ma ha radici che risalgono agli anni Settanta, quando molti giovani arrivarono per studiare medicina e ingegneria nelle università di Roma, Bologna, Perugia e Napoli; una parte consistente ha poi ottenuto la cittadinanza italiana. Nella tabella dell\'Agenzia delle Entrate il codice Z161 identifica i Territori dell\'Autonomia Palestinese e viene attribuito a chi risulta nato in Cisgiordania o nella Striscia di Gaza secondo i documenti presentati, indipendentemente dalla cittadinanza attuale.',
+    faqExtra: {
+      q: 'Sono nato in Cisgiordania o a Gaza: nel codice fiscale uso Z161?',
+      a: 'Sì, se nei documenti di identità il luogo di nascita risulta nei Territori Palestinesi il codice catastale è Z161. Se invece il documento riporta come stato di nascita la Giordania o Israele, l\'Agenzia delle Entrate usa il codice di quello stato (Z220 per la Giordania, Z226 per Israele). Fa fede il luogo di nascita riportato sul documento, non la cittadinanza.',
+    },
+  },
+  {
+    slug: 'kazakhstan',
+    codiceCatastale: 'Z255',
+    continente: 'Asia',
+    nomeCompleto: 'Kazakistan',
+    nomeBreve: 'Kazakistan',
+    preposizione: 'in',
+    articolo: 'il',
+    esempioNome: 'Aigerim Nurlanova',
+    esempioSesso: 'F',
+    esempioData: '5 settembre 1996',
+    comunita:
+      'La comunità kazaka in Italia è piccola ma in crescita: studenti universitari a Milano, Bologna e Torino, professionisti del settore energetico e famiglie miste. Un caso frequente per il codice Z255 è quello dei bambini nati in Kazakistan e adottati da famiglie italiane, soprattutto tra la fine degli anni Novanta e i primi anni Duemila, quando il Paese era tra le origini più frequenti delle adozioni internazionali in Italia: il loro codice fiscale conserva Z255 come luogo di nascita anche dopo l\'acquisto della cittadinanza. La presenza italiana in Kazakistan ruota intorno ai giacimenti di Kashagan e Karachaganak e agli uffici di Almaty e Astana.',
+    faqExtra: {
+      q: 'Un bambino nato in Kazakistan e adottato in Italia mantiene Z255 nel codice fiscale?',
+      a: 'Sì. Il codice catastale nelle posizioni 12-15 indica il luogo di nascita e non cambia con l\'adozione né con l\'acquisto della cittadinanza italiana. Cambia invece la parte iniziale del codice se con l\'adozione cambiano cognome e nome: in quel caso l\'Agenzia delle Entrate attribuisce un nuovo codice fiscale, che mantiene comunque Z255.',
+    },
+  },
+  {
+    slug: 'giordania',
+    codiceCatastale: 'Z220',
+    continente: 'Asia',
+    nomeCompleto: 'Giordania',
+    nomeBreve: 'Giordania',
+    preposizione: 'in',
+    articolo: 'la',
+    esempioNome: 'Omar Haddad',
+    esempioSesso: 'M',
+    esempioData: '12 aprile 1991',
+    comunita:
+      'I cittadini giordani residenti in Italia sono alcune migliaia, con una presenza storica legata alle università: dagli anni Settanta Roma, Bologna, Pavia e Perugia hanno formato generazioni di medici e ingegneri giordani, molti dei quali sono rimasti in Italia o hanno mantenuto rapporti professionali con il Paese. Una parte della comunità è di origine palestinese e ha documenti giordani: per il codice fiscale conta il luogo di nascita riportato sul documento, quindi chi è nato ad Amman, Zarqa o Irbid usa Z220. La comunità italiana in Giordania è invece piccola e concentrata ad Amman, tra cooperazione, missioni archeologiche e imprese.',
+    faqExtra: {
+      q: 'Il codice fiscale serve per iscriversi a un\'università italiana dalla Giordania?',
+      a: 'Sì. Il codice fiscale è richiesto per l\'immatricolazione, per il permesso di soggiorno per studio e per aprire un conto corrente. Si può chiedere all\'Ambasciata d\'Italia ad Amman insieme al visto per studio, oppure a qualsiasi ufficio dell\'Agenzia delle Entrate una volta arrivati in Italia. Il calcolo online serve a conoscerlo in anticipo, ma il codice ufficiale è solo quello attribuito dall\'Agenzia.',
+    },
+  },
+  {
+    slug: 'capo-verde',
+    codiceCatastale: 'Z307',
+    continente: 'Africa',
+    nomeCompleto: 'Capo Verde',
+    nomeBreve: 'Capo Verde',
+    preposizione: 'a',
+    articolo: '',
+    esempioNome: 'Maria Tavares',
+    esempioSesso: 'F',
+    esempioData: '20 luglio 1978',
+    comunita:
+      'Quella capoverdiana è una delle comunità africane di più antico insediamento in Italia: le prime ad arrivare furono le donne impiegate nel lavoro domestico a Roma e a Napoli già negli anni Sessanta e Settanta, spesso attraverso le reti delle missioni cattoliche. Oggi i residenti con cittadinanza capoverdiana sono alcune migliaia, ma la comunità reale è più ampia perché molti hanno ottenuto la cittadinanza italiana o hanno figli nati in Italia. Il codice Z307 riguarda quindi soprattutto la prima e la seconda generazione nate nell\'arcipelago, in particolare nelle isole di Santiago, São Vicente e Santo Antão.',
+    faqExtra: {
+      q: 'Chi è nato a Capo Verde prima dell\'indipendenza del 1975 usa Z307 o il codice del Portogallo?',
+      a: 'Di norma Z307. Il codice catastale identifica il territorio di nascita così come è classificato oggi nella tabella dell\'Agenzia delle Entrate, non lo stato che lo amministrava alla data di nascita. Chi è nato nell\'arcipelago quando era ancora una colonia portoghese usa quindi Z307 e non Z128 (Portogallo). In caso di dubbio fa fede il codice fiscale già attribuito dall\'Agenzia.',
+    },
+  },
+  {
+    slug: 'congo',
+    codiceCatastale: 'Z311',
+    continente: 'Africa',
+    nomeCompleto: 'Repubblica del Congo (Brazzaville)',
+    nomeBreve: 'Congo',
+    preposizione: 'in',
+    articolo: 'il',
+    esempioNome: 'Jean-Claude Mbemba',
+    esempioSesso: 'M',
+    esempioData: '9 marzo 1983',
+    comunita:
+      'La Repubblica del Congo, con capitale Brazzaville, non va confusa con la Repubblica Democratica del Congo (ex Zaire, capitale Kinshasa), che ha un codice diverso, Z312. La comunità congolese di Brazzaville in Italia è piccola, nell\'ordine di poche migliaia di persone, e legata a percorsi di studio, a congregazioni religiose e a ricongiungimenti familiari, con presenze soprattutto a Roma, Milano e Torino. Molti arrivi risalgono agli anni Novanta, segnati dalla guerra civile del 1997-1999. Chi è nato a Brazzaville, Pointe-Noire o Dolisie usa Z311.',
+    faqExtra: {
+      q: 'Sono nato a Kinshasa: il codice è Z311 o Z312?',
+      a: 'Z312. Kinshasa è la capitale della Repubblica Democratica del Congo, che ha il proprio codice catastale Z312. Il codice Z311 identifica solo la Repubblica del Congo, con capitale Brazzaville, sull\'altra sponda del fiume Congo. I due codici non sono intercambiabili: un codice sbagliato produce un codice fiscale diverso da quello ufficiale.',
+    },
+  },
+  {
+    slug: 'togo',
+    codiceCatastale: 'Z351',
+    continente: 'Africa',
+    nomeCompleto: 'Togo',
+    nomeBreve: 'Togo',
+    preposizione: 'in',
+    articolo: 'il',
+    esempioNome: 'Kossi Agbeko',
+    esempioSesso: 'M',
+    esempioData: '28 ottobre 1994',
+    comunita:
+      'La comunità togolese in Italia conta alcune migliaia di persone, con una presenza che si è consolidata negli anni Dieci del Duemila attraverso il lavoro agricolo e industriale, i ricongiungimenti familiari e i percorsi di accoglienza. Le concentrazioni maggiori sono in Lombardia, Veneto, Lazio e Campania. Il Togo è un paese francofono dell\'Africa occidentale, stretto tra Ghana e Benin: chi è nato a Lomé, Sokodé o Kara usa il codice Z351 nel codice fiscale italiano, da non confondere con il Ghana (Z318) e il Benin (Z314).',
+    faqExtra: {
+      q: 'Un cittadino togolese può calcolare il codice fiscale prima di arrivare in Italia?',
+      a: 'Sì, il calcolo online dà il codice teorico a partire da cognome, nome, data di nascita e codice Z351, ed è utile per compilare in anticipo moduli e pratiche. Il codice ufficiale però è solo quello attribuito dall\'Agenzia delle Entrate, che si richiede in Ambasciata a Lomé o, una volta in Italia, allo Sportello Unico per l\'Immigrazione o a un ufficio dell\'Agenzia.',
+    },
+  },
 ];
