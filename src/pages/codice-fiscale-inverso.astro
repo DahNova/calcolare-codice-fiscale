@@ -28,6 +28,18 @@ const faqs = [
     q: "Il codice fiscale inverso è gratuito?",
     a: "Sì, lo strumento è gratuito, immediato e non richiede registrazione. Il codice fiscale inserito viene elaborato direttamente nel browser e non viene salvato sui nostri server.",
   },
+  {
+    q: "Il codice fiscale inverso funziona anche per chi è nato all'estero?",
+    a: "Sì. Per i nati all'estero le posizioni 12-15 contengono un codice che inizia con Z (ad esempio Z129 per la Romania, Z100 per l'Albania) al posto del codice di un comune italiano. Lo strumento riconosce i 216 codici Z e restituisce lo stato estero di nascita, oltre a data di nascita e sesso.",
+  },
+  {
+    q: "Si può fare il codice fiscale inverso di una società o di un condominio?",
+    a: "No. Il codice fiscale di società, enti e condomini è composto da 11 cifre e non codifica alcun dato anagrafico: non c'è nulla da decodificare. La decodifica inversa vale solo per il codice fiscale alfanumerico di 16 caratteri delle persone fisiche. Le ditte individuali usano il codice fiscale personale del titolare, che si può decodificare normalmente.",
+  },
+  {
+    q: "L'Agenzia delle Entrate offre un servizio di codice fiscale inverso?",
+    a: "L'Agenzia delle Entrate mette a disposizione un servizio di verifica che conferma se un codice fiscale esiste ed è attribuito, ma non ne decodifica il contenuto. La decodifica dei dati anagrafici (data di nascita, sesso, luogo) si ottiene con uno strumento di calcolo inverso come questo, che lavora sulla struttura del codice senza consultare archivi.",
+  },
 ];
 
 const schemaFAQ = {
@@ -131,6 +143,41 @@ const schemaApp = {
       <p class="mt-3 text-xs text-slate-500">
         Vuoi capire il significato di ogni singolo carattere? Leggi la guida
         <a href="/come-leggere-codice-fiscale/" class="text-brand-blue-link hover:underline font-medium">come leggere il codice fiscale</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Codice Fiscale Inverso per Nati all'Estero</h2>
+      <p>
+        Se la persona è nata fuori dall'Italia, nelle posizioni 12-15 del codice fiscale non c'è il
+        codice di un comune ma un <strong>codice catastale estero</strong>, che inizia sempre con la
+        lettera <strong>Z</strong>: ad esempio
+        <a href="/codice-fiscale-estero/romania/" class="text-brand-blue-link hover:underline font-medium">Z129 per la Romania</a>,
+        <a href="/codice-fiscale-estero/albania/" class="text-brand-blue-link hover:underline font-medium">Z100 per l'Albania</a>,
+        <a href="/codice-fiscale-estero/marocco/" class="text-brand-blue-link hover:underline font-medium">Z330 per il Marocco</a> o
+        <a href="/codice-fiscale-estero/cina/" class="text-brand-blue-link hover:underline font-medium">Z210 per la Cina</a>.
+        La decodifica inversa riconosce questi codici e restituisce lo <strong>stato di nascita</strong>
+        al posto del comune, con il collegamento alla scheda del paese.
+      </p>
+      <p class="mt-3">
+        L'elenco completo dei 216 codici Z, con la pagina dedicata a ogni paese, è nella
+        <a href="/codice-fiscale-stranieri/" class="text-brand-blue-link hover:underline font-medium">tabella dei codici catastali esteri</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Codice Fiscale Inverso di Società, Ditte e Condomini</h2>
+      <p>
+        La decodifica inversa funziona solo con il codice fiscale <strong>alfanumerico di 16
+        caratteri</strong> delle persone fisiche. Società di capitali, enti, associazioni e condomini
+        hanno invece un codice fiscale <strong>numerico di 11 cifre</strong> che non contiene dati
+        anagrafici: da quelle cifre non si ricava né una data né un luogo. In questi casi si può
+        controllare solo la correttezza formale del numero, oppure consultare il Registro Imprese
+        per i dati del soggetto.
+      </p>
+      <p class="mt-2">
+        Le <strong>ditte individuali</strong> fanno eccezione: usano il codice fiscale personale del
+        titolare, quindi si decodificano normalmente come quello di qualsiasi persona fisica.
       </p>
     </section>
 

@@ -2,6 +2,7 @@
 // src/pages/codice-catastale/[comune].astro
 import Layout from '../../layouts/Layout.astro';
 import EsempioCF from '../../components/EsempioCF.astro';
+import InversoCallout from '../../components/InversoCallout.astro';
 import { resolveComuni, comuniVicini } from '../../lib/comuniCatastale';
 
 export function getStaticPaths() {
@@ -43,7 +44,7 @@ const schemaArticle = {
   "url": url,
   "inLanguage": "it",
   "datePublished": "2026-07-21",
-  "dateModified": "2026-07-21",
+  "dateModified": "2026-09-04",
   "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
   "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
 };
@@ -85,6 +86,7 @@ const schemaArticle = {
       <h2 class="text-xl font-heading font-bold text-slate-800 mb-3">Esempio pratico</h2>
       <p class="mb-3">Ecco come appare {code} nel codice fiscale di una persona nata a {c.nome}:</p>
       <EsempioCF cognome="Rossi" nome="Mario" sesso="M" giorno={1} mese={1} anno={1980} paese={c.nome} codiceCatastale={code} preposizione="a" />
+      <InversoCallout codice={code} luogo={`a ${c.nome}`} />
     </section>
 
     {vicini.length > 0 && (
@@ -125,10 +127,14 @@ const schemaArticle = {
   <!-- Next-step (leva PV/session) -->
   <section class="mt-8">
     <h2 class="text-lg font-heading font-bold text-slate-800 mb-3">Prossimi passi</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <a href="/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
         <div class="font-semibold text-sm text-brand-blue-link mb-1">Calcola un CF con {c.nome} &rarr;</div>
         <div class="text-xs text-slate-500">Inserisci nome, cognome e data: il codice {code} è già pronto</div>
+      </a>
+      <a href="/codice-fiscale-inverso/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
+        <div class="font-semibold text-sm text-brand-blue-link mb-1">Codice fiscale inverso &rarr;</div>
+        <div class="text-xs text-slate-500">Da un CF con {code} ricava data di nascita, sesso e comune</div>
       </a>
       <a href="/verifica-codice-fiscale/" class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
         <div class="font-semibold text-sm text-brand-blue-link mb-1">Verifica un codice fiscale &rarr;</div>

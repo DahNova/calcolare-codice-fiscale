@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Layout from '../../layouts/Layout.astro';
 import EsempioCF from '../../components/EsempioCF.astro';
+import InversoCallout from '../../components/InversoCallout.astro';
 import { paesiEsteri } from '../../data/paesiEsteri';
 import { countryContent } from '../../data/countryContent';
 import type { CountryContent } from '../../data/countryContent';
@@ -104,7 +105,7 @@ const schemaArticle = {
   "url": `https://www.calcolare-codice-fiscale.it/codice-fiscale-estero/${c.slug}/`,
   "inLanguage": "it",
   "datePublished": "2026-03-20",
-  "dateModified": "2026-03-20",
+  "dateModified": "2026-09-04",
   "author": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
   "publisher": { "@type": "Organization", "name": "Calcolare Codice Fiscale" },
 };
@@ -190,6 +191,7 @@ const heroAlt = `Codice fiscale italiano per cittadini nati ${c.preposizione} ${
         paese={c.nomeBreve}
         codiceCatastale={c.codiceCatastale}
       />
+      <InversoCallout codice={c.codiceCatastale} luogo={`${c.preposizione} ${c.nomeBreve}`} />
     </section>
 
     {heroImage && (
@@ -287,6 +289,7 @@ const heroAlt = `Codice fiscale italiano per cittadini nati ${c.preposizione} ${
         { href: '/come-leggere-codice-fiscale/', title: 'Come Leggere il CF', desc: 'Capisci ogni carattere del codice fiscale' },
         { href: '/codice-belfiore/', title: 'Codice Belfiore (Codice Catastale)', desc: "Cos'è il codice catastale di nascita e dove si trova nel CF" },
         { href: '/codice-fiscale-stranieri/', title: 'Tutti i Codici Z Esteri', desc: 'Tabella completa dei 216 codici catastali paesi' },
+        { href: '/codice-fiscale-inverso/', title: 'Codice Fiscale Inverso', desc: `Decodifica un CF con ${c.codiceCatastale}: data di nascita, sesso e paese` },
       ].map(({ href, title, desc }) => (
         <a href={href} class="block p-4 bg-white border border-slate-200 rounded-xl hover:border-brand-blue-link hover:shadow-sm transition-all">
           <div class="font-semibold text-sm text-brand-blue-link mb-1">{title} →</div>

@@ -1,0 +1,25 @@
+---
+/**
+ * Richiamo contestuale al codice fiscale inverso, con anchor esatta.
+ * Usato dalle pagine programmatiche (comuni e paesi esteri) subito dopo
+ * l'esempio pratico: chi arriva con un codice catastale in mano spesso ha
+ * gia' un CF completo da leggere, non uno da calcolare.
+ */
+interface Props {
+  /** Codice catastale mostrato nel richiamo (es. F205, Z129). */
+  codice: string;
+  /** Luogo di nascita con preposizione (es. "a Milano", "in Romania"). */
+  luogo: string;
+}
+
+const { codice, luogo } = Astro.props;
+---
+
+<div class="mt-4 flex gap-3 bg-blue-50 border border-blue-200 rounded-xl p-4">
+  <div class="w-2 h-2 rounded-full bg-brand-blue-link mt-1.5 shrink-0"></div>
+  <p class="text-slate-700">
+    Hai già un codice fiscale con <span class="font-mono font-bold">{codice}</span> nelle posizioni 12-15?
+    Con il <a href="/codice-fiscale-inverso/" class="text-brand-blue-link hover:underline font-medium">codice fiscale inverso</a>
+    ricavi in un secondo data di nascita, sesso e la conferma che la persona è nata {luogo}.
+  </p>
+</div>

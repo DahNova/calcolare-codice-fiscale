@@ -97,6 +97,15 @@ export const slugToIso2: Record<string, string> = {
   'venezuela': 've',
   'vietnam': 'vn',
   'yemen': 'ye',
+  // Pilota estero, 4 set 2026: i codici Z con domanda misurata fra i 93 paesi senza pagina
+  'palestina': 'ps',
+  'giordania': 'jo',
+  'kazakhstan': 'kz',
+  'capo-verde': 'cv',
+  'congo': 'cg',
+  'guinea': 'gn',
+  'libia': 'ly',
+  'togo': 'tg',
 };
 
 export function flagUrl(slug: string, size: 'w20' | 'w40' | 'w80' | 'w160' = 'w80'): string | null {

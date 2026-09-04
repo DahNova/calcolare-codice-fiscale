@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { decodificaCodiceFiscale } from '../lib/inverso';
+import { decodificaCodiceFiscale, luogoEstero } from '../lib/inverso';
+import type { LuogoEstero } from '../lib/inverso';
 import { verificaCodiceFiscale } from '../lib/verifica';
 
 type Comune = { nome: string; provincia: string; codiceCatastale: string };
@@ -12,6 +13,7 @@ export default function InversoForm() {
   const [error, setError] = useState('');
   const [dati, setDati] = useState<ReturnType<typeof decodificaCodiceFiscale>>(null);
   const [nomeComune, setNomeComune] = useState('');
+  const [estero, setEstero] = useState<LuogoEstero | null>(null);
   const comuniRef = useRef<Comune[]>([]);
 
   // Load comuni once on mount
@@ -26,6 +28,7 @@ export default function InversoForm() {
     setError('');
     setDati(null);
     setNomeComune('');
+    setEstero(null);
 
     if (!verificaCodiceFiscale(cf)) {
       setError('Codice fiscale non valido. Verifica che sia composto da 16 caratteri corretti.');
@@ -35,6 +38,14 @@ export default function InversoForm() {
     const result = decodificaCodiceFiscale(cf);
     if (!result) { setError('Impossibile decodificare il codice fiscale.'); return; }
     setDati(result);
+
+    // Nati all'estero: il codice Z non e' in comuni.json, si risolve dalla tabella paesi.
+    const paese = luogoEstero(result.codiceCatastale);
+    if (paese) {
+      setEstero(paese);
+      setNomeComune(`${paese.nome} (stato estero)`);
+      return;
+    }
 
     const trovato = comuniRef.current.find(c => c.codiceCatastale === result.codiceCatastale);
     setNomeComune(trovato ? `${trovato.nome} (${trovato.provincia})` : `Codice: ${result.codiceCatastale}`);
@@ -49,9 +60,12 @@ export default function InversoForm() {
   }
 
   // Dopo la decodifica il codice catastale è in primo piano: Belfiore è il passo naturale.
+  // Per un nato all'estero con scheda paese, la scheda prende il posto di Belfiore.
   const nextSteps = [
     { id: 'verifica', href: '/verifica-codice-fiscale/', title: 'Verifica questo CF', desc: 'Controlla che sia formalmente corretto' },
-    { id: 'codice-belfiore', href: '/codice-belfiore/', title: 'Codice Belfiore', desc: "Cos'è il codice catastale di nascita" },
+    estero?.href
+      ? { id: 'paese', href: estero.href, title: `Codice fiscale ${estero.nome}`, desc: `Tutto sul codice ${estero.codiceCatastale} e sul CF dei nati in questo paese` }
+      : { id: 'codice-belfiore', href: '/codice-belfiore/', title: 'Codice Belfiore', desc: "Cos'è il codice catastale di nascita" },
     { id: 'calcola', href: '/', title: 'Calcola un CF', desc: 'Genera un codice fiscale da zero' },
   ];
 
@@ -96,11 +110,20 @@ export default function InversoForm() {
             <div className="bg-slate-50 rounded-xl p-5">
               <p className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Luogo di nascita</p>
               <p className="text-base font-semibold text-slate-900">{nomeComune || '...'}</p>
+              {estero && (
+                <p className="text-xs text-slate-500 mt-1">
+                  Codice catastale estero <span className="font-mono font-semibold">{estero.codiceCatastale}</span>
+                  {estero.href && (
+                    <> · <a href={estero.href} onClick={() => trackNextStep('paese-inline')} className="text-brand-blue-link hover:underline">scheda {estero.nome}</a></>
+                  )}
+                </p>
+              )}
             </div>
           </div>
           <p className="text-xs text-slate-500 mt-3">
             * L'anno potrebbe essere {dati.annoCompleto} o {dati.annoCompleto - 100} in caso di omonimia.
             Non è possibile risalire al nome o cognome esatti.
+            {dati.omocodia && ' Il codice inserito è un omocodice: le lettere sostitutive sono state riconvertite nelle cifre originali.'}
           </p>
 
           <nav aria-label="Prossimi passi" className="pt-1">
