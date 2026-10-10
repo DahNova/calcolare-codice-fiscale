@@ -3,7 +3,10 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import CalcolaForm from '../components/CalcolaForm';
 import StrumentiCorrelati from '../components/StrumentiCorrelati.astro';
+import Modello3D from '../components/Modello3D.astro';
 import homepageHero from '../assets/homepage-hero.webp';
+
+const alt3D = 'Modello 3D di una tessera sanitaria con chip, la tessera che riporta il codice fiscale';
 
 const schemaWebApp = {
   "@context": "https://schema.org",
@@ -72,7 +75,8 @@ const schemaWebSite = {
   schemaJson={[schemaWebApp, schemaFAQ, schemaWebSite]}
 >
   <!-- Hero section with gradient background -->
-  <div class="bg-gradient-to-br from-brand-navy via-brand-navy-light to-brand-blue rounded-2xl p-8 sm:p-12 text-center mb-8">
+  <div class="bg-gradient-to-br from-brand-navy via-brand-navy-light to-brand-blue rounded-2xl p-8 sm:p-12 text-center mb-8 md:flex md:items-center md:gap-8 md:text-left">
+    <div class="md:flex-1">
     <p class="text-white/50 text-sm tracking-widest uppercase font-heading mb-3">Generatore di codice fiscale gratuito</p>
     <h1 class="text-4xl sm:text-5xl font-heading font-extrabold text-white mb-6 tracking-tight">Calcola il tuo Codice Fiscale</h1>
 
@@ -86,6 +90,10 @@ const schemaWebSite = {
     </div>
 
     <p class="text-white/60 text-sm tracking-wide">Gratis · Immediato · Aggiornato 2026</p>
+    </div>
+
+    <!-- Modello 3D: nell'hero solo da md in su, su mobile scende sotto il form -->
+    <Modello3D modello="tessera-sanitaria" alt={alt3D} hero class="hidden md:block w-44 shrink-0" />
   </div>
 
   <!-- Calculator Form (React component) -->
@@ -93,6 +101,9 @@ const schemaWebSite = {
 
   <!-- AdSense slot -->
   <div class="my-10 min-h-[90px]"></div>
+
+  <!-- Su mobile il modello 3D sta qui, dopo lo slot: non lascia un vuoto se l'annuncio manca -->
+  <Modello3D modello="tessera-sanitaria" alt={alt3D} class="md:hidden w-36 mx-auto -mt-4 mb-6" />
 
   <!-- SEO Content -->
   <section class="mt-2">

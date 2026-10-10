@@ -1,0 +1,118 @@
+---
+// Modello 3D decorativo: poster statico nel markup, <model-viewer> montato
+// solo a pagina caricata e quando il blocco si avvicina al viewport.
+// Senza JS (o con risparmio dati) resta il poster.
+export interface Props {
+  /** Nome del file in public/3d/ senza estensione (es. 'tessera-sanitaria'). */
+  modello: string;
+  alt: string;
+  class?: string;
+  /** Poster above the fold: caricato subito, ma a bassa priorità. */
+  hero?: boolean;
+  /** Disco chiaro dietro il modello, per modelli scuri su fondo scuro. */
+  alone?: boolean;
+  /** Esposizione di <model-viewer> (default della libreria: 1). */
+  esposizione?: number;
+}
+
+const { modello, alt, class: className = '', hero = false, alone = false, esposizione } = Astro.props;
+const src = `/3d/${modello}.glb`;
+const poster = `/3d/${modello}.webp`;
+---
+
+<div
+  class:list={['modello-3d relative aspect-square', className]}
+  data-modello-3d
+  data-src={src}
+  data-poster={poster}
+  data-alt={alt}
+  data-esposizione={esposizione}
+>
+  {alone && (
+    <div
+      class="absolute inset-[6%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.22)_0%,rgba(147,197,253,0.12)_45%,transparent_70%)]"
+      aria-hidden="true"
+    ></div>
+  )}
+  <img
+    src={poster}
+    alt={alt}
+    width="512"
+    height="512"
+    loading={hero ? 'eager' : 'lazy'}
+    fetchpriority={hero ? 'low' : undefined}
+    decoding="async"
+    class="absolute inset-0 w-full h-full object-contain"
+  />
+</div>
+
+<script>
+  // Un solo import della libreria (three + decoder meshopt inclusi), condiviso.
+  // model-viewer usa il decoder meshopt (WASM inline nel bundle) solo se
+  // meshoptDecoderLocation è impostato: prima carica quello script, poi usa
+  // il proprio. Gli diamo un file vuoto same-origin, così niente CDN.
+  let viewer: Promise<unknown> | undefined;
+  const caricaViewer = () =>
+    (viewer ??= import('@google/model-viewer').then(({ ModelViewerElement }) => {
+      ModelViewerElement.meshoptDecoderLocation = '/3d/meshopt-decoder.js';
+    }));
+
+  // Il modello non deve mai contendere banda o main thread al calcolatore:
+  // si parte solo dopo il load della pagina e a browser inattivo.
+  const paginaPronta = new Promise<void>((resolve) => {
+    const dopoLoad = () => {
+      if ('requestIdleCallback' in window) requestIdleCallback(() => resolve(), { timeout: 2500 });
+      else setTimeout(resolve, 200);
+    };
+    if (document.readyState === 'complete') dopoLoad();
+    else window.addEventListener('load', dopoLoad, { once: true });
+  });
+
+  const riduciMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const risparmioDati =
+    (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+
+  async function monta(wrapper: HTMLElement) {
+    const { src, poster, alt, esposizione } = wrapper.dataset;
+    if (!src || !poster || !alt) return;
+    try {
+      await paginaPronta;
+      await caricaViewer();
+    } catch {
+      return; // resta il poster
+    }
+
+    const mv = document.createElement('model-viewer');
+    mv.setAttribute('src', src);
+    mv.setAttribute('poster', poster);
+    mv.setAttribute('alt', alt);
+    mv.setAttribute('camera-controls', '');
+    mv.setAttribute('touch-action', 'pan-y');
+    mv.setAttribute('disable-zoom', '');
+    mv.setAttribute('interaction-prompt', 'none');
+    mv.setAttribute('shadow-intensity', '0.6');
+    mv.setAttribute('environment-image', 'neutral');
+    mv.setAttribute('reveal', 'auto');
+    if (esposizione) mv.setAttribute('exposure', esposizione);
+    if (!riduciMovimento) mv.setAttribute('auto-rotate', '');
+    mv.className = 'absolute inset-0 w-full h-full';
+    mv.style.setProperty('--poster-color', 'transparent');
+
+    // Il poster <img> sotto resta visibile finché il modello non è pronto.
+    const img = wrapper.querySelector('img');
+    mv.addEventListener('load', () => img?.classList.add('invisible'), { once: true });
+    wrapper.appendChild(mv);
+  }
+
+  const wrappers = document.querySelectorAll<HTMLElement>('[data-modello-3d]');
+  if (wrappers.length > 0 && !risparmioDati && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        observer.unobserve(entry.target);
+        monta(entry.target as HTMLElement);
+      }
+    }, { rootMargin: '200px' });
+    wrappers.forEach((w) => observer.observe(w));
+  }
+</script>
