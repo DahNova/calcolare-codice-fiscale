@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import CercaComuneDaCodice from '../components/CercaComuneDaCodice';
+import CercaComuneDaCodiceTool from '../components/CercaComuneDaCodice';
 import StrumentiCorrelati from '../components/StrumentiCorrelati.astro';
 import { paesiEsteri } from '../data/paesiEsteri';
 
@@ -62,7 +62,7 @@ const schemaFAQ = {
     <p class="text-white/60 text-sm">Inserisci un codice catastale per scoprire il comune italiano o lo stato estero corrispondente.</p>
   </div>
 
-  <CercaComuneDaCodice client:load paesiEsteri={paesiForClient} />
+  <CercaComuneDaCodiceTool client:load paesiEsteri={paesiForClient} />
 
   <div class="my-10 min-h-[90px]"></div>
 

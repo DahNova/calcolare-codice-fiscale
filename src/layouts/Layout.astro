@@ -174,10 +174,10 @@ const allSchemas = breadcrumbs && breadcrumbs.length > 0
     </footer>
 
     <script>
-      const btn = document.getElementById('menu-btn');
-      const overlay = document.getElementById('menu-overlay');
-      const drawer = document.getElementById('menu-drawer');
-      const closeBtn = document.getElementById('menu-close');
+      const btn = document.getElementById('menu-btn')!;
+      const overlay = document.getElementById('menu-overlay')!;
+      const drawer = document.getElementById('menu-drawer')!;
+      const closeBtn = document.getElementById('menu-close')!;
 
       function openMenu() {
         overlay.classList.remove('pointer-events-none');

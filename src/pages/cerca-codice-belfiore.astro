@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import CercaCodiceBelfiore from '../components/CercaCodiceBelfiore';
+import CercaCodiceBelfioreTool from '../components/CercaCodiceBelfiore';
 import { paesiEsteri } from '../data/paesiEsteri';
 
 const paesiForClient = paesiEsteri.map(p => ({
@@ -66,7 +66,7 @@ const schemaFAQ = {
     <p class="text-white/60 text-sm">Inserisci il nome di un comune italiano o stato estero per trovare il codice Belfiore (codice catastale).</p>
   </div>
 
-  <CercaCodiceBelfiore client:load paesiEsteri={paesiForClient} />
+  <CercaCodiceBelfioreTool client:load paesiEsteri={paesiForClient} />
 
   <div class="my-10 min-h-[90px]"></div>
 
