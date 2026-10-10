@@ -2,7 +2,7 @@
 
 Generati il 2026-10-10 con Meshy API: reference `nano-banana-2` (text-to-image, sfondo rimosso) → `image-to-3d` modello `latest` (Meshy 7.1), texture 2K PBR, remesh triangoli ~40k.
 Ottimizzati per il web con `@gltf-transform/cli@4.5.1 optimize --texture-compress webp --texture-size 1024 --compress meshopt` (serve il decoder meshopt: `<model-viewer>` e three.js `GLTFLoader` + `MeshoptDecoder` lo supportano).
-Ogni `<id>.webp` è il poster trasparente 512 px (vista frontale). Sorgenti a piena risoluzione (GLB 2K, USDZ per AR iOS, 4 viste, reference) in `C:/Progetti_WSL/_tools/meshy-spend/out/calcolare-codice-fiscale/`.
+Ogni `<id>.webp` è il poster trasparente: il primo frame renderizzato da `<model-viewer>` con la stessa camera/esposizione del sito (auto-rotate off, `toBlob` WebP q 0.88, 2x la dimensione mostrata: tessera 352 px, pin 288 px con exposure 1.3), così poster e modello coincidono allo swap. Sorgenti a piena risoluzione (GLB 2K, USDZ per AR iOS, 4 viste, reference) in `C:/Progetti_WSL/_tools/meshy-spend/out/calcolare-codice-fiscale/`.
 
 | id | prompt | task image-to-3d |
 |---|---|---|

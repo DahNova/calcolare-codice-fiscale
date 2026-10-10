@@ -1,7 +1,8 @@
 ---
 // Modello 3D decorativo: poster statico nel markup, <model-viewer> montato
-// solo a pagina caricata e quando il blocco si avvicina al viewport.
-// Senza JS (o con risparmio dati) resta il poster.
+// solo quando non costa nulla al calcolatore. Su desktop capace parte da solo
+// (vicino al viewport + load + primo gesto + idle); altrove resta il poster
+// con un bottone "Ruota in 3D". Senza JS resta il poster.
 export interface Props {
   /** Nome del file in public/3d/ senza estensione (es. 'tessera-sanitaria'). */
   modello: string;
@@ -47,6 +48,11 @@ const poster = `/3d/${modello}.webp`;
 </div>
 
 <script>
+  type NavigatorEsteso = Navigator & {
+    connection?: { saveData?: boolean };
+    deviceMemory?: number;
+  };
+
   // Un solo import della libreria (three + decoder meshopt inclusi), condiviso.
   // model-viewer usa il decoder meshopt (WASM inline nel bundle) solo se
   // meshoptDecoderLocation è impostato: prima carica quello script, poi usa
@@ -55,35 +61,76 @@ const poster = `/3d/${modello}.webp`;
   const caricaViewer = () =>
     (viewer ??= import('@google/model-viewer').then(({ ModelViewerElement }) => {
       ModelViewerElement.meshoptDecoderLocation = '/3d/meshopt-decoder.js';
+    }).catch((err) => {
+      viewer = undefined; // "Riprova" deve poter ritentare l'import
+      throw err;
     }));
 
-  // Il modello non deve mai contendere banda o main thread al calcolatore:
-  // si parte solo dopo il load della pagina e a browser inattivo.
-  const paginaPronta = new Promise<void>((resolve) => {
-    const dopoLoad = () => {
-      if ('requestIdleCallback' in window) requestIdleCallback(() => resolve(), { timeout: 2500 });
-      else setTimeout(resolve, 200);
-    };
-    if (document.readyState === 'complete') dopoLoad();
-    else window.addEventListener('load', dopoLoad, { once: true });
-  });
+  // Il chunk di model-viewer costa secondi di CPU su mobile (long task da
+  // ~1.5 s in Lighthouse): in automatico solo su dispositivi con mouse e
+  // hardware adeguato, altrimenti si carica solo su richiesta.
+  const nav = navigator as NavigatorEsteso;
+  const automatico =
+    window.matchMedia('(pointer: fine)').matches &&
+    (navigator.hardwareConcurrency ?? 4) >= 4 &&
+    nav.connection?.saveData !== true &&
+    (nav.deviceMemory === undefined || nav.deviceMemory >= 4);
 
   const riduciMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const risparmioDati =
-    (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+
+  const idle = () =>
+    new Promise<void>((resolve) => {
+      if ('requestIdleCallback' in window) requestIdleCallback(() => resolve(), { timeout: 2500 });
+      else setTimeout(resolve, 200);
+    });
+
+  const paginaCaricata = new Promise<void>((resolve) => {
+    if (document.readyState === 'complete') resolve();
+    else window.addEventListener('load', () => resolve(), { once: true });
+  });
+
+  // Primo gesto dell'utente: listener registrati subito, passivi, una volta.
+  const primoGesto = new Promise<void>((resolve) => {
+    const eventi = ['scroll', 'wheel', 'pointerdown', 'touchstart', 'keydown'] as const;
+    const via = () => {
+      eventi.forEach((e) => window.removeEventListener(e, via));
+      resolve();
+    };
+    eventi.forEach((e) => window.addEventListener(e, via, { passive: true }));
+  });
+
+  // Mai mentre si sta compilando il calcolatore: si aspetta il blur e un idle.
+  const staDigitando = () => {
+    const el = document.activeElement;
+    return el instanceof HTMLElement && el.closest('form') !== null && el.matches('input, select, textarea');
+  };
+  async function attendiFineDigitazione() {
+    while (staDigitando()) {
+      await new Promise((resolve) => document.addEventListener('focusout', resolve, { once: true }));
+      await idle();
+    }
+  }
+
+  const montati = new WeakSet<HTMLElement>();
+  // model-viewer tiene in cache per URL anche un caricamento fallito:
+  // ogni nuovo tentativo usa un URL diverso.
+  const tentativi = new WeakMap<HTMLElement, number>();
 
   async function monta(wrapper: HTMLElement) {
     const { src, poster, alt, esposizione } = wrapper.dataset;
-    if (!src || !poster || !alt) return;
+    if (montati.has(wrapper) || !src || !poster || !alt) return;
+    montati.add(wrapper);
     try {
-      await paginaPronta;
       await caricaViewer();
-    } catch {
-      return; // resta il poster
+    } catch (err) {
+      montati.delete(wrapper);
+      throw err; // resta il poster
     }
 
     const mv = document.createElement('model-viewer');
-    mv.setAttribute('src', src);
+    const n = tentativi.get(wrapper) ?? 0;
+    tentativi.set(wrapper, n + 1);
+    mv.setAttribute('src', n === 0 ? src : `${src}?tentativo=${n}`);
     mv.setAttribute('poster', poster);
     mv.setAttribute('alt', alt);
     mv.setAttribute('camera-controls', '');
@@ -98,21 +145,102 @@ const poster = `/3d/${modello}.webp`;
     mv.className = 'absolute inset-0 w-full h-full';
     mv.style.setProperty('--poster-color', 'transparent');
 
-    // Il poster <img> sotto resta visibile finché il modello non è pronto.
+    // Il poster <img> sotto resta visibile finché il modello non è pronto;
+    // se il GLB non arriva si torna al solo poster.
     const img = wrapper.querySelector('img');
-    mv.addEventListener('load', () => img?.classList.add('invisible'), { once: true });
+    const pronto = new Promise<void>((resolve, reject) => {
+      mv.addEventListener('load', () => {
+        img?.classList.add('invisible');
+        resolve();
+      }, { once: true });
+      mv.addEventListener('error', () => {
+        mv.remove();
+        img?.classList.remove('invisible');
+        montati.delete(wrapper);
+        reject(new Error(`Modello 3D non caricato: ${src}`));
+      }, { once: true });
+    });
     wrapper.appendChild(mv);
+    return pronto;
+  }
+
+  async function avviaAutomatico(wrapper: HTMLElement, vicino: Promise<void>) {
+    // Scorciatoia: puntatore o focus sul blocco, l'utente lo sta guardando.
+    const interesse = new Promise<void>((resolve) => {
+      wrapper.addEventListener('pointerenter', () => resolve(), { once: true });
+      wrapper.addEventListener('focusin', () => resolve(), { once: true });
+    });
+    const normale = (async () => {
+      await vicino;
+      await paginaCaricata;
+      await primoGesto;
+      await idle();
+    })();
+    await Promise.race([interesse, normale]);
+    await attendiFineDigitazione();
+    await monta(wrapper).catch(() => aggiungiBottone(wrapper, RIPROVA));
+  }
+
+  const ETICHETTA = 'Ruota in 3D';
+  const RIPROVA = 'Riprova';
+  const ICONA =
+    '<svg aria-hidden="true" viewBox="0 0 24 24" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>';
+
+  // Modalità su richiesta: bottone sovrapposto al poster (assoluto, niente CLS).
+  // Dopo un errore riappare come "Riprova": mai uno spinner infinito.
+  function aggiungiBottone(wrapper: HTMLElement, etichetta = ETICHETTA) {
+    const compatto = wrapper.clientWidth < 120;
+    const nomeDi = (testo: string) =>
+      testo === RIPROVA ? 'Riprova a caricare il modello 3D' : `${testo}: ${wrapper.dataset.alt ?? 'modello'}`;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className =
+      'absolute bottom-0 right-0 inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] ' +
+      (compatto ? 'p-0 translate-x-1/3 translate-y-1/3 ' : 'px-3.5 ') +
+      'rounded-full bg-brand-navy/90 text-white text-xs font-heading font-semibold border border-white/25 shadow-sm ' +
+      'hover:bg-brand-blue transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white ' +
+      'focus-visible:ring-offset-2 focus-visible:ring-offset-brand-blue disabled:opacity-80 disabled:cursor-progress';
+    btn.innerHTML = ICONA + `<span class="${compatto ? 'sr-only' : ''}">${etichetta}</span>`;
+    btn.setAttribute('aria-label', nomeDi(etichetta));
+    const testo = btn.querySelector('span');
+    const icona = btn.querySelector('svg');
+
+    btn.addEventListener('click', async () => {
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+      btn.setAttribute('aria-label', 'Caricamento del modello 3D');
+      if (testo && !compatto) testo.textContent = 'Caricamento…';
+      icona?.classList.add('animate-spin');
+      try {
+        await monta(wrapper);
+        btn.remove();
+      } catch {
+        btn.disabled = false;
+        btn.removeAttribute('aria-busy');
+        btn.setAttribute('aria-label', nomeDi(RIPROVA));
+        if (testo) testo.textContent = RIPROVA;
+        icona?.classList.remove('animate-spin');
+      }
+    });
+    wrapper.appendChild(btn);
   }
 
   const wrappers = document.querySelectorAll<HTMLElement>('[data-modello-3d]');
-  if (wrappers.length > 0 && !risparmioDati && 'IntersectionObserver' in window) {
+  if (automatico && 'IntersectionObserver' in window) {
+    const vicini = new Map<Element, () => void>();
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         observer.unobserve(entry.target);
-        monta(entry.target as HTMLElement);
+        vicini.get(entry.target)?.();
       }
     }, { rootMargin: '200px' });
-    wrappers.forEach((w) => observer.observe(w));
+    wrappers.forEach((w) => {
+      const vicino = new Promise<void>((resolve) => vicini.set(w, resolve));
+      observer.observe(w);
+      avviaAutomatico(w, vicino);
+    });
+  } else {
+    wrappers.forEach((w) => aggiungiBottone(w));
   }
 </script>
