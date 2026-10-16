@@ -23,7 +23,14 @@ const tools = [
   { slug: 'codice-belfiore', href: '/codice-belfiore/', title: 'Codice Belfiore', desc: 'Cos\'è il codice Belfiore e come si usa' },
 ];
 
-const filtered = tools.filter(t => t.slug !== currentSlug).slice(0, limit);
+// Calcolatore e inverso sempre presenti; gli altri ruotano a partire dalla pagina corrente,
+// così ogni guida riceve link da 3-4 pagine invece che sempre le stesse 4 da tutte
+const pinned = ['', 'inverso'];
+const fissi = tools.filter(t => pinned.includes(t.slug) && t.slug !== currentSlug);
+const ruotabili = tools.filter(t => !pinned.includes(t.slug));
+const start = (tools.findIndex(t => t.slug === currentSlug) + 1) % ruotabili.length;
+const ruotati = [...ruotabili.slice(start), ...ruotabili.slice(0, start)].filter(t => t.slug !== currentSlug);
+const filtered = [...fissi, ...ruotati].slice(0, limit);
 ---
 
 <section class="mt-8">

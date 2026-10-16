@@ -50,14 +50,17 @@ const esNomeParts = c.esempioNome.split(' ');
 const esCognome = esNomeParts.length > 1 ? esNomeParts.slice(1).join(' ') : esNomeParts[0];
 const esNome = esNomeParts[0];
 
-// Related countries: up to 4 from same continent with dedicated pages
-let related = paesiEsteri
-  .filter(p => p.hasDedicatedPage && p.slug !== c.slug && p.continente === c.continente);
+// Related countries: the next 4 in the same continent, cyclically, so every page gets
+// links from its neighbours instead of all pages linking the first 4 of the array
+const ruota = <T,>(arr: T[], from: number) => [...arr.slice(from), ...arr.slice(0, from)];
+const conPagina = paesiEsteri.filter(p => p.hasDedicatedPage);
+const stessoContinente = conPagina.filter(p => p.continente === c.continente);
+const posizione = stessoContinente.findIndex(p => p.slug === c.slug);
+let related = ruota(stessoContinente, posizione + 1).filter(p => p.slug !== c.slug).slice(0, 4);
 if (related.length < 4) {
-  const others = paesiEsteri.filter(p => p.hasDedicatedPage && p.slug !== c.slug && p.continente !== c.continente);
-  related = [...related, ...others].slice(0, 4);
-} else {
-  related = related.slice(0, 4);
+  const altri = conPagina.filter(p => p.continente !== c.continente);
+  const offset = conPagina.findIndex(p => p.slug === c.slug) % altri.length;
+  related = [...related, ...ruota(altri, offset).slice(0, 4 - related.length)];
 }
 const relatedContent = related.map(r => {
   const rc = countryContent.find(cc => cc.slug === r.slug);
